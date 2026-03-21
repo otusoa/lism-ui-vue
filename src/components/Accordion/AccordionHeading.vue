@@ -1,11 +1,16 @@
 <template>
-  <component :is="as" :class="['c--accordion_heading']" class="set--plain" :role="as === 'div' ? 'heading' : undefined">
+  <component
+    :is="as"
+    :class="['c--accordion_heading']"
+    class="set--plain"
+    :role="as === 'div' ? 'heading' : undefined"
+  >
     <slot />
   </component>
 </template>
 
 <script setup lang="ts">
-interface Props {
+export interface Props {
   as?: string
 }
 

@@ -1,12 +1,22 @@
 <script setup lang="ts">
-import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch, type ComputedRef } from 'vue'
+import {
+  computed,
+  inject,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  useAttrs,
+  watch,
+  type ComputedRef,
+} from 'vue'
 import { accordionItemIdKey, accordionRootContextKey } from './context'
 
 defineOptions({
   inheritAttrs: false,
 })
 
-interface Props {
+export interface Props {
   id?: string
   isOpen?: boolean
   flow?: boolean
@@ -112,8 +122,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="panelRef" class="c--accordion_panel -pos:rel -ov:hidden" :id="panelId"
-    :hidden="isHidden ? 'until-found' : undefined" @transitionend="onTransitionEnd">
+  <div
+    ref="panelRef"
+    class="c--accordion_panel -pos:rel -ov:hidden"
+    :id="panelId"
+    :hidden="isHidden ? 'until-found' : undefined"
+    @transitionend="onTransitionEnd"
+  >
     <div :class="contentClassNames" v-bind="attrs">
       <slot />
     </div>

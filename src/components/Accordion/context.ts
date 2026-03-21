@@ -10,4 +10,6 @@ export interface AccordionRootContext {
   closeItem: (id: string) => void
 }
 
-export const accordionRootContextKey = Symbol('accordion-root-context') as InjectionKey<AccordionRootContext>
+export const accordionRootContextKey = Symbol(
+  'accordion-root-context',
+) as InjectionKey<AccordionRootContext>

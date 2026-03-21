@@ -2,7 +2,7 @@
 import { computed, provide, ref, toRef } from 'vue'
 import { accordionRootContextKey } from './context'
 
-interface Props {
+export interface Props {
   allowMultiple?: boolean
 }
 
@@ -50,7 +50,11 @@ const classNames = computed(() => ['l--stack', 'c--accordion'].join(' '))
 </script>
 
 <template>
-  <div :class="[classNames]" class="-bd" :data-allow-multiple="props.allowMultiple ? '' : undefined">
+  <div
+    :class="[classNames]"
+    class="-bd"
+    :data-allow-multiple="props.allowMultiple ? '' : undefined"
+  >
     <slot />
   </div>
 </template>
@@ -105,7 +109,7 @@ const classNames = computed(() => ['l--stack', 'c--accordion'].join(' '))
   /* .c--accordion_content {} */
 
   /* パネルが完全に閉じている時にabsoluteで飛ばしておくと、Chromeでも検索時に正常にハイライトされるようになる（なぜかは不明） */
-  [hidden]>.c--accordion_content {
+  [hidden] > .c--accordion_content {
     position: absolute;
   }
 

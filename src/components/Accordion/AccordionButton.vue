@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, inject, type ComputedRef } from 'vue'
-import { accordionItemIdKey, accordionRootContextKey } from './context'
-import AccordionIcon from './AccordionIcon.vue'
+import { accordionItemIdKey, accordionRootContextKey } from '@/components/Accordion/context'
+import AccordionIcon from '@/components/Accordion/AccordionIcon.vue'
 
-interface Props {
+export interface Props {
   controls?: string
   isOpen?: boolean
 }
@@ -14,7 +14,7 @@ interface Emits {
 
 const props = defineProps<Props>()
 
-defineEmits<Emits>()
+const emit = defineEmits<Emits>()
 
 const itemId = inject<ComputedRef<string> | undefined>(accordionItemIdKey, undefined)
 const rootContext = inject(accordionRootContextKey, null)
@@ -33,12 +33,18 @@ const onClick = () => {
   if (itemId?.value && rootContext) {
     rootContext.toggleItem(itemId.value)
   }
+  emit('toggle')
 }
 </script>
 
 <template>
-  <button type="button" class="c--accordion_button l--flex set--plain -g:10 -w:100% -ai:center -jc:between -p:20"
-    :aria-controls="ariaControls" :aria-expanded="isOpened" @click="onClick(); $emit('toggle')">
+  <button
+    type="button"
+    class="c--accordion_button l--flex set--plain -g:10 -w:100% -ai:center -jc:between -p:20"
+    :aria-controls="ariaControls"
+    :aria-expanded="isOpened"
+    @click="onClick"
+  >
     <slot />
     <AccordionIcon />
   </button>

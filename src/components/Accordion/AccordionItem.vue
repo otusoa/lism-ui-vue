@@ -4,7 +4,7 @@ import { accordionItemIdKey, accordionRootContextKey } from './context'
 
 let itemIdSeed = 0
 
-interface Props {
+export interface Props {
   id?: string
   defaultOpen?: boolean
   isOpen?: boolean
