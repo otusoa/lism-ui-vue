@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    name: CIの実行
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: pnpmのセットアップ
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Node.jsのセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: 依存関係のインストール
+        run: pnpm install
+
+      - name: Lint の実行 (oxlint)
+        run: pnpm lint:oxlint
+
+      - name: 型チェックの実行
+        run: pnpm type-check
+
+      - name: ビルドの実行
+        run: pnpm build
