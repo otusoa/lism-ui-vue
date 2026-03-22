@@ -59,6 +59,7 @@ import { Lism } from '../../../../src/components/Lism'
         This paragraph has <code>exProps</code> applied (id and data-custom).
       </Lism>
     </section>
-    <Lism> aa </Lism>
+    <Lism lismClass="c--myComponent" variant="secondary"> LismClass + variant </Lism>
+    <Lism h="fit" as=""> aa </Lism>
   </div>
 </template>
