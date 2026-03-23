@@ -45,17 +45,17 @@ const module: NuxtModule = defineNuxtModule({
 
     if (nuxt.options.dev) {
       lookupDirs.push(workspaceSrcComponents, packageSrcComponents, packageDistComponents)
-    }
-    else {
+    } else {
       lookupDirs.push(packageDistComponents, packageSrcComponents, workspaceSrcComponents)
     }
 
-    const matchedComponentsDir = lookupDirs.find(dir => existsSync(dir))
+    const matchedComponentsDir = lookupDirs.find((dir) => existsSync(dir))
     if (matchedComponentsDir) {
       addComponentsDir({
         path: matchedComponentsDir,
         prefix: '',
         global: true,
+        extensions: ['vue'],
       })
     }
 

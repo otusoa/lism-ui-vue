@@ -1,12 +1,12 @@
 <template>
   <div>Nuxt module playground!</div>
-  <Lism tag="">
-    あああ
-  </Lism>
+
+  <Lism fx="1" fxd="col-r" fz="5xl">ああ</Lism>
+  <Lism bd bds="dashed" bdw="4px" bdc="red" p="15" bd-b> あああ </Lism>
   <AccordionRoot>
     <AccordionItem>
       <AccordionHeading>
-        <AccordionButton p="20">
+        <AccordionButton p="15">
           <span>テスト日本語ジャパン</span>
         </AccordionButton>
       </AccordionHeading>
@@ -17,7 +17,4 @@
   </AccordionRoot>
 </template>
 
-<script setup lang="ts">
-import 'lism-css/main.css'
-import 'lism-ui-vue/style'
-</script>
+<script setup lang="ts"></script>

@@ -10,6 +10,7 @@ import getUtilKey from 'lism-css/lib/getUtilKey'
 import getMaybeCssVar from 'lism-css/lib/getMaybeCssVar'
 import getBpData from 'lism-css/lib/getBpData'
 import splitWithComma from 'lism-css/lib/helper/splitWithComma'
+import type { LismProps } from './types'
 
 // isEmptyObj / filterEmptyObj の簡易実装
 const isEmptyObj = (obj: Record<string, unknown>) => Object.keys(obj).length === 0
@@ -41,18 +42,28 @@ const getTokenKey = (propName: string) => {
  * @param inputProps - コンポーネントに渡された全属性 (props + attrs)
  * @returns Vueの v-bind に渡せるオブジェクト
  */
-export function getLismPropsVue(inputProps: Record<string, any>): LismOutput {
-  if (isEmptyObj(inputProps)) {
+export function getLismPropsVue(inputProps: LismProps): LismOutput {
+  if (isEmptyObj(inputProps as Record<string, unknown>)) {
     return { class: [], style: {} }
   }
 
-  const { layout, ...restInput } = inputProps
-  const props = getLayoutProps(layout, restInput)
+  const { layout, ...restInput } = inputProps as { layout?: string } & Record<string, unknown>
+  const props = getLayoutProps(
+    layout as Parameters<typeof getLayoutProps>[0],
+    restInput
+  ) as Record<string, unknown> & {
+    class?: string
+    className?: string
+    lismClass?: string
+    variant?: string
+    style?: string | Record<string, unknown> | unknown[]
+    _propConfig?: Record<string, unknown>
+  }
 
   const uClasses: string[] = []
   const lismState: string[] = []
   const styles: Record<string, string | number> = {}
-  const attrs: Record<string, any> = {}
+  const attrs: Record<string, unknown> = {}
 
   // baseクラスの生成 (lismClassとvariant)
   const baseClasses: string[] = []
@@ -74,8 +85,8 @@ export function getLismPropsVue(inputProps: Record<string, any>): LismOutput {
   delete props.variant
 
   // _propConfig や style などの抽出
-  const inlineStyle = (props.style as Record<string, any>) || {}
-  const _propConfig = (props._propConfig as Record<string, any>) || {}
+  const inlineStyle = (props.style as Record<string, unknown>) || {}
+  const _propConfig = (props._propConfig as Record<string, unknown>) || {}
   delete props.style
   delete props._propConfig
 

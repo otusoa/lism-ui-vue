@@ -10,11 +10,12 @@ export default createConfigForNuxt({
     stylistic: true,
   },
   dirs: {
-    src: [
-      './playground',
-    ],
+    src: ['./playground'],
+  },
+}).append({
+  extends: ['prettier'],
+  rules: {
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/multiline-html-element-content-newline': 'off',
   },
 })
-  .append(
-    // your custom flat config here...
-  )
