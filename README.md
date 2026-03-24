@@ -1,69 +1,88 @@
-# .
+# LismUI Vue
 
-This template should help get you started developing with Vue 3 in Vite.
+LismCSS の Vue 3 専用の実装ライブラリです。効率的にレイアウトを構築するためのユーティリティコンポーネントを提供します。
 
-## Recommended IDE Setup
+## パッケージ構成
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+このリポジトリはモノレポ構成となっており、以下のパッケージが含まれています：
 
-## Recommended Browser Setup
+- **`lism-ui-vue`**: Vue 3 用のコアコンポーネントライブラリ。
+- **`@lism-ui-vue/nuxt`**: Nuxt 4+ 対応の専用モジュール（自動インポート対応）。
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+---
 
-## Type Support for `.vue` Imports in TS
+## インストール
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-## Nuxt で自動インポートを有効化する
+### Vue 3 プロジェクトの場合
 
-`lism-ui-vue/nuxt` モジュールに bundled `unplugin-auto-import` サポートを追加しました。`src/runtime/composables` 以下に配置したエクスポートは、Nuxt の `addImportsDir` と unplugin-auto-import の `dirs` によって自動登録されます。
+```bash
+npm install lism-ui-vue
+```
 
-### 利用例
+### Nuxt プロジェクトの場合
+
+```bash
+npm install @lism-ui-vue/nuxt
+```
+
+※ `@lism-ui-vue/nuxt` をインストールすると、`lism-ui-vue` も自動的に依存関係として追加されます。
+
+---
+
+## Nuxt での利用方法
+
+`nuxt.config.ts` の `modules` に追加するだけで、すべてのコンポーネントとコンポーザブルが自動的にインポートされます。
 
 ```ts
-// apps/nuxt-test/nuxt.config.ts
+// nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['lism-ui-vue/nuxt'],
+  modules: ['@lism-ui-vue/nuxt'],
 })
 ```
 
+### 利用例
+
 ```vue
-<script setup>
-const lism = useLismProps({ lismClass: 'foo' })
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <Lism lismClass="foo">Hello</Lism>
+  <Lism p="20" bgc="base" bd> Hello LismUI! </Lism>
 </template>
 ```
-## Customize configuration
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## 開発者向け (Contribution)
 
-```sh
+### プロジェクトのセットアップ
+
+```bash
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+### 開発サーバーの起動
 
-```sh
+```bash
+# Vue本体の開発
+pnpm dev
+
+# Nuxtモジュールの開発 (Playground)
+cd apps/lism-ui-vue-nuxt
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### ビルドとテスト
 
-```sh
+```bash
+# 全パッケージのビルド
 pnpm build
+
+# 全パッケージのテスト
+pnpm test
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+---
 
-```sh
-pnpm lint
-```
+## License
+
+MIT
