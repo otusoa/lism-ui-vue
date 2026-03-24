@@ -32,7 +32,8 @@
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
-    "format": "oxfmt src/"
+    "format": "oxfmt src/",
+    "release": "pnpm run lint && pnpm run type-check && pnpm run build && changelogen --release && git push --follow-tags"
   },
   "dependencies": {
     "lism-css": "^0.9.3"
@@ -44,6 +45,7 @@
     "@vitejs/plugin-vue": "^6.0.5",
     "@vue/eslint-config-typescript": "^14.7.0",
     "@vue/tsconfig": "^0.8.1",
+    "changelogen": "^0.6.2",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-oxlint": "~1.50.0",
