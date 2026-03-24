@@ -6,8 +6,9 @@
 
   <Lism bd bds="dashed" bdw="4px" bdc="red" p="15" bd-b> あああ </Lism>
 
-  <Lism p="10">asdfasdf</Lism>
-  <AccordionRoot>
+  <Lism p="10" fz="">asdfasdf</Lism>
+  <TheTest />
+  <AccordionRoot aslf="start">
     <AccordionItem>
       <AccordionHeading>
         <AccordionButton p="15">
