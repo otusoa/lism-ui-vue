@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, type ComputedRef } from 'vue'
-import { accordionItemIdKey, accordionRootContextKey } from '@/components/Accordion/context'
-import AccordionIcon from '@/components/Accordion/AccordionIcon.vue'
+import { accordionItemIdKey, accordionRootContextKey } from './context'
+import AccordionIcon from './AccordionIcon.vue'
 
 export interface Props {
   controls?: string
@@ -38,13 +38,8 @@ const onClick = () => {
 </script>
 
 <template>
-  <button
-    type="button"
-    class="c--accordion_button l--flex set--plain -g:10 -w:100% -ai:center -jc:between -p:20"
-    :aria-controls="ariaControls"
-    :aria-expanded="isOpened"
-    @click="onClick"
-  >
+  <button type="button" class="c--accordion_button l--flex set--plain -g:10 -w:100% -ai:center -jc:between -p:20"
+    :aria-controls="ariaControls" :aria-expanded="isOpened" @click="onClick">
     <slot />
     <AccordionIcon />
   </button>
