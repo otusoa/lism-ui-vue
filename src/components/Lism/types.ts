@@ -25,10 +25,3 @@ export type LismProps = LismCoreProps & {
   [key: string]: any
 }
 
-// Volar/vue-tsc が標準のHTMLタグやVueコンポーネントにLismプロパティを提案できるようにするためのグローバル型拡張。
-import 'vue'
-
-declare module 'vue' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  export interface ComponentCustomProps extends LismCoreBaseProps {}
-}
