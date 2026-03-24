@@ -34,8 +34,8 @@ export default defineConfig({
             filter: (src) => {
               // ディレクトリはそのまま通す
               try { if (statSync(src).isDirectory()) return true } catch { return false }
-              // .vue ファイルのみコピー
-              return src.endsWith('.vue')
+              // .vue, .ts, .mts ファイルをコピー（コンポーネントが依存するファイル用）
+              return /\.(vue|ts|mts)$/.test(src)
             }
           }
         )
