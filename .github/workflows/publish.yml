@@ -1,0 +1,38 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: パブリッシュの実行
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # OIDCによるnpm認証（Provenance）に必要
+      contents: read # ソースの読み取りに必要
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: pnpmのセットアップ
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Node.jsのセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 依存関係のインストール
+        run: pnpm install --frozen-lockfile
+
+      - name: ビルドの実行
+        run: pnpm build
+
+      - name: npmへパブリッシュ
+        run: pnpm publish -r --access public --no-git-checks --provenance

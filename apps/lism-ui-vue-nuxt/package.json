@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "LismUI VueのNuxtモジュール",
   "license": "MIT",
-  "repository": "your-org/my-module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/otusoa/lism-ui-vue"
+  },
   "workspaces": [
     "playground"
   ],
