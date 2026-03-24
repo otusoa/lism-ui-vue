@@ -38,7 +38,7 @@ jobs:
         run: pnpm build
 
       - name: "Nuxtモジュール: Playgroundの準備"
-        run: pnpm --filter lism-ui-vue-nuxt run dev:prepare
+        run: pnpm --filter @lism-ui-vue/nuxt run dev:prepare
 
       - name: "Nuxtモジュール: テストの実行"
-        run: pnpm --filter lism-ui-vue-nuxt run test
+        run: pnpm --filter @lism-ui-vue/nuxt run test
