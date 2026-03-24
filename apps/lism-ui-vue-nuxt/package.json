@@ -1,5 +1,5 @@
 {
-  "name": "lism-ui-vue-nuxt",
+  "name": "@lism-ui-vue/nuxt",
   "version": "0.0.1",
   "description": "LismUI VueのNuxtモジュール",
   "license": "MIT",

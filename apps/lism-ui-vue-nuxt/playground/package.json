@@ -8,7 +8,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "my-module": "latest",
+    "@lism-ui-vue/nuxt": "workspace:*",
     "nuxt": "^4.4.2"
   }
 }

@@ -7,13 +7,13 @@ import type { NuxtModule } from '@nuxt/schema'
 
 const module: NuxtModule = defineNuxtModule({
   meta: {
-    name: 'lism-ui-vue/nuxt',
+    name: '@lism-ui-vue/nuxt',
     configKey: 'lism',
     compatibility: {
       nuxt: '>=4.0.0',
     },
   },
-  setup(_options, nuxt) {
+  async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     // CSSの追加
@@ -31,22 +31,32 @@ const module: NuxtModule = defineNuxtModule({
     // モジュールオプションで指定がある場合は優先
     const { componentsDir: optionComponentsDir } = _options as { componentsDir?: string }
 
-    const moduleDir = dirname(fileURLToPath(import.meta.url))
-    const workspaceSrcComponents = resolvePath(moduleDir, '../../../src/components')
-    const packageRoot = resolvePath(moduleDir, '../../..')
-    const packageSrcComponents = resolvePath(packageRoot, 'src/components')
-    const packageDistComponents = resolvePath(packageRoot, 'dist/components')
-
     const lookupDirs = [] as string[]
 
     if (optionComponentsDir) {
-      lookupDirs.push(resolvePath(moduleDir, optionComponentsDir))
+      lookupDirs.push(resolvePath(dirname(fileURLToPath(import.meta.url)), optionComponentsDir))
     }
 
-    if (nuxt.options.dev) {
-      lookupDirs.push(workspaceSrcComponents, packageSrcComponents, packageDistComponents)
-    } else {
-      lookupDirs.push(packageDistComponents, packageSrcComponents, workspaceSrcComponents)
+    // lism-ui-vue パッケージのディレクトリを解決
+    const { resolvePath: resolveNuxtPath } = await import('@nuxt/kit')
+    
+    try {
+      // package.jsonが非公開の場合があるため、エントリポイントからルートパスを推測する
+      const lismEntryPath = await resolveNuxtPath('lism-ui-vue')
+      const lismPackageRoot = resolvePath(dirname(lismEntryPath), '..')
+      
+      const packageSrcComponents = resolvePath(lismPackageRoot, 'src/components')
+      const packageDistComponents = resolvePath(lismPackageRoot, 'dist/runtime/components')
+      
+      if (nuxt.options.dev) {
+        // 開発環境では src/components を優先
+        lookupDirs.push(packageSrcComponents, packageDistComponents)
+      } else {
+        // 本番環境では dist/runtime/components を優先
+        lookupDirs.push(packageDistComponents, packageSrcComponents)
+      }
+    } catch (e) {
+      console.warn('[lism-ui-vue/nuxt] Failed to resolve lism-ui-vue package structure. Component auto-import may fail.', e)
     }
 
     const matchedComponentsDir = lookupDirs.find((dir) => existsSync(dir))
@@ -59,7 +69,7 @@ const module: NuxtModule = defineNuxtModule({
       })
     }
 
-    // composables を自動インポート対象として登録（手動で名前列挙しない）
+    // composables の auto-import 登録
     const composablesDir = resolve('./runtime/composables')
     addImportsDir(composablesDir)
   },
