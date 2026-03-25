@@ -1,6 +1,18 @@
 # Changelog
 
 
+## @lism-ui-vue/nuxt@v0.1.1-alpha.2
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1...@lism-ui-vue/nuxt@v0.1.1-alpha.2)
+
+### 🩹 Fixes
+
+- **nuxt-modules:** Https://github.com/otusoa/lism-ui-vue/issues/5 の解決 ([a0520a1](https://github.com/otusoa/lism-ui-vue/commit/a0520a1))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## @lism-ui-vue/nuxt@v0.1.1
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.2-alpha.3...@lism-ui-vue/nuxt@v0.1.1)
