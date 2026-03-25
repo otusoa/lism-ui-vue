@@ -1,4 +1,4 @@
-import { defineNuxtModule, addComponentsDir, addImportsDir, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, addComponentsDir, createResolver } from '@nuxt/kit'
 import { existsSync } from 'node:fs'
 import { dirname, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -16,28 +16,27 @@ const module: NuxtModule = defineNuxtModule({
   async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
-    const options = _options as { componentsDir?: string; skipCss?: boolean }
-
-    // CSSの追加（skipCss: true の場合はスキップ）
-    if (!options.skipCss) {
-      nuxt.options.css = nuxt.options.css || []
-      nuxt.options.css.push('lism-ui-vue/style')
-      nuxt.options.css.push('lism-css/main.css')
-    }
+    const options = _options as { componentsDir?: string; skipCss?: boolean; verbose?: boolean }
+    const skipCss = options.skipCss || false
+    const verbose = options.verbose || false
 
     // lism-css を SSR バンドルに含める（getLayoutProps が SSR で解決できない問題の修正）
     nuxt.options.build = nuxt.options.build || {}
     nuxt.options.build.transpile = nuxt.options.build.transpile || []
     const transpile = nuxt.options.build.transpile as string[]
     if (!transpile.includes('lism-css')) transpile.push('lism-css')
+
     if (!transpile.includes('lism-ui-vue')) transpile.push('lism-ui-vue')
 
     // モジュール内 runtime/components の auto-import
-    addComponentsDir({
-      path: resolve('./runtime/components'),
-      prefix: '',
-      global: true,
-    })
+    const runtimeComponentsDir = resolve('./runtime/components')
+    if (existsSync(runtimeComponentsDir)) {
+      addComponentsDir({
+        path: runtimeComponentsDir,
+        prefix: '',
+        global: true,
+      })
+    }
 
     // モジュールオプションで指定がある場合は優先
     const { componentsDir: optionComponentsDir } = _options as { componentsDir?: string }
@@ -50,15 +49,30 @@ const module: NuxtModule = defineNuxtModule({
 
     // lism-ui-vue パッケージのディレクトリを解決
     const { resolvePath: resolveNuxtPath } = await import('@nuxt/kit')
-    
+
+    // CSSの追加
+    if (!skipCss) {
+      nuxt.options.css = nuxt.options.css || []
+      for (const cssPath of ['lism-ui-vue/style', 'lism-css/main.css']) {
+        try {
+          const resolved = await resolveNuxtPath(cssPath)
+          if (existsSync(resolved)) {
+            nuxt.options.css.push(cssPath)
+          }
+        } catch {
+          console.error(`[@lism-ui-vue/nuxt] Failed to resolve ${cssPath}`)
+        }
+      }
+    }
+
     try {
       // package.jsonが非公開の場合があるため、エントリポイントからルートパスを推測する
       const lismEntryPath = await resolveNuxtPath('lism-ui-vue')
       const lismPackageRoot = resolvePath(dirname(lismEntryPath), '..')
-      
+
       const packageSrcComponents = resolvePath(lismPackageRoot, 'src/components')
       const packageDistComponents = resolvePath(lismPackageRoot, 'dist/runtime/components')
-      
+
       const isTest = !!(process.env.VITEST || process.env.NODE_ENV === 'test')
       if (nuxt.options.dev || isTest) {
         // 開発・テスト環境では src/components を優先
@@ -81,8 +95,10 @@ const module: NuxtModule = defineNuxtModule({
     }
 
     const matchedComponentsDir = lookupDirs.find((dir) => existsSync(dir))
-    console.log('[lism-ui-vue/nuxt] Resolved lookupDirs:', lookupDirs)
-    console.log('[lism-ui-vue/nuxt] matchedComponentsDir:', matchedComponentsDir)
+    if (verbose) {
+      console.log('[@lism-ui-vue/nuxt] Resolved lookupDirs:', lookupDirs)
+      console.log('[@lism-ui-vue/nuxt] matchedComponentsDir:', matchedComponentsDir)
+    }
 
     if (matchedComponentsDir) {
       addComponentsDir({
@@ -93,9 +109,6 @@ const module: NuxtModule = defineNuxtModule({
       })
     }
 
-    // composables の auto-import 登録
-    const composablesDir = resolve('./runtime/composables')
-    addImportsDir(composablesDir)
   },
 })
 

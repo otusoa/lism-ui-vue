@@ -14,9 +14,4 @@ defineProps<Props>()
   </Lism>
 </template>
 
-<style scoped>
-/* CSSファイルが生成されないため、残す */
-.css-generate {
-  align-self: auto;
-}
-</style>
+<style scoped></style>
