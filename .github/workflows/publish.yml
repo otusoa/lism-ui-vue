@@ -31,6 +31,10 @@ jobs:
       - name: 依存関係のインストール
         run: pnpm install --frozen-lockfile
 
+      - name: Prepare Nuxt
+        run: pnpm exec nuxi prepare
+        working-directory: apps/lism-ui-vue-nuxt # 該当のディレクトリを指定
+
       - name: ビルドの実行
         run: pnpm build
 
