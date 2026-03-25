@@ -1,25 +1,30 @@
 <template>
-  <div>Nuxt module playground!</div>
+  <Lism max-w="1000px" mx="auto">
+    <div>Nuxt module playground!</div>
 
-  <Lism fx="1" fxd="col-r" fz="5xl">ああ</Lism>
-  <Lism pl="80" ac="end"> あああ </Lism>
+    <Lism fx="1" fxd="col-r" fz="5xl">ああ</Lism>
+    <Lism pl="80" ac="end"> あああ </Lism>
 
-  <Lism bd bds="dashed" bdw="4px" bdc="red" p="15" bd-b> あああ </Lism>
+    <Lism bd bds="dashed" bdw="4px" bdc="red" p="15" bd-b>bdが効かない</Lism>
 
-  <Lism p="10" fz="">asdfasdf</Lism>
-  <TheTest />
-  <AccordionRoot aslf="start">
-    <AccordionItem>
-      <AccordionHeading>
-        <AccordionButton p="15">
-          <span>テスト日本語ジャパン</span>
-        </AccordionButton>
-      </AccordionHeading>
-      <AccordionPanel p="20" lism-class="b-y-style-groove">
-        <AccordionContent> テスト日本語ジャパンコンテンツ </AccordionContent>
-      </AccordionPanel>
-    </AccordionItem>
-  </AccordionRoot>
+    <LismBox p="30" bgc="base-2" bxsh="10" bdrs="10" mb="50">
+      <p></p>
+    </LismBox>
+
+    <Lism bd p="30" bgc="base-2" bxsh="10" bdrs="10" mb="50">
+      <p>aaa</p>
+    </Lism>
+
+    <LismStack layout="box" bgc="base-2" g="20" p="30" bdrs="10">
+      <LismBox>aaa</LismBox>
+      <LismBox>aaa</LismBox>
+      <LismBox>aaa</LismBox>
+    </LismStack>
+
+    <LismContainer bd is-wrapper="s" p="20">
+      <LismBox :p="[10, 30]">このBOXは、paddingが切り替わります。</LismBox>
+    </LismContainer>
+  </Lism>
 </template>
 
 <script setup lang="ts"></script>
