@@ -24,7 +24,7 @@
     "./style": "./dist/lism-ui-vue.css"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",

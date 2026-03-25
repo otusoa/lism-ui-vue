@@ -11,7 +11,7 @@ export default defineConfig({
     vue(),
     AutoImport({
       dirs: ['src/runtime/composables'],
-      dts: 'dist/auto-imports.d.ts'
+      dts: 'dist/auto-imports.d.ts',
     }),
     dts({
       tsconfigPath: './tsconfig.app.json',
@@ -25,7 +25,7 @@ export default defineConfig({
     // nuxt.ts の addComponentsDir がこのパスを参照する
     {
       name: 'copy-vue-to-runtime',
-      closeBundle() {
+      writeBundle() {
         cpSync(
           fileURLToPath(new URL('./src/components', import.meta.url)),
           fileURLToPath(new URL('./dist/runtime/components', import.meta.url)),
@@ -33,14 +33,18 @@ export default defineConfig({
             recursive: true,
             filter: (src) => {
               // ディレクトリはそのまま通す
-              try { if (statSync(src).isDirectory()) return true } catch { return false }
+              try {
+                if (statSync(src).isDirectory()) return true
+              } catch {
+                return false
+              }
               // .vue, .ts, .mts ファイルをコピー（コンポーネントが依存するファイル用）
               return /\.(vue|ts|mts)$/.test(src)
-            }
-          }
+            },
+          },
         )
-      }
-    }
+      },
+    },
   ],
   resolve: {
     alias: {
@@ -64,7 +68,7 @@ export default defineConfig({
         },
         entryFileNames: '[name].js',
         chunkFileNames: 'lism-ui-vue.js',
-        assetFileNames: 'lism-ui-vue.[ext]'
+        assetFileNames: 'lism-ui-vue.[ext]',
       },
     },
     outDir: 'dist',
