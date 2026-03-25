@@ -103,7 +103,7 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
    * レスポンシブ指定の各ブレイクポイントに対しても再帰的に呼び出されます。
    */
   const setAttrs = (propName: string, val: any, config: any = {}, bp: string = '') => {
-    if (val == null || val === '' || val === false) return
+    if (val == null || val === false) return
 
     let varName = `--${propName}`
     let utilName = `-${String(config.utilKey || propName)}`
@@ -139,7 +139,7 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       }
     }
 
-    if (val === true || val === '-') {
+    if (val === true || val === '-' || val === '') {
       addUtil(utilName)
       return
     }
@@ -215,8 +215,13 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
 
   // propの解析ループ
   Object.keys(props).forEach((key) => {
-    const val = props[key]
-    if (val === undefined) return
+    const rawVal = props[key]
+    if (rawVal === undefined) return
+    
+    // Vue の場合、`<Lism bd>` のようなフラグ属性は `""` (空文字) として `$attrs` に渡るが、
+    // js実装側では `true` として扱う仕様のため変換。
+    // target外の純粋な HTML 属性等は `rawVal` を使用して元の `""` を反映させる。
+    const val = rawVal === '' ? true : rawVal
 
     if (Object.prototype.hasOwnProperty.call(STATES, key)) {
       const stateConfig = (STATES as Record<string, unknown>)[key]
@@ -246,8 +251,8 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     } else if (key === 'css') {
       if (val) Object.assign(styles, val)
     } else {
-      // Lismの対象外の属性(id, data-*, aria-* 等)はそのままattrsへ
-      attrs[key] = val
+      // Lismの対象外の属性(id, data-*, aria-* 等)はそのままattrsへ (空文字列などもそのまま)
+      attrs[key] = rawVal
     }
   })
 
