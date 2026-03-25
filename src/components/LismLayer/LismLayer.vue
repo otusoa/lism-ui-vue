@@ -1,15 +1,20 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismProps } from '../../core/types'
+import type { LismCoreBaseProps, FilterProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LismProps
+// LismProps をベースに、フィルタープロパティを Vue に認識させる
+interface Props extends /* @vue-ignore */ LismCoreBaseProps, FilterProps {}
 
 defineOptions({ inheritAttrs: false })
-defineProps<Props>()
+const props = defineProps<Props>()
+
+// isLayer はテンプレート側で固定で指定するため、props から除外して渡す（重複警告の回避）
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { isLayer, ...otherProps } = props
 </script>
 
 <template>
-  <Lism is-layer v-bind="$attrs">
+  <Lism isLayer v-bind="{ ...$attrs, ...otherProps }">
     <slot />
   </Lism>
 </template>
