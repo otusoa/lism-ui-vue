@@ -25,7 +25,6 @@ const module: NuxtModule = defineNuxtModule({
     nuxt.options.build.transpile = nuxt.options.build.transpile || []
     const transpile = nuxt.options.build.transpile as string[]
     if (!transpile.includes('lism-css')) transpile.push('lism-css')
-
     if (!transpile.includes('lism-ui-vue')) transpile.push('lism-ui-vue')
 
     // モジュール内 runtime/components の auto-import
@@ -38,13 +37,15 @@ const module: NuxtModule = defineNuxtModule({
       })
     }
 
-    // モジュールオプションで指定がある場合は優先
-    const { componentsDir: optionComponentsDir } = _options as { componentsDir?: string }
+    const isLocal = import.meta.url.includes('/apps/lism-ui-vue-nuxt/')
+    const isTest = !!(process.env.VITEST || process.env.NODE_ENV === 'test')
+    const useSrc = isLocal && (nuxt.options.dev || isTest)
 
-    const lookupDirs = [] as string[]
+    const lookupDirs: string[] = []
 
-    if (optionComponentsDir) {
-      lookupDirs.push(resolvePath(dirname(fileURLToPath(import.meta.url)), optionComponentsDir))
+    // モジュールオプションで指定がある場合は最優先
+    if (options.componentsDir) {
+      lookupDirs.push(resolvePath(dirname(fileURLToPath(import.meta.url)), options.componentsDir))
     }
 
     // lism-ui-vue パッケージのディレクトリを解決
@@ -66,36 +67,38 @@ const module: NuxtModule = defineNuxtModule({
     }
 
     try {
-      // package.jsonが非公開の場合があるため、エントリポイントからルートパスを推測する
+      // エントリポイントからルートパスを推測する
       const lismEntryPath = await resolveNuxtPath('lism-ui-vue')
       const lismPackageRoot = resolvePath(dirname(lismEntryPath), '..')
 
       const packageSrcComponents = resolvePath(lismPackageRoot, 'src/components')
       const packageDistComponents = resolvePath(lismPackageRoot, 'dist/runtime/components')
 
-      const isTest = !!(process.env.VITEST || process.env.NODE_ENV === 'test')
-      if (nuxt.options.dev || isTest) {
-        // 開発・テスト環境では src/components を優先
+      if (useSrc) {
+        // モノレポ内での開発・テスト環境では src/components を優先
         lookupDirs.push(packageSrcComponents, packageDistComponents)
       } else {
-        // 本番環境では dist/runtime/components を優先
-        lookupDirs.push(packageDistComponents, packageSrcComponents)
+        // パブリッシュ環境（または外部利用）では dist/runtime/components を優先
+        lookupDirs.push(packageDistComponents)
       }
     } catch {
-      // resolveNuxtPath が失敗した場合（テスト環境 / pnpm link など）は
-      // このファイル自身の位置 (apps/lism-ui-vue-nuxt/src/module.ts) から推測する
+      // resolveNuxtPath が失敗した場合
       const moduleDir = dirname(fileURLToPath(import.meta.url))
-      // moduleDir = .../apps/lism-ui-vue-nuxt/src
-      // 2段上がるとプロジェクトルート
-      const projectRoot = resolvePath(moduleDir, '..', '..')
-      const fallbackSrc = resolvePath(projectRoot, 'src/components')
-      const fallbackDist = resolvePath(moduleDir, 'runtime/components')
-      console.warn('[lism-ui-vue/nuxt] Falling back to local paths:', { fallbackSrc, fallbackDist })
-      lookupDirs.push(fallbackSrc, fallbackDist)
+
+      if (isLocal) {
+        // モノレポ内ならプロジェクトルートから推測
+        const projectRoot = resolvePath(moduleDir, '..', '..', '..')
+        lookupDirs.push(resolvePath(projectRoot, 'src/components'))
+      } else {
+        // 外部利用なら自身の runtime/components を推測
+        lookupDirs.push(resolvePath(moduleDir, 'runtime/components'))
+      }
     }
 
     const matchedComponentsDir = lookupDirs.find((dir) => existsSync(dir))
     if (verbose) {
+      console.log('[@lism-ui-vue/nuxt] isLocal:', isLocal)
+      console.log('[@lism-ui-vue/nuxt] useSrc:', useSrc)
       console.log('[@lism-ui-vue/nuxt] Resolved lookupDirs:', lookupDirs)
       console.log('[@lism-ui-vue/nuxt] matchedComponentsDir:', matchedComponentsDir)
     }
