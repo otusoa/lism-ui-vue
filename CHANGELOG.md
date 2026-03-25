@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.2-alpha.1
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.2-alpha.0...v0.1.2-alpha.1)
+
+### 🤖 CI
+
+- **publish:** Ciファイルの不備を更新 ([8b13d17](https://github.com/otusoa/lism-ui-vue/commit/8b13d17))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## v0.1.2-alpha.0
 
 
