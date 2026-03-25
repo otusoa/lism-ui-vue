@@ -40,4 +40,9 @@ jobs:
         run: pnpm build
 
       - name: npmへパブリッシュ
-        run: pnpm publish -r --access public --no-git-checks --provenance
+        run: |
+          if [[ "${{ github.ref_name }}" == *"alpha"* ]]; then
+            pnpm publish -r --access public --no-git-checks --provenance --tag alpha
+          else
+            pnpm publish -r --access public --no-git-checks --provenance
+          fi
