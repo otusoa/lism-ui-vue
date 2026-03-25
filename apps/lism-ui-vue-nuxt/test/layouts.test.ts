@@ -61,7 +61,8 @@ describe('Layout Components SSR', async () => {
   it('renders LismSideMain with css variables', async () => {
     const html = await $fetch('/')
     expect(html).toContain('l--sideMain')
-    expect(html).toContain('-g:20')
+    expect(html).toContain('--sideW:200px')
+    expect(html).toContain('--mainW:400px')
   })
 
   it('renders LismLayer with backdrop-filter', async () => {

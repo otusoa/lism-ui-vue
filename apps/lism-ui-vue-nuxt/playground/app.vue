@@ -1,5 +1,5 @@
 <template>
-  <Lism max-w="1000px" mx="auto">
+  <Lism max-w="1200px" mx="auto">
     <div>Nuxt module playground!</div>
 
     <Lism fx="1" fxd="col-r" fz="5xl">ああ</Lism>
@@ -11,7 +11,8 @@
       <p></p>
     </LismBox>
 
-    <Lism bd p="30" bgc="base-2" bxsh="10" bdrs="10" mb="50">
+    <!-- ホバーしたらシャドー -->
+    <Lism setTransition bxsh="10" :hov="{ bxsh: '40' }" bd p="30" bgc="base-2" bdrs="10" mb="50">
       <p>aaa</p>
     </Lism>
 
@@ -30,17 +31,21 @@
       <LismBox bgc="base-2">aaa</LismBox>
     </LismFlex>
 
-    <LismSideMain side-w="200px" main-w="" g="20">
-      <Lism is-side p="20" bgc="base-2">Sidebar</Lism>
-      <Lism p="20" bd>Main content</Lism>
+    <LismSideMain sideW="12rem" mainW="20rem" g="20">
+      <Box p="15" bd bdc="blue">
+        <p>Main Content</p>
+      </Box>
+      <Box isSide p="15" bd bdc="red">
+        <p>Side Content</p>
+      </Box>
     </LismSideMain>
 
-    <LismFrame as="figure" ar="16/9" pos="rel">
+    <!-- <LismFrame as="figure" ar="16/9" pos="rel">
       <img src="https://cdn.lism-css.com/img/a-1.jpg" alt="" width="960" height="640" />
       <LismLayer blur="10px" bgc="rgb(255 255 255 / 20%)" p="20" d="f" ai="c" jc="c">
         <Lism fz="2xl" fw="bold">BACKDROP BLUR</Lism>
       </LismLayer>
-    </LismFrame>
+    </LismFrame> -->
   </Lism>
 </template>
 

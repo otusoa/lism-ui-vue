@@ -26,6 +26,12 @@ describe('getLismPropsVue', () => {
     expect(output.style['--sideW']).toBe('200px')
   })
 
+  it('automatically converts kebab-case layout props to camelCase', () => {
+    // side-w should be converted to sideW and then to --sideW by lism-css
+    const output = getLismPropsVue({ layout: 'sideMain', 'side-w': '300px' } as any)
+    expect(output.style['--sideW']).toBe('300px')
+  })
+
   it('merges class and variant correctly', () => {
     const output = getLismPropsVue({ lismClass: 'l--box', variant: 'test' })
     expect(output.class).toContain('l--box')

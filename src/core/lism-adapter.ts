@@ -52,19 +52,19 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   // ハイフンを含むキーのうち、camelCase に変換すると STATES または PROPS に一致するものだけを変換する。
   const normalizedInput: Record<string, unknown> = {}
   for (const [key, value] of Object.entries(inputProps)) {
-    if (key.includes('-')) {
-      // kebab-case → camelCase へ変換を試みる
-      const camelKey = key.replace(/-([a-z])/g, (_, c) => c.toUpperCase())
-      if (
-        Object.prototype.hasOwnProperty.call(STATES, camelKey) ||
-        Object.prototype.hasOwnProperty.call(PROPS, camelKey)
-      ) {
-        // camelCase に変換すると STATES/PROPS に一致 → camelCase で格納
-        normalizedInput[camelKey] = value
-      } else {
-        // camelCase にしても一致しない → 元の kebab-case のまま (bd-b 等の PROPS キー)
-        normalizedInput[key] = value
-      }
+    if (key.startsWith('data-') || key.startsWith('aria-')) {
+      normalizedInput[key] = value
+      continue
+    }
+
+    // 1. そのままのキーで PROPS または STATES に存在するか確認
+    // LismCSS の PROPS には 'max-w' や 'min-w' などケバブケースのキーが含まれているため。
+    if (Object.prototype.hasOwnProperty.call(PROPS, key) || Object.prototype.hasOwnProperty.call(STATES, key)) {
+      normalizedInput[key] = value
+    } else if (key.includes('-')) {
+      // 2. 存在しない場合でハイフンを含むなら、camelCase に変換 (is-container -> isContainer, side-w -> sideW 等)
+      const camelKey = key.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase())
+      normalizedInput[camelKey] = value
     } else {
       normalizedInput[key] = value
     }
@@ -268,11 +268,11 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       } else {
         analyzeState(stateConfig, val)
       }
-    } else if (Object.prototype.hasOwnProperty.call(PROPS, key)) {
+    } else if (Object.prototype.hasOwnProperty.call(PROPS, key) || _propConfig[key]) {
       const propConfigBase = (PROPS as Record<string, unknown>)[key] || null
-      if (propConfigBase !== null && val != null) {
+      if (val != null) {
         const config = _propConfig[key]
-          ? Object.assign({}, propConfigBase, _propConfig[key])
+          ? Object.assign({}, propConfigBase || {}, _propConfig[key])
           : propConfigBase
 
         const bpData: Record<string, any> = getBpData(val)
