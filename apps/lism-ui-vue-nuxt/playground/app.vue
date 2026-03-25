@@ -24,6 +24,11 @@
     <LismContainer bd is-wrapper="s" p="20">
       <LismBox :p="[10, 30]">このBOXは、paddingが切り替わります。</LismBox>
     </LismContainer>
+    <LismFlex g="10">
+      <LismBox bgc="base-2">aaa</LismBox>
+      <LismBox bgc="base-2">aaa</LismBox>
+      <LismBox bgc="base-2">aaa</LismBox>
+    </LismFlex>
   </Lism>
 </template>
 

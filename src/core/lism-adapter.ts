@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * @file LismプロパティをVue用に変換するためのユーティリティ
+ * @file LismプロパティをVue.jsに適合させるためのアダプター
  */
 import { STATES, PROPS } from 'lism-css/config'
 import getLayoutProps from 'lism-css/lib/getLayoutProps'

@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import { getLismPropsVue } from './useLism'
+import { getLismPropsVue } from '../../core/lism-adapter'
 
-import type { LismCoreBaseProps } from './types'
+import type { LismCoreBaseProps } from '../../core/types'
 
 defineOptions({ inheritAttrs: false })
 

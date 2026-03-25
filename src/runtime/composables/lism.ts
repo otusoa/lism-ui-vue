@@ -1,6 +1,6 @@
-import { getLismPropsVue } from '../../components/Lism/useLism'
-import type { LismOutput } from '../../components/Lism/useLism'
-import type { LismProps } from '../../components/Lism/types'
+import { getLismPropsVue } from '../../core/lism-adapter'
+import type { LismOutput } from '../../core/lism-adapter'
+import type { LismProps } from '../../core/types'
 
 /**
  * Vue で使いやすい getLismProps util を Nuxt auto-import で提供。
