@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismCoreBaseProps } from '../../core/types'
+import type { LismProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LismCoreBaseProps
+type Props = /* @vue-ignore */ LismProps
 
 defineOptions({ inheritAttrs: false })
 defineProps<Props>()
 </script>
 
 <template>
-  <Lism layout="grid" v-bind="$attrs">
+  <Lism is-layer v-bind="$attrs">
     <slot />
   </Lism>
 </template>

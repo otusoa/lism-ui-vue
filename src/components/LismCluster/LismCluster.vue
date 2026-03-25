@@ -9,7 +9,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <Lism layout="grid" v-bind="$attrs">
+  <Lism layout="cluster" v-bind="$attrs">
     <slot />
   </Lism>
 </template>

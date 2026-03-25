@@ -236,6 +236,19 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     }
   }
 
+  const FILTERS = [
+    'blur',
+    'contrast',
+    'brightness',
+    'dropShadow',
+    'grayscale',
+    'hueRotate',
+    'invert',
+    'saturate',
+    'sepia',
+  ]
+  const filterValues: string[] = []
+
   // propの解析ループ
   Object.keys(props).forEach((key) => {
     const rawVal = props[key]
@@ -269,6 +282,11 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           setAttrs(key, bpData[bp], config, bp)
         })
       }
+    } else if (FILTERS.includes(key)) {
+      if (val) {
+        const kebabName = key.replace(/([A-Z])/g, '-$1').toLowerCase()
+        filterValues.push(`${kebabName}(${val})`)
+      }
     } else if (key === 'hov') {
       setHovProps(val)
     } else if (key === 'css') {
@@ -282,6 +300,11 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   // 最終的なクラス配列の構築
   // Vueのクラスバインディングを活かし、配列で返す
   const finalClass = [...baseClasses, ...lismState, ...uClasses].filter(Boolean)
+
+  // フィルターがある場合は backdrop-filter として追加 (Layer用)
+  if (filterValues.length > 0) {
+    styles.backdropFilter = filterValues.join(' ')
+  }
 
   return {
     class: finalClass,

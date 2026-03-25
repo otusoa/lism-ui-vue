@@ -9,7 +9,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <Lism lism-class="l--box" v-bind="$attrs">
+  <Lism layout="box" v-bind="$attrs">
     <slot />
   </Lism>
 </template>
