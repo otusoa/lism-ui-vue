@@ -27,6 +27,9 @@
     },
     "./style": "./dist/lism-ui-vue.css"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite build --watch",
     "build": "run-p type-check \"build-only {@}\" --",
