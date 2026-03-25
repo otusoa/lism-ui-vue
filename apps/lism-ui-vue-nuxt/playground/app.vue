@@ -11,6 +11,8 @@
       <p></p>
     </LismBox>
 
+    <Lism fz="5xl">Vitest</Lism>
+
     <!-- ホバーしたらシャドー -->
     <Lism setTransition bxsh="10" :hov="{ bxsh: '40' }" bd p="30" bgc="base-2" bdrs="10" mb="50">
       <p>aaa</p>
@@ -47,6 +49,9 @@
       </LismLayer>
     </LismFrame>
   </Lism>
+  <pre><code>{{ useTest().message }}</code></pre>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTest } from 'lism-ui-vue/composables'
+</script>

@@ -15,11 +15,15 @@
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/lism-ui-vue.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/lism-ui-vue.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./composables": {
+      "types": "./dist/composables.d.ts",
+      "import": "./dist/composables.js"
     },
     "./style": "./dist/lism-ui-vue.css"
   },

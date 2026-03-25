@@ -10,13 +10,13 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      dirs: ['src/runtime/composables'],
+      dirs: ['src/composables'],
       dts: 'dist/auto-imports.d.ts',
     }),
     dts({
       tsconfigPath: './tsconfig.app.json',
       rollupTypes: true,
-      entryRoot: 'src/components',
+      entryRoot: 'src',
       outDir: 'dist',
       insertTypesEntry: true,
       copyDtsFiles: false,
@@ -45,6 +45,7 @@ export default defineConfig({
         }
         copyDir('./src/components', './dist/runtime/components')
         copyDir('./src/core', './dist/runtime/core')
+        copyDir('./src/composables', './dist/runtime/composables')
       },
     },
   ],
@@ -57,9 +58,10 @@ export default defineConfig({
     lib: {
       entry: {
         index: fileURLToPath(new URL('./src/components/index.ts', import.meta.url)),
+        composables: fileURLToPath(new URL('./src/composables/index.ts', import.meta.url)),
       },
       name: 'LismUIVue',
-      fileName: (entryName) => `${entryName}.js`,
+      fileName: (entryName: string) => `${entryName}.js`,
       formats: ['es'],
     },
     rollupOptions: {

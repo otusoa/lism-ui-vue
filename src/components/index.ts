@@ -8,5 +8,3 @@ export * from './LismCluster'
 export * from './LismFrame'
 export * from './LismSideMain'
 export * from './LismLayer'
-
-export * from '../runtime/composables/lism'
