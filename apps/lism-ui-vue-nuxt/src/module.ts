@@ -67,7 +67,7 @@ const module: NuxtModule = defineNuxtModule({
         // 本番環境では dist/runtime/components を優先
         lookupDirs.push(packageDistComponents, packageSrcComponents)
       }
-    } catch (_e) {
+    } catch {
       // resolveNuxtPath が失敗した場合（テスト環境 / pnpm link など）は
       // このファイル自身の位置 (apps/lism-ui-vue-nuxt/src/module.ts) から推測する
       const moduleDir = dirname(fileURLToPath(import.meta.url))
