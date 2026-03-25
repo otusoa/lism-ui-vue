@@ -47,7 +47,30 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     return { class: [], style: {} }
   }
 
-  const { layout, ...restInput } = inputProps as { layout?: string } & Record<string, unknown>
+  // Vue テンプレートでは kebab-case (is-container) で属性を記述するが、
+  // STATES/PROPS のキーは camelCase (isContainer) であるため変換が必要。
+  // ハイフンを含むキーのうち、camelCase に変換すると STATES または PROPS に一致するものだけを変換する。
+  const normalizedInput: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(inputProps)) {
+    if (key.includes('-')) {
+      // kebab-case → camelCase へ変換を試みる
+      const camelKey = key.replace(/-([a-z])/g, (_, c) => c.toUpperCase())
+      if (
+        Object.prototype.hasOwnProperty.call(STATES, camelKey) ||
+        Object.prototype.hasOwnProperty.call(PROPS, camelKey)
+      ) {
+        // camelCase に変換すると STATES/PROPS に一致 → camelCase で格納
+        normalizedInput[camelKey] = value
+      } else {
+        // camelCase にしても一致しない → 元の kebab-case のまま (bd-b 等の PROPS キー)
+        normalizedInput[key] = value
+      }
+    } else {
+      normalizedInput[key] = value
+    }
+  }
+
+  const { layout, ...restInput } = normalizedInput as { layout?: string } & Record<string, unknown>
   const props = getLayoutProps(
     layout as Parameters<typeof getLayoutProps>[0],
     restInput
