@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.2-alpha.2
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.1-alpha.0...v0.1.2-alpha.2)
+
+### 🏡 Chore
+
+- **package.json:** リリース周りを更新 ci: alphaリリースに最適化 ([d3d5b1e](https://github.com/otusoa/lism-ui-vue/commit/d3d5b1e))
+
+### 🤖 CI
+
+- Ciのタグが競合する問題を解決 ([7eb7eb5](https://github.com/otusoa/lism-ui-vue/commit/7eb7eb5))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## v0.1.2-alpha.1
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.2-alpha.0...v0.1.2-alpha.1)
