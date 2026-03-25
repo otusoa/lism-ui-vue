@@ -26,23 +26,25 @@ export default defineConfig({
     {
       name: 'copy-vue-to-runtime',
       writeBundle() {
-        cpSync(
-          fileURLToPath(new URL('./src/components', import.meta.url)),
-          fileURLToPath(new URL('./dist/runtime/components', import.meta.url)),
-          {
-            recursive: true,
-            filter: (src) => {
-              // ディレクトリはそのまま通す
-              try {
-                if (statSync(src).isDirectory()) return true
-              } catch {
-                return false
-              }
-              // .vue, .ts, .mts ファイルをコピー（コンポーネントが依存するファイル用）
-              return /\.(vue|ts|mts)$/.test(src)
+        const copyDir = (srcPath: string, destPath: string) => {
+          cpSync(
+            fileURLToPath(new URL(srcPath, import.meta.url)),
+            fileURLToPath(new URL(destPath, import.meta.url)),
+            {
+              recursive: true,
+              filter: (src) => {
+                try {
+                  if (statSync(src).isDirectory()) return true
+                } catch {
+                  return false
+                }
+                return /\.(vue|ts|mts)$/.test(src)
+              },
             },
-          },
-        )
+          )
+        }
+        copyDir('./src/components', './dist/runtime/components')
+        copyDir('./src/core', './dist/runtime/core')
       },
     },
   ],

@@ -100,7 +100,9 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     const variantClass = `${first}--${props.variant}`
     mainClass = [first, variantClass, ...arr.slice(1)].join(' ')
   }
-  if (mainClass) baseClasses.push(mainClass)
+  if (mainClass) {
+    mainClass.split(' ').filter(Boolean).forEach(c => baseClasses.push(c))
+  }
 
   delete props.class
   delete props.className
