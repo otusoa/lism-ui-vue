@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.2-alpha.3
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.1-alpha.1...v0.1.2-alpha.3)
+
+### 🏡 Chore
+
+- **tag名:** タグ名を設定ファイルで変更 ([6f8a551](https://github.com/otusoa/lism-ui-vue/commit/6f8a551))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## v0.1.2-alpha.2
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.1-alpha.0...v0.1.2-alpha.2)
