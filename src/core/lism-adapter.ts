@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * @file LismプロパティをVue用に変換するためのユーティリティ
+ * @file LismプロパティをVue.jsに適合させるためのアダプター
  */
 import { STATES, PROPS } from 'lism-css/config'
 import getLayoutProps from 'lism-css/lib/getLayoutProps'
@@ -47,7 +47,30 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     return { class: [], style: {} }
   }
 
-  const { layout, ...restInput } = inputProps as { layout?: string } & Record<string, unknown>
+  // Vue テンプレートでは kebab-case (is-container) で属性を記述するが、
+  // STATES/PROPS のキーは camelCase (isContainer) であるため変換が必要。
+  // ハイフンを含むキーのうち、camelCase に変換すると STATES または PROPS に一致するものだけを変換する。
+  const normalizedInput: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(inputProps)) {
+    if (key.startsWith('data-') || key.startsWith('aria-')) {
+      normalizedInput[key] = value
+      continue
+    }
+
+    // 1. そのままのキーで PROPS または STATES に存在するか確認
+    // LismCSS の PROPS には 'max-w' や 'min-w' などケバブケースのキーが含まれているため。
+    if (Object.prototype.hasOwnProperty.call(PROPS, key) || Object.prototype.hasOwnProperty.call(STATES, key)) {
+      normalizedInput[key] = value
+    } else if (key.includes('-')) {
+      // 2. 存在しない場合でハイフンを含むなら、camelCase に変換 (is-container -> isContainer, side-w -> sideW 等)
+      const camelKey = key.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase())
+      normalizedInput[camelKey] = value
+    } else {
+      normalizedInput[key] = value
+    }
+  }
+
+  const { layout, ...restInput } = normalizedInput as { layout?: string } & Record<string, unknown>
   const props = getLayoutProps(
     layout as Parameters<typeof getLayoutProps>[0],
     restInput
@@ -77,7 +100,9 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     const variantClass = `${first}--${props.variant}`
     mainClass = [first, variantClass, ...arr.slice(1)].join(' ')
   }
-  if (mainClass) baseClasses.push(mainClass)
+  if (mainClass) {
+    mainClass.split(' ').filter(Boolean).forEach(c => baseClasses.push(c))
+  }
 
   delete props.class
   delete props.className
@@ -103,7 +128,7 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
    * レスポンシブ指定の各ブレイクポイントに対しても再帰的に呼び出されます。
    */
   const setAttrs = (propName: string, val: any, config: any = {}, bp: string = '') => {
-    if (val == null || val === '' || val === false) return
+    if (val == null || val === false) return
 
     let varName = `--${propName}`
     let utilName = `-${String(config.utilKey || propName)}`
@@ -139,7 +164,7 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       }
     }
 
-    if (val === true || val === '-') {
+    if (val === true || val === '-' || val === '') {
       addUtil(utilName)
       return
     }
@@ -213,10 +238,28 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     }
   }
 
+  const FILTERS = [
+    'blur',
+    'contrast',
+    'brightness',
+    'dropShadow',
+    'grayscale',
+    'hueRotate',
+    'invert',
+    'saturate',
+    'sepia',
+  ]
+  const filterValues: string[] = []
+
   // propの解析ループ
   Object.keys(props).forEach((key) => {
-    const val = props[key]
-    if (val === undefined) return
+    const rawVal = props[key]
+    if (rawVal === undefined) return
+    
+    // Vue の場合、`<Lism bd>` のようなフラグ属性は `""` (空文字) として `$attrs` に渡るが、
+    // js実装側では `true` として扱う仕様のため変換。
+    // target外の純粋な HTML 属性等は `rawVal` を使用して元の `""` を反映させる。
+    const val = rawVal === '' ? true : rawVal
 
     if (Object.prototype.hasOwnProperty.call(STATES, key)) {
       const stateConfig = (STATES as Record<string, unknown>)[key]
@@ -225,11 +268,11 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       } else {
         analyzeState(stateConfig, val)
       }
-    } else if (Object.prototype.hasOwnProperty.call(PROPS, key)) {
+    } else if (Object.prototype.hasOwnProperty.call(PROPS, key) || _propConfig[key]) {
       const propConfigBase = (PROPS as Record<string, unknown>)[key] || null
-      if (propConfigBase !== null && val != null) {
+      if (val != null) {
         const config = _propConfig[key]
-          ? Object.assign({}, propConfigBase, _propConfig[key])
+          ? Object.assign({}, propConfigBase || {}, _propConfig[key])
           : propConfigBase
 
         const bpData: Record<string, any> = getBpData(val)
@@ -241,19 +284,29 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           setAttrs(key, bpData[bp], config, bp)
         })
       }
+    } else if (FILTERS.includes(key)) {
+      if (val) {
+        const kebabName = key.replace(/([A-Z])/g, '-$1').toLowerCase()
+        filterValues.push(`${kebabName}(${val})`)
+      }
     } else if (key === 'hov') {
       setHovProps(val)
     } else if (key === 'css') {
       if (val) Object.assign(styles, val)
     } else {
-      // Lismの対象外の属性(id, data-*, aria-* 等)はそのままattrsへ
-      attrs[key] = val
+      // Lismの対象外の属性(id, data-*, aria-* 等)はそのままattrsへ (空文字列などもそのまま)
+      attrs[key] = rawVal
     }
   })
 
   // 最終的なクラス配列の構築
   // Vueのクラスバインディングを活かし、配列で返す
   const finalClass = [...baseClasses, ...lismState, ...uClasses].filter(Boolean)
+
+  // フィルターがある場合は backdrop-filter として追加 (Layer用)
+  if (filterValues.length > 0) {
+    styles.backdropFilter = filterValues.join(' ')
+  }
 
   return {
     class: finalClass,

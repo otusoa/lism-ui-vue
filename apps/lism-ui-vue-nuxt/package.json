@@ -1,8 +1,9 @@
 {
   "name": "@lism-ui-vue/nuxt",
-  "version": "0.0.1",
-  "description": "LismUI VueのNuxtモジュール",
+  "version": "0.1.0",
+  "description": "Lism-ui-vueのNuxtモジュール",
   "license": "MIT",
+  "author": "Eita Kobayashi",
   "repository": {
     "type": "git",
     "url": "https://github.com/otusoa/lism-ui-vue"

@@ -1,9 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import { getLismPropsVue } from './useLism'
+import { getLismPropsVue } from '../../core/lism-adapter'
 
-import type { LismCoreBaseProps } from './types'
+import type { LismCoreBaseProps } from '../../core/types'
+
+defineOptions({ inheritAttrs: false })
 
 // propsは Lism のコアプロパティのみを型定義し、残りは attrs から透過的に取得する
 interface Props extends /* @vue-ignore */ LismCoreBaseProps {
@@ -28,12 +30,14 @@ const componentTag = computed(() => props.tag || props.as || 'div')
 
 // props と attrs の変更に追従できるよう、computed で出力を生成
 const lismOutput = computed(() => {
-  // $attrs には defineProps で宣言したプロパティが含まれないため、
-  // パースに必要な lismClass と variant を手動でマージして解析処理へ送る
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { tag, as, exProps, ...lismProps } = props
+
+  // $attrs には defineProps で宣言したプロパティが含まれない場合があるため、
+  // 両方をマージして解析処理へ送る
   const output = getLismPropsVue({
+    ...lismProps,
     ...attrs,
-    lismClass: props.lismClass,
-    variant: props.variant,
   })
 
   // exProps がある場合は、解析後の結果にマージする（解析結果を上書きできるように最後にマージ）

@@ -10,13 +10,13 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      dirs: ['src/runtime/composables'],
-      dts: 'dist/auto-imports.d.ts'
+      dirs: ['src/composables'],
+      dts: 'dist/auto-imports.d.ts',
     }),
     dts({
       tsconfigPath: './tsconfig.app.json',
       rollupTypes: true,
-      entryRoot: 'src/components',
+      entryRoot: 'src',
       outDir: 'dist',
       insertTypesEntry: true,
       copyDtsFiles: false,
@@ -25,22 +25,29 @@ export default defineConfig({
     // nuxt.ts の addComponentsDir がこのパスを参照する
     {
       name: 'copy-vue-to-runtime',
-      closeBundle() {
-        cpSync(
-          fileURLToPath(new URL('./src/components', import.meta.url)),
-          fileURLToPath(new URL('./dist/runtime/components', import.meta.url)),
-          {
-            recursive: true,
-            filter: (src) => {
-              // ディレクトリはそのまま通す
-              try { if (statSync(src).isDirectory()) return true } catch { return false }
-              // .vue, .ts, .mts ファイルをコピー（コンポーネントが依存するファイル用）
-              return /\.(vue|ts|mts)$/.test(src)
-            }
-          }
-        )
-      }
-    }
+      writeBundle() {
+        const copyDir = (srcPath: string, destPath: string) => {
+          cpSync(
+            fileURLToPath(new URL(srcPath, import.meta.url)),
+            fileURLToPath(new URL(destPath, import.meta.url)),
+            {
+              recursive: true,
+              filter: (src) => {
+                try {
+                  if (statSync(src).isDirectory()) return true
+                } catch {
+                  return false
+                }
+                return /\.(vue|ts|mts)$/.test(src)
+              },
+            },
+          )
+        }
+        copyDir('./src/components', './dist/runtime/components')
+        copyDir('./src/core', './dist/runtime/core')
+        copyDir('./src/composables', './dist/runtime/composables')
+      },
+    },
   ],
   resolve: {
     alias: {
@@ -51,9 +58,10 @@ export default defineConfig({
     lib: {
       entry: {
         index: fileURLToPath(new URL('./src/components/index.ts', import.meta.url)),
+        composables: fileURLToPath(new URL('./src/composables/index.ts', import.meta.url)),
       },
       name: 'LismUIVue',
-      fileName: (entryName) => `${entryName}.js`,
+      fileName: (entryName: string) => `${entryName}.js`,
       formats: ['es'],
     },
     rollupOptions: {
@@ -64,7 +72,7 @@ export default defineConfig({
         },
         entryFileNames: '[name].js',
         chunkFileNames: 'lism-ui-vue.js',
-        assetFileNames: 'lism-ui-vue.[ext]'
+        assetFileNames: 'lism-ui-vue.[ext]',
       },
     },
     outDir: 'dist',
