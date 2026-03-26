@@ -40,8 +40,11 @@
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "format": "oxfmt src/",
-    "release": "changelogen --release --name lism-ui-vue && git push --follow-tags",
-    "release:alpha": "changelogen --release --name lism-ui-vue --prerelease alpha && git push --follow-tags"
+    "release": "changelogen --release --name lism-ui-vue",
+    "release:alpha": "changelogen --release --name lism-ui-vue --prerelease alpha",
+    "release:beta": "changelogen --release --name lism-ui-vue --prerelease beta",
+    "release:rc": "changelogen --release --prerelease rc",
+    "tag:push": "git push --follow-tags"
   },
   "dependencies": {
     "lism-css": "^0.9.3"
