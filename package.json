@@ -40,10 +40,10 @@
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "format": "oxfmt src/",
-    "release": "changelogen --release",
-    "release:alpha": "changelogen --release --prerelease alpha",
-    "release:beta": "changelogen --release --prerelease beta",
-    "release:rc": "changelogen --release --prerelease rc",
+    "release": "changelogen --release --bump",
+    "release:alpha": "changelogen --release --bump --prerelease alpha",
+    "release:beta": "changelogen --release --bump --prerelease beta",
+    "release:rc": "changelogen --release --bump --prerelease rc",
     "tag:push": "git push --follow-tags"
   },
   "dependencies": {
