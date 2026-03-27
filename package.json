@@ -40,8 +40,11 @@
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "format": "oxfmt src/",
-    "release": "changelogen --release --name lism-ui-vue && git push --follow-tags",
-    "release:alpha": "changelogen --release --name lism-ui-vue --prerelease alpha && git push --follow-tags"
+    "release": "changelogen --release --bump",
+    "release:alpha": "changelogen --release --bump --prerelease alpha",
+    "release:beta": "changelogen --release --bump --prerelease beta",
+    "release:rc": "changelogen --release --bump --prerelease rc",
+    "tag:push": "git push --follow-tags"
   },
   "dependencies": {
     "lism-css": "^0.9.3"
@@ -56,20 +59,19 @@
     "changelogen": "^0.6.2",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-oxlint": "~1.50.0",
-    "eslint-plugin-vue": "~10.8.0",
+    "eslint-plugin-oxlint": "^1.57.0",
+    "eslint-plugin-vue": "^10.8.0",
     "jiti": "^2.6.1",
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.35.0",
-    "oxlint": "~1.50.0",
-    "rolldown-plugin-dts": "^0.22.5",
+    "oxlint": "^1.57.0",
     "typescript": "~5.9.3",
     "unplugin-auto-import": "^21.0.0",
-    "unplugin-vue-components": "^31.0.0",
-    "vite": "^8.0.1",
+    "unplugin-vue-components": "^31.1.0",
+    "vite": "^8.0.3",
     "vite-plugin-dts": "^4.5.4",
-    "vite-plugin-vue-devtools": "^8.1.0",
-    "vue": "^3.5.30",
+    "vite-plugin-vue-devtools": "^8.1.1",
+    "vue": "^3.5.31",
     "vue-tsc": "^3.2.6"
   },
   "engines": {
