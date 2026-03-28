@@ -12,28 +12,28 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "lism-css": "^0.9.3",
-    "vue": "^3.5.29"
+    "lism-ui-vue": "workspace:*",
+    "vue": "^3.5.31"
   },
   "devDependencies": {
-    "@tsconfig/node24": "^24.0.4",
-    "@types/node": "^24.11.0",
-    "@vitejs/plugin-vue": "^6.0.4",
-    "@vue/tsconfig": "^0.8.1",
-    "typescript": "~5.9.3",
-    "vite": "^8.0.1",
-    "vue-tsc": "^3.2.5",
-    "storybook": "^10.3.1",
-    "@storybook/vue3-vite": "^10.3.1",
     "@chromatic-com/storybook": "^5.0.2",
-    "@storybook/addon-vitest": "^10.3.1",
     "@storybook/addon-a11y": "^10.3.1",
     "@storybook/addon-docs": "^10.3.1",
     "@storybook/addon-onboarding": "^10.3.1",
-    "eslint-plugin-storybook": "^10.3.1",
-    "vitest": "^4.1.0",
-    "playwright": "^1.58.2",
+    "@storybook/addon-vitest": "^10.3.1",
+    "@storybook/vue3-vite": "^10.3.1",
+    "@tsconfig/node24": "^24.0.4",
+    "@types/node": "^24.11.0",
+    "@vitejs/plugin-vue": "^6.0.4",
     "@vitest/browser-playwright": "^4.1.0",
-    "@vitest/coverage-v8": "^4.1.0"
+    "@vitest/coverage-v8": "^4.1.0",
+    "@vue/tsconfig": "^0.8.1",
+    "eslint-plugin-storybook": "^10.3.1",
+    "playwright": "^1.58.2",
+    "storybook": "^10.3.1",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1",
+    "vitest": "^4.1.0",
+    "vue-tsc": "^3.2.5"
   }
 }

@@ -16,6 +16,7 @@ const module: NuxtModule = defineNuxtModule({
   async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
+    // TODO: SkipCssという名前は適当に決めたが、分かりづらそうなのでbeta版で「autoImportCss」に変更する予定
     const options = _options as { componentsDir?: string; skipCss?: boolean; verbose?: boolean }
     const skipCss = options.skipCss || false
     const verbose = options.verbose || false
@@ -111,7 +112,6 @@ const module: NuxtModule = defineNuxtModule({
         extensions: ['vue'],
       })
     }
-
   },
 })
 
