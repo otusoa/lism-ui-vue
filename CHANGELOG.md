@@ -1,6 +1,10 @@
 # Changelog
 
 
+## lism-ui-vue@v0.1.2-alpha.5
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.4...lism-ui-vue@v0.1.2-alpha.5)
+
 ## lism-ui-vue@v0.1.2-alpha.4
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.2...lism-ui-vue@v0.1.2-alpha.4)
