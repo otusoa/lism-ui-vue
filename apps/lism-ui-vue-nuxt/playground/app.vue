@@ -48,6 +48,12 @@
         <Lism fz="2xl" fw="bold">BACKDROP BLUR</Lism>
       </LismLayer>
     </LismFrame>
+
+    <LismFlow flow="10px">
+      <LismBox>aaa</LismBox>
+      <LismBox>aaa</LismBox>
+      <LismBox>aaa</LismBox>
+    </LismFlow>
   </Lism>
   <pre><code>{{ useTest().message }}</code></pre>
 </template>

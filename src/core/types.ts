@@ -9,6 +9,7 @@ import type {
   ClusterProps,
   FrameProps,
   BoxProps,
+  FlowLayoutProps,
 } from 'lism-css/lib/types/LayoutProps'
 
 export type {
@@ -19,7 +20,10 @@ export type {
   ClusterProps,
   FrameProps,
   BoxProps,
+  FlowLayoutProps,
 }
+
+export type FlowValue = 's' | 'l' | ((string & {}) | number)
 
 // 定数を持つ基底プロパティ（ユニオン型などを含まない）
 export type LismCoreBaseProps = Partial<PropValueTypes & StateProps & LayoutProps>
