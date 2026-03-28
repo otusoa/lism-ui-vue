@@ -1,5 +1,5 @@
 <template>
-  <Lism max-w="1200px" mx="auto">
+  <Lism max-w="1200px" mx="auto" p="20">
     <div>Nuxt module playground!</div>
 
     <Lism fx="1" fxd="col-r" fz="5xl">ああ</Lism>
