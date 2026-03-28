@@ -1,6 +1,31 @@
 # Changelog
 
 
+## lism-ui-vue@v0.1.2-alpha.4
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.2...lism-ui-vue@v0.1.2-alpha.4)
+
+### 🚀 Enhancements
+
+- **LismFlow:** Flowを追加 ([d61a4c6](https://github.com/otusoa/lism-ui-vue/commit/d61a4c6))
+- **LismFluidCols:** FluidClosを追加 ([b144108](https://github.com/otusoa/lism-ui-vue/commit/b144108))
+- **Columns, SwitchCols:** コンポーネントを追加 ([5914a50](https://github.com/otusoa/lism-ui-vue/commit/5914a50))
+
+### 🩹 Fixes
+
+- **tsconfig:** Tsconfigのパスにrootを指定。その他改善 ([b1186ca](https://github.com/otusoa/lism-ui-vue/commit/b1186ca))
+- **tsconfig:** ついでにTSconfigのエラーを修正 ([2a29c4c](https://github.com/otusoa/lism-ui-vue/commit/2a29c4c))
+
+### 🏡 Chore
+
+- **dev:** Package.jsonのリリース周りを改善 ([62283db](https://github.com/otusoa/lism-ui-vue/commit/62283db))
+- **storyboook:** 環境を整備 ([7b4b94e](https://github.com/otusoa/lism-ui-vue/commit/7b4b94e))
+- **comment:** 分かりやすようにコメントを追加 ([c2f7d29](https://github.com/otusoa/lism-ui-vue/commit/c2f7d29))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## v0.1.2-alpha.3
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.1-alpha.1...v0.1.2-alpha.3)
