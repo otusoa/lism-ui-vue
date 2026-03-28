@@ -2,20 +2,9 @@
   "extends": "../../tsconfig.app.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "../../",
-    "composite": true,
-    "noEmit": false,
-    "emitDeclarationOnly": true,
     "paths": {
-      "@/*": ["../../src/*"],
-      "root/*": ["../../*"]
+      "@/*": ["../../src/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "src/**/*.vue",
-    ".storybook/**/*",
-    "../../src/**/*",
-    "../../src/**/*.vue"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
