@@ -54,6 +54,12 @@
       <LismBox>aaa</LismBox>
       <LismBox>aaa</LismBox>
     </LismFlow>
+
+    <LismFluidCols auto-fill cols="240px" g="20">
+      <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
+      <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
+      <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
+    </LismFluidCols>
   </Lism>
   <pre><code>{{ useTest().message }}</code></pre>
 </template>

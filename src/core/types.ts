@@ -10,6 +10,7 @@ import type {
   FrameProps,
   BoxProps,
   FlowLayoutProps,
+  FluidColsProps,
 } from 'lism-css/lib/types/LayoutProps'
 
 export type {
@@ -21,6 +22,7 @@ export type {
   FrameProps,
   BoxProps,
   FlowLayoutProps,
+  FluidColsProps,
 }
 
 export type FlowValue = 's' | 'l' | ((string & {}) | number)
