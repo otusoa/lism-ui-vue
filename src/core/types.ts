@@ -11,6 +11,8 @@ import type {
   BoxProps,
   FlowLayoutProps,
   FluidColsProps,
+  ColumnsProps,
+  SwitchColsProps,
 } from 'lism-css/lib/types/LayoutProps'
 
 export type {
@@ -23,6 +25,8 @@ export type {
   BoxProps,
   FlowLayoutProps,
   FluidColsProps,
+  ColumnsProps,
+  SwitchColsProps,
 }
 
 export type FlowValue = 's' | 'l' | ((string & {}) | number)

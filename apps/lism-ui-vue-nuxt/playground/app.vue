@@ -11,7 +11,7 @@
       <p></p>
     </LismBox>
 
-    <Lism fz="5xl">Vitest</Lism>
+    <Lism bre fz="5xl">Vitest</Lism>
 
     <!-- ホバーしたらシャドー -->
     <Lism setTransition bxsh="10" :hov="{ bxsh: '40' }" bd p="30" bgc="base-2" bdrs="10" mb="50">
@@ -60,6 +60,12 @@
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
     </LismFluidCols>
+
+    <LismSwitchCols break-size="">
+      <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
+      <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
+      <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
+    </LismSwitchCols>
   </Lism>
   <pre><code>{{ useTest().message }}</code></pre>
 </template>
