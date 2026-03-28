@@ -34,12 +34,12 @@
     </LismFlex>
 
     <LismSideMain sideW="12rem" mainW="20rem" g="20">
-      <Box p="15" bd bdc="blue">
+      <LismBox layout="box" p="15" bd bdc="blue">
         <p>Main Content</p>
-      </Box>
-      <Box isSide p="15" bd bdc="red">
+      </LismBox>
+      <LismBox isSide p="15" bd bdc="red">
         <p>Side Content</p>
-      </Box>
+      </LismBox>
     </LismSideMain>
 
     <LismFrame as="figure" ar="16/9" pos="rel">

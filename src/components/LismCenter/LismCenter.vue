@@ -5,11 +5,11 @@ import type { LismCoreBaseProps } from '../../core/types'
 type Props = /* @vue-ignore */ LismCoreBaseProps
 
 defineOptions({ inheritAttrs: false })
-defineProps<Props>()
+const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism layout="center" v-bind="$attrs">
+  <Lism v-bind="{ ...props, ...$attrs }" layout="center">
     <slot />
   </Lism>
 </template>

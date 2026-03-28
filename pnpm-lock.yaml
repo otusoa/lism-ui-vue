@@ -136,6 +136,9 @@ importers:
       lism-ui-vue:
         specifier: workspace:*
         version: link:../..
+      vue:
+        specifier: ^3.5.31
+        version: 3.5.31(typescript@5.9.3)
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^5.0.2
