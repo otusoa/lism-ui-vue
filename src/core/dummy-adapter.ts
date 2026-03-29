@@ -51,11 +51,13 @@ export function getContent({
       text = `<li>${safePre}</li>` + text;
     }
   } else {
-    if (offset) {
+    const normalizedOffset = Math.max(0, Math.trunc(offset));
+    if (normalizedOffset > 0) {
       const parts = splitText(text);
-      text = parts.slice(offset).join('').trim();
+      text = parts.slice(normalizedOffset).join('').trim();
       text = text.charAt(0).toUpperCase() + text.slice(1);
     }
+
     if (safePre) {
       text = safePre + text;
     }
