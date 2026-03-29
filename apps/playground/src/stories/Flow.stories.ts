@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import LismFlow from '@/components/LismFlow/LismFlow.vue'
-import LismBox from '@/components/LismBox/LismBox.vue'
+import { LismFlow, LismBox } from '@/components'
 
 const meta: Meta<typeof LismFlow> = {
   title: 'Layout/Flow',
