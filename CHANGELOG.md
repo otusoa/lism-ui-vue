@@ -1,6 +1,23 @@
 # Changelog
 
 
+## lism-ui-vue@v0.1.2-alpha.6
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.5...lism-ui-vue@v0.1.2-alpha.6)
+
+### 🚀 Enhancements
+
+- **dummyコンポーネント): dummyを追加 fix(storyboook:** 一部のストーリーの壊れていたパスを修正 ([8166b90](https://github.com/otusoa/lism-ui-vue/commit/8166b90))
+
+### 🩹 Fixes
+
+- **dummy:** V-htmlの挙動の変更 imgProps の算出ロジック変更 `src/core/dummy-adapter.ts` における pre プロパティの XSS 脆弱性を修正しました。 ([d59126f](https://github.com/otusoa/lism-ui-vue/commit/d59126f))
+- **adpter:** Offset の正規化 ([2bdec01](https://github.com/otusoa/lism-ui-vue/commit/2bdec01))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## lism-ui-vue@v0.1.2-alpha.5
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.4...lism-ui-vue@v0.1.2-alpha.5)
