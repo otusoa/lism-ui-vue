@@ -62,12 +62,19 @@
     </LismFluidCols>
 
     <LismSwitchCols break-size="">
-      <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
+      <LismBox m p="30" bgc="base-2" bd>Card 1</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
     </LismSwitchCols>
+
+    <pre><code>{{ useTest().message }}</code></pre>
+
+    <!-- <LismFlow setGutter py="20" w="100%" h="20em" className="is--vertical@sm set--bp">
+      <p></p>
+    </LismFlow> -->
+
+    <LismDummy as="ol" length="xl" />
   </Lism>
-  <pre><code>{{ useTest().message }}</code></pre>
 </template>
 
 <script setup lang="ts">

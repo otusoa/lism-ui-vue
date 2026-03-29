@@ -70,3 +70,15 @@ export type LismProps = LismCoreProps &
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any
   }
+
+export type DummyProps = {
+  as?: string | object
+  tag?: string
+  src?: string
+  width?: string | number
+  height?: string | number
+  pre?: string
+  length?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'codes' | (string & {})
+  lang?: 'ja' | 'en' | 'ar'
+  offset?: number
+}
