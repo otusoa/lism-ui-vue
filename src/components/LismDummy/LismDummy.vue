@@ -25,11 +25,12 @@ const lismProps = computed(() => {
 })
 
 // Image用のProps（デフォルトのサイズなど、明示的に指定するものを除外）
-const imgProps = computed(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { src, width, height, ...rest } = lismProps.value
-  return rest
-})
+const imgProps = computed(() => ({
+  ...lismProps.value,
+  src: props.src ?? 'https://cdn.lism-css.com/dummy-image.jpg',
+  width: props.width ?? 600,
+  height: props.height ?? 400,
+}))
 
 const dummyContent = computed(() => {
   if (isImg.value) return ''
@@ -49,9 +50,6 @@ const dummyContent = computed(() => {
   <Lism
     v-if="isImg"
     as="img"
-    src="https://cdn.lism-css.com/dummy-image.jpg"
-    :width="600"
-    :height="400"
     alt="ダミー画像"
     v-bind="{ ...imgProps, ...$attrs }"
   />
@@ -61,6 +59,7 @@ const dummyContent = computed(() => {
   <ol v-else-if="tagName === 'ol'" v-html="dummyContent"></ol>
 
   <!-- 通常テキスト: Lismコンポーネントとして描画 -->
-  <!-- eslint-disable-next-line vue/no-v-html -->
-  <Lism v-else :as="tagName" v-bind="{ ...lismProps, ...$attrs }" v-html="dummyContent" />
+  <Lism v-else :as="tagName" v-bind="{ ...lismProps, ...$attrs }">
+    <span v-html="dummyContent"></span>
+  </Lism>
 </template>

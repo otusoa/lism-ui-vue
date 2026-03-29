@@ -10,6 +10,13 @@ const splitText = (text: string) =>
       }
       return acc
     }, [])
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 
 export interface GetContentOptions {
   tag?: string
@@ -35,11 +42,13 @@ export function getContent({
   const normalizedTag = tag?.toString().toLowerCase();
   const isList = normalizedTag === 'ul' || normalizedTag === 'ol';
 
+  const safePre = pre ? escapeHtml(pre) : '';
+
   if (isList) {
     const listItems = splitText(text).map((s) => s.trim()).filter(Boolean);
     text = listItems.map((s) => `<li>${s}</li>`).join('');
-    if (pre) {
-      text = `<li>${pre}</li>` + text;
+    if (safePre) {
+      text = `<li>${safePre}</li>` + text;
     }
   } else {
     if (offset) {
@@ -47,8 +56,8 @@ export function getContent({
       text = parts.slice(offset).join('').trim();
       text = text.charAt(0).toUpperCase() + text.slice(1);
     }
-    if (pre) {
-      text = pre + text;
+    if (safePre) {
+      text = safePre + text;
     }
   }
 
