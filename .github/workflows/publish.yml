@@ -3,7 +3,6 @@ name: Publish to npm
 on:
   push:
     tags:
-      - 'v*'
       - '*@v*'
 
 jobs:
@@ -41,8 +40,13 @@ jobs:
 
       - name: npmへパブリッシュ
         run: |
-          if [[ "${{ github.ref_name }}" == *"alpha"* ]]; then
-            pnpm publish -r --access public --no-git-checks --provenance --tag alpha
-          else
-            pnpm publish -r --access public --no-git-checks --provenance
-          fi
+          REF="${{ github.ref_name }}"
+          # タグ名からパッケージ名を抽出 (例: @scope/pkg@v1.0.0 -> @scope/pkg)
+          PKG=$(echo "$REF" | sed 's/@v[0-9].*//')
+          
+          # タグ名からリリース識別子 (alpha, beta, rc, next) を抽出して dist-tag を決定
+          TAG=$(echo "$REF" | sed -n 's/.*-\(alpha\|beta\|rc\|next\).*/\1/p')
+          TAG=${TAG:-latest}
+
+          echo "Publishing $PKG with tag: $TAG"
+          pnpm publish -r --filter "$PKG" --access public --no-git-checks --provenance --tag "$TAG"

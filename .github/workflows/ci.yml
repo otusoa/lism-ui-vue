@@ -7,10 +7,31 @@ on:
     branches: [main]
 
 jobs:
-  ci:
-    name: CIの実行
+  filter:
     runs-on: ubuntu-latest
+    outputs:
+      core: ${{ steps.changes.outputs.core }}
+      nuxt: ${{ steps.changes.outputs.nuxt }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            core:
+              - 'package.json'
+              - 'pnpm-workspace.yaml'
+              - 'src/**'
+              - 'tsconfig.json'
+              - 'vite.config.ts'
+            nuxt:
+              - 'apps/lism-ui-vue-nuxt/**'
 
+  ci-core:
+    name: Core CI
+    needs: filter
+    if: needs.filter.outputs.core == 'true'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +58,29 @@ jobs:
       - name: ビルドの実行
         run: pnpm build
 
-      - name: "Nuxtモジュール: Playgroundの準備"
+  ci-nuxt:
+    name: Nuxt CI
+    needs: filter
+    if: needs.filter.outputs.nuxt == 'true' || needs.filter.outputs.core == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: pnpmのセットアップ
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Node.jsのセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: 依存関係のインストール
+        run: pnpm install
+
+      - name: Prepare Nuxt
         run: pnpm --filter @lism-ui-vue/nuxt run dev:prepare
 
       - name: "Nuxtモジュール: テストの実行"
