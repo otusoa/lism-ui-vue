@@ -38,24 +38,8 @@ export type LismCoreBaseProps = Partial<PropValueTypes & StateProps & LayoutProp
 // Lism-CSSで用意されている標準のプロパティをまとめた型
 export type LismCoreProps = LismCoreBaseProps
 
-export type FilterName =
-  | 'blur'
-  | 'contrast'
-  | 'brightness'
-  | 'dropShadow'
-  | 'grayscale'
-  | 'hueRotate'
-  | 'invert'
-  | 'saturate'
-  | 'sepia'
-
-export type FilterProps = {
-  [K in FilterName]?: string | number
-}
-
 // Lismが受け取れるプロパティの全容（Vueコンポーネント用）
-export type LismProps = LismCoreProps &
-  FilterProps & {
+export type LismProps = LismCoreProps & {
     tag?: keyof HTMLElementTagNameMap | (string & {})
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     as?: keyof HTMLElementTagNameMap | (string & {}) | Exclude<any, string>

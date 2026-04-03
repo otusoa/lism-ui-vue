@@ -12,4 +12,6 @@ export * from './LismFlow'
 export * from './LismFluidCols'
 export * from './LismColumns'
 export * from './LismSwitchCols'
-export * from './LismDummy'
+
+// UIコンポーネント
+export * from './LismUi/Dummy'

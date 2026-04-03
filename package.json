@@ -47,7 +47,7 @@
     "tag:push": "git push --follow-tags"
   },
   "dependencies": {
-    "lism-css": "^0.9.3"
+    "lism-css": "^0.10.1"
   },
   "devDependencies": {
     "@nuxt/schema": "^4.4.2",

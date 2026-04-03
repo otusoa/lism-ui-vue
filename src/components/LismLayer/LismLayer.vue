@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismCoreBaseProps, FilterProps } from '../../core/types'
+import type { LismCoreBaseProps } from '../../core/types'
 
-// LismProps をベースに、フィルタープロパティを Vue に認識させる
-interface Props extends /* @vue-ignore */ LismCoreBaseProps, FilterProps {}
+// Vueコンパイラによる複雑な型の解析（およびそれに伴うビルドエラー）を回避するために、
+// 直接 LismCoreBaseProps を使わず、インターフェースを介して @vue-ignore を適用します。
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface Props extends /* @vue-ignore */ LismCoreBaseProps {}
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<Props>()

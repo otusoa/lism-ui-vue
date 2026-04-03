@@ -44,7 +44,7 @@
 
     <LismFrame as="figure" ar="16/9" pos="rel">
       <img src="https://cdn.lism-css.com/img/a-1.jpg" alt="" width="960" height="640" />
-      <LismLayer contrast="1.1" sepia="0.4" grayscale="0.4" p="20" d="f" ai="c" jc="c">
+      <LismLayer p="20" d="f" ai="c" jc="c">
         <Lism fz="2xl" fw="bold">BACKDROP BLUR</Lism>
       </LismLayer>
     </LismFrame>
@@ -73,7 +73,7 @@
       <p></p>
     </LismFlow> -->
 
-    <LismDummy as="ol" length="xl" />
+    <LismUiDummy as="ol" length="xl" />
   </Lism>
 </template>
 
