@@ -80,6 +80,12 @@ jobs:
       - name: 依存関係のインストール
         run: pnpm install
 
+      - name: ビルドの実行
+        run: pnpm build
+
+      - name: Playwright 依存関係のインストール
+        run: npx playwright install-deps
+
       - name: Prepare Nuxt
         run: pnpm --filter @lism-ui-vue/nuxt run dev:prepare
 
