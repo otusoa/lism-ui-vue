@@ -1,6 +1,24 @@
 # Changelog
 
 
+## @lism-ui-vue/nuxt@v0.1.1-alpha.3
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.6...@lism-ui-vue/nuxt@v0.1.1-alpha.3)
+
+### 🏡 Chore
+
+- **dev:** リリースコマンドのディレクトリスコープを指定 ([41649e7](https://github.com/otusoa/lism-ui-vue/commit/41649e7))
+- **dev:** リリースコマンドのディレクトリスコープを指定（Nuxtモジュール） ([67da6cd](https://github.com/otusoa/lism-ui-vue/commit/67da6cd))
+
+### 🤖 CI
+
+- CIの最適化、Nuxtモジュールとcoreを分離するようにした。 ([5524726](https://github.com/otusoa/lism-ui-vue/commit/5524726))
+- **不備:** 不備を修正 ([80bcebd](https://github.com/otusoa/lism-ui-vue/commit/80bcebd))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## @lism-ui-vue/nuxt@v0.1.1-alpha.2
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1...@lism-ui-vue/nuxt@v0.1.1-alpha.2)
