@@ -1,6 +1,34 @@
 # Changelog
 
 
+## lism-ui-vue@v0.1.2-alpha.7
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.3...lism-ui-vue@v0.1.2-alpha.7)
+
+### 🚀 Enhancements
+
+- **コンポーネント:** セマンティックコンポーネントを追加 ([ce10f12](https://github.com/otusoa/lism-ui-vue/commit/ce10f12))
+- **Mediaコンポーネント:** メディアコンポーネントを追加 ([95de112](https://github.com/otusoa/lism-ui-vue/commit/95de112))
+- **storybook): コンポーネントをすべてカバーするStoryを追加 ci: ciが終わらないと、publishできないようにした。 chore(deps:** Lism-cssをアップデート ([d4110bb](https://github.com/otusoa/lism-ui-vue/commit/d4110bb))
+
+### 🩹 Fixes
+
+- **型サジェスト:** 型サジェストが正常に機能するように修正 ([62a602a](https://github.com/otusoa/lism-ui-vue/commit/62a602a))
+- **storybook:** 未使用のインポートを削除 ([86f9fae](https://github.com/otusoa/lism-ui-vue/commit/86f9fae))
+- コードラビット様のごレビューでご修正しました ([c57c3b3](https://github.com/otusoa/lism-ui-vue/commit/c57c3b3))
+
+### 💅 Refactors
+
+- LismLayerのプロパティ整理とLismDummyの自前実装への移行 - LismLayer: FilterName および FilterProps を廃止 - LismDummy: lism-css の仕様変更に伴い、ダミーテキスト生成ロジックを内部実装 (dummy-adapter) へ移行 - types: 不要となった FilterName, FilterProps を src/core/types.ts から削除 - playground: ダミーコンポーネントの使用箇所を LismUiDummy に更新 ([c6e003c](https://github.com/otusoa/lism-ui-vue/commit/c6e003c))
+
+### 🌊 Types
+
+- **components:** LismBasePropsの改善と公式のAllowedTag型適用によるサジェストの最適化およびJSDoc追加 ([3579712](https://github.com/otusoa/lism-ui-vue/commit/3579712))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## lism-ui-vue@v0.1.2-alpha.6
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.5...lism-ui-vue@v0.1.2-alpha.6)
