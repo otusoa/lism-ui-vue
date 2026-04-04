@@ -1,12 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { ListProps } from '../../core/types'
+import type { LismCoreBaseProps, ListAllowedTag } from '../../core/types'
 
-type Props = /* @vue-ignore */ ListProps
+interface Props extends /* @vue-ignore */ LismCoreBaseProps {
+	tag?: string
+	as?: ListAllowedTag
+}
+
+type PropsBase = /* @vue-ignore */ LismCoreBaseProps
+defineProps<Props & PropsBase>()
 
 defineOptions({ inheritAttrs: false })
-defineProps<Props>()
 </script>
 
 <template>

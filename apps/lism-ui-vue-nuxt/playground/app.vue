@@ -97,7 +97,7 @@
       </LismList>
 
       <LismList as="ol" mt="20" g="10">
-        <LismListItem>Ordered Item 1</LismListItem>
+        <LismListItem as="li">Ordered Item 1</LismListItem>
         <LismListItem>Ordered Item 2</LismListItem>
       </LismList>
     </LismBox>

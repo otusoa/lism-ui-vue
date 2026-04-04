@@ -14,6 +14,13 @@ import type {
   ColumnsProps,
   SwitchColsProps,
 } from 'lism-css/lib/types/LayoutProps'
+import type {
+  TextAllowedTag,
+  InlineAllowedTag,
+  GroupAllowedTag,
+  ListAllowedTag,
+  ListItemAllowedTag,
+} from 'lism-css/lib/types/allowedTags'
 
 export type {
   SideMainProps,
@@ -27,6 +34,11 @@ export type {
   FluidColsProps,
   ColumnsProps,
   SwitchColsProps,
+  TextAllowedTag,
+  InlineAllowedTag,
+  GroupAllowedTag,
+  ListAllowedTag,
+  ListItemAllowedTag,
 }
 
 // LismFlow用
@@ -65,17 +77,17 @@ export type DummyProps = {
 }
 
 // 各コンポーネント用の型定義
-export type TextProps = LismBaseProps
-export type InlineProps = LismBaseProps
-export type GroupProps = LismBaseProps
+export type TextProps = LismBaseProps & { as?: TextAllowedTag }
+export type InlineProps = LismBaseProps & { as?: InlineAllowedTag }
+export type GroupProps = LismBaseProps & { as?: GroupAllowedTag }
 export type LinkProps = LismBaseProps & {
   href?: string
   target?: string
   rel?: string
   download?: unknown
 }
-export type ListProps = LismBaseProps
-export type ListItemProps = LismBaseProps
+export type ListProps = LismBaseProps & { as?: ListAllowedTag }
+export type ListItemProps = LismBaseProps & { as?: ListItemAllowedTag }
 export type HeadingProps = LismBaseProps & {
   lv?: 1 | 2 | 3 | 4 | 5 | 6 | '1' | '2' | '3' | '4' | '5' | '6'
 }

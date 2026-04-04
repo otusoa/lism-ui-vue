@@ -1,12 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { InlineProps } from '../../core/types'
+import type { LismCoreBaseProps, InlineAllowedTag } from '../../core/types'
 
-type Props = /* @vue-ignore */ InlineProps
+interface Props extends /* @vue-ignore */ LismCoreBaseProps {
+	tag?: string
+	as?: InlineAllowedTag
+}
+
+type PropsBase = /* @vue-ignore */ LismCoreBaseProps
+defineProps<Props & PropsBase>()
 
 defineOptions({ inheritAttrs: false })
-defineProps<Props>()
 </script>
 
 <template>

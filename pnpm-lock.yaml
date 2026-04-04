@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       lism-css:
-        specifier: ^0.10.1
-        version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^0.10.2
+        version: 0.10.2(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
     devDependencies:
       '@nuxt/schema':
         specifier: ^4.4.2
@@ -4342,8 +4342,8 @@ packages:
     resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
     engines: {node: '>=14'}
 
-  lism-css@0.10.1:
-    resolution: {integrity: sha512-icur2NrUmKSTrGUrDXVaYA2McLNl5e2tOBxUCMrmXYLodSqOD1ZxrLtmGyLFTCjuqq6aU8MEIZ5X6CWjmtv5SA==}
+  lism-css@0.10.2:
+    resolution: {integrity: sha512-76thYj9eOwksS8eaB4FBErhpWLnEebUsz9fL6kvzT6G55DBD3/+iqI8ADBjMF+j0nYQ0apni6UBmEpO1g6BLcw==}
     hasBin: true
     peerDependencies:
       '@types/react': '*'
@@ -10260,7 +10260,7 @@ snapshots:
 
   lilconfig@3.1.3: {}
 
-  lism-css@0.10.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  lism-css@0.10.2(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@types/react': 19.2.14
       '@types/react-dom': 19.2.3(@types/react@19.2.14)
