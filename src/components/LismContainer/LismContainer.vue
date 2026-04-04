@@ -8,7 +8,6 @@ type Props = /* @vue-ignore */ LismBaseProps & {
    * 's', 'm', 'l' などのサイズ、または true を指定できます。
    */
   size?: LismBaseProps['isWrapper']
-  // size?: boolean | string
 }
 
 defineOptions({ inheritAttrs: false })

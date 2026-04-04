@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { LismBox, LismText } from '@/components'
+import LismStack from '@/components/LismStack/LismStack.vue'
 
 const meta: Meta = {
   title: 'Labo/Hover',
@@ -10,7 +11,7 @@ export default meta
 
 export const Basic: StoryObj = {
   render: () => ({
-    components: { LismBox },
+    components: { LismBox, LismStack },
     template: `
       <LismStack g="20">
         <LismBox p="30" bgc="base-2" hov="o" setTransition>
@@ -29,7 +30,7 @@ export const Basic: StoryObj = {
 
 export const ParentChild: StoryObj = {
   render: () => ({
-    components: { LismBox, LismText },
+    components: { LismBox, LismText, LismStack },
     template: `
       <LismBox p="40" bgc="base-2" setHov setTransition :hov="{ bgc: 'brand-faint' }">
         <LismText>Parent Box (setHov)</LismText>
@@ -46,7 +47,7 @@ export const ParentChild: StoryObj = {
 
 export const CustomTransition: StoryObj = {
   render: () => ({
-    components: { LismBox },
+    components: { LismBox, LismStack },
     template: `
       <LismStack g="20">
         <LismBox p="30" bgc="base-2"

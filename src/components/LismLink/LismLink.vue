@@ -6,11 +6,11 @@ import type { LinkProps } from '../../core/types'
 type Props = /* @vue-ignore */ LinkProps
 
 defineOptions({ inheritAttrs: false })
-defineProps<Props>()
+const props = defineProps<Props>()
 </script>
 
 <template>
-	<Lism as="a" v-bind="$attrs">
-		<slot />
-	</Lism>
+  <Lism :as="props.as ?? 'a'" v-bind="$attrs">
+    <slot />
+  </Lism>
 </template>

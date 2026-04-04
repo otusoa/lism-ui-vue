@@ -4,18 +4,16 @@ import { Lism } from '../Lism'
 import type { LismCoreBaseProps, InlineAllowedTag } from '../../core/types'
 
 interface Props extends /* @vue-ignore */ LismCoreBaseProps {
-	tag?: string
-	as?: InlineAllowedTag
+  as?: InlineAllowedTag
 }
 
-type PropsBase = /* @vue-ignore */ LismCoreBaseProps
-defineProps<Props & PropsBase>()
+const props = defineProps<Props>()
 
 defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-	<Lism v-bind="$attrs" as="span">
-		<slot />
-	</Lism>
+  <Lism v-bind="$attrs" :as="props.as ?? 'span'">
+    <slot />
+  </Lism>
 </template>

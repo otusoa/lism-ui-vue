@@ -29,7 +29,7 @@
       <LismBox>aaa</LismBox>
     </LismStack>
 
-    <LismContainer bd is-wrapper="s" p="20">
+    <LismContainer bd size="s" is-wrapper="l" p="20">
       <LismBox :p="[10, 30]">このBOXは、paddingが切り替わります。</LismBox>
     </LismContainer>
     <LismFlex g="10">
@@ -85,13 +85,8 @@
     <Lism :hov="{ bxsh: '10' }" p="20" bgc="base-2" bdrs="10"> ホバー</Lism>
 
     <LismFrame as="figure" ar="2/1" pos="rel">
-      <LismMedia
-        src="https://cdn.lism-css.com/img/a-1.jpg"
-        width="960"
-        height="640"
-        style="filter: contrast(1.1) saturate(0.2)"
-        alt="Dummy Image"
-      />
+      <LismMedia src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
+        style="filter: contrast(1.1) saturate(0.2)" alt="Dummy Image" />
       <Lism as="figcaption" pos="abs" z="1" b="0" p="5" w="100%" c="white" ta="center" lts="l">
         Lorem ipsum text.
       </Lism>

@@ -5,18 +5,17 @@ import type { LismCoreBaseProps, GroupAllowedTag } from '../../core/types'
 
 // サジェストの復活と「横取り」を両立させるプロパティ定義
 interface Props extends /* @vue-ignore */ LismCoreBaseProps {
-  tag?: string
   as?: GroupAllowedTag
 }
 
 type PropsBase = /* @vue-ignore */ LismCoreBaseProps
-defineProps<Props & PropsBase>()
+const props = defineProps<Props & PropsBase>()
 
 defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-  <Lism as="div" v-bind="$attrs">
+  <Lism :as="props.as || 'div'" v-bind="$attrs">
     <slot />
   </Lism>
 </template>

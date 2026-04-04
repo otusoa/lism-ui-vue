@@ -90,25 +90,25 @@ export type LismBaseProps = LismCoreProps & {
    * hov={{ bgc: 'brand', c: 'white' }}
    */
   hov?:
-    | (string & {})
-    | 'o'
-    | 'c'
-    | 'bgc'
-    | 'bdc'
-    | 'bxsh'
-    | 'fade'
-    | 'zoom'
-    | 'shadowUp'
-    | 'to:show'
-    | 'to:hide'
-    | 'to:zoom'
-    | (Partial<PropValueTypes> & {
-        duration?: string | number
-        delay?: string | number
-        easing?: string
-        class?: string
-        [key: string]: unknown
-      })
+  | (string & {})
+  | 'o'
+  | 'c'
+  | 'bgc'
+  | 'bdc'
+  | 'bxsh'
+  | 'fade'
+  | 'zoom'
+  | 'shadowUp'
+  | 'to:show'
+  | 'to:hide'
+  | 'to:zoom'
+  | (Partial<PropValueTypes> & {
+    duration?: string | number
+    delay?: string | number
+    easing?: string
+    class?: string
+    [key: string]: unknown
+  })
   /**
    * インラインスタイルを追加で指定します。
    */
@@ -118,7 +118,7 @@ export type LismBaseProps = LismCoreProps & {
    */
   lismClass?: string
   /**
-   * Lism の解析を通さずに直接要素に流し込むための拡張プロパティです。
+   * Lism CSSの解析を通さずに直接要素に流し込むための拡張プロパティです。
    */
   exProps?: Record<string, unknown>
 }

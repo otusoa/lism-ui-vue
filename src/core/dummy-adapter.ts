@@ -72,6 +72,15 @@ const splitByPunctuation = (content: string): string[] => {
     }, [])
 }
 
+const escapeHtml = (value: string): string => {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 export interface GetContentOptions {
   tag?: string
   pre?: string
@@ -92,6 +101,7 @@ export function getContent({
 }: GetContentOptions): string {
   const langTexts = TEXTS[lang] as Record<string, string> | undefined
   let content = langTexts?.[length] || langTexts?.['s'] || ''
+  const safePre = escapeHtml(pre)
 
   const normalizedTag = tag?.toString().toLowerCase()
   const isList = normalizedTag === 'ul' || normalizedTag === 'ol'
@@ -102,16 +112,16 @@ export function getContent({
       .map((s) => s.trim())
       .filter(Boolean)
     content = items.map((s) => `<li>${s}</li>`).join('')
-    if (pre) {
-      content = `<li>${pre}</li>` + content
+    if (safePre) {
+      content = `<li>${safePre}</li>` + content
     }
   } else {
     if (offset) {
       content = splitByPunctuation(content).slice(offset).join('').trim()
       content = content.charAt(0).toUpperCase() + content.slice(1)
     }
-    if (pre) {
-      content = pre + content
+    if (safePre) {
+      content = safePre + content
     }
   }
 

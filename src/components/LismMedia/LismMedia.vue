@@ -7,7 +7,6 @@ import type { ImgHTMLAttributes, VideoHTMLAttributes, IframeHTMLAttributes } fro
 type NativeMediaProps = ImgHTMLAttributes & VideoHTMLAttributes & IframeHTMLAttributes
 
 interface Props extends /* @vue-ignore */ NativeMediaProps {
-  tag?: string
   as?: MediaAllowedTag
   src?: string
 }
@@ -19,7 +18,7 @@ defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-  <Lism v-bind="$attrs" :tag="props.tag" :as="props.as || 'img'" :src="props.src">
+  <Lism v-bind="{ ...props, ...$attrs, as: props.as || 'img' }">
     <slot />
   </Lism>
 </template>
