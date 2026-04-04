@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismCoreBaseProps, FlowValue } from '../../core/types'
+import type { LismBaseProps, FlowValue } from '../../core/types'
 
-interface Props extends /* @vue-ignore */ LismCoreBaseProps {
+interface Props extends /* @vue-ignore */ LismBaseProps {
   flow?: FlowValue
 }
 

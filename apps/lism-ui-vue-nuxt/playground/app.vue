@@ -42,6 +42,10 @@
       </LismBox>
     </LismSideMain>
 
+    <LismCenter as="">
+      <LismBox>あああ</LismBox>
+    </LismCenter>
+
     <LismFrame as="figure" ar="16/9" pos="rel">
       <img src="https://cdn.lism-css.com/img/a-1.jpg" alt="" width="960" height="640" />
       <LismLayer p="20" d="f" ai="c" jc="c">
@@ -73,6 +77,8 @@
       <p></p>
     </LismFlow> -->
 
+    <Lism as="" />
+
     <LismUiDummy as="ol" length="xl" />
 
     <LismBox p="30" bgc="base-2" bdrs="10" mt="50">
@@ -96,9 +102,9 @@
         <LismListItem>List Item 3</LismListItem>
       </LismList>
 
-      <LismList as="ol" mt="20" g="10">
-        <LismListItem as="li">Ordered Item 1</LismListItem>
-        <LismListItem>Ordered Item 2</LismListItem>
+      <LismList as="dl" mt="20" g="10">
+        <LismListItem as="dt">Ordered Item 1</LismListItem>
+        <LismListItem as="dd">Ordered Item 2</LismListItem>
       </LismList>
     </LismBox>
   </Lism>

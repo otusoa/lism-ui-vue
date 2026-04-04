@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismCoreBaseProps } from '../../core/types'
+import type { LismBaseProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LismCoreBaseProps
+type Props = /* @vue-ignore */ LismBaseProps
 
 defineOptions({ inheritAttrs: false })
 defineProps<Props>()
