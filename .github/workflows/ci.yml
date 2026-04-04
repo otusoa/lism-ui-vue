@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_call:
 
 jobs:
   filter:
@@ -30,7 +31,7 @@ jobs:
   ci-core:
     name: Core CI
     needs: filter
-    if: needs.filter.outputs.core == 'true'
+    if: needs.filter.outputs.core == 'true' || github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +62,7 @@ jobs:
   ci-nuxt:
     name: Nuxt CI
     needs: filter
-    if: needs.filter.outputs.nuxt == 'true' || needs.filter.outputs.core == 'true'
+    if: needs.filter.outputs.nuxt == 'true' || needs.filter.outputs.core == 'true' || github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -6,7 +6,11 @@ on:
       - '*@v*'
 
 jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
   publish:
+    needs: ci
     name: パブリッシュの実行
     runs-on: ubuntu-latest
     permissions:

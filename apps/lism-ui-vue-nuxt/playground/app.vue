@@ -18,6 +18,11 @@
       <p>aaa</p>
     </Lism>
 
+    <LismBox set-transition :hov="{ o: '0.5', c: 'red' }" bgc="base-2" bd p="20" my="20">
+      <p>LinkBox</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </LismBox>
+
     <LismStack layout="box" bgc="base-2" g="20" p="30" bdrs="10">
       <LismBox>aaa</LismBox>
       <LismBox>aaa</LismBox>
@@ -77,6 +82,8 @@
       <p></p>
     </LismFlow> -->
 
+    <Lism :hov="{ bxsh: '10' }" p="20" bgc="base-2" bdrs="10"> ホバー</Lism>
+
     <LismFrame as="figure" ar="2/1" pos="rel">
       <LismMedia
         src="https://cdn.lism-css.com/img/a-1.jpg"
@@ -89,6 +96,8 @@
         Lorem ipsum text.
       </Lism>
     </LismFrame>
+
+    <LismText as="p" fw="bold">あああ</LismText>
 
     <LismUiDummy as="ol" length="xl" />
 

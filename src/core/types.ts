@@ -80,6 +80,40 @@ export type LismBaseProps = LismCoreProps & {
    */
   variant?: string
   /**
+   * ホバー時のスタイルを指定します。
+   * 文字列でカンマ区切りのクラス指定、またはオブジェクト形式での指定が可能です。
+   *
+   * @example
+   * hov="o"
+   * hov="c,bxsh"
+   * hov="to:zoom"
+   * hov={{ bgc: 'brand', c: 'white' }}
+   */
+  hov?:
+    | (string & {})
+    | 'o'
+    | 'c'
+    | 'bgc'
+    | 'bdc'
+    | 'bxsh'
+    | 'fade'
+    | 'zoom'
+    | 'shadowUp'
+    | 'to:show'
+    | 'to:hide'
+    | 'to:zoom'
+    | (Partial<PropValueTypes> & {
+        duration?: string | number
+        delay?: string | number
+        easing?: string
+        class?: string
+        [key: string]: unknown
+      })
+  /**
+   * インラインスタイルを追加で指定します。
+   */
+  css?: string | Record<string, string | number>
+  /**
    * 独自のLismクラス（プレフィックス等を持つクラス）を追加で指定します。
    */
   lismClass?: string
@@ -173,7 +207,9 @@ export type ListItemProps = LismBaseProps & { as?: ListItemAllowedTag }
  * LismMedia コンポーネント用のプロパティ型。
  * as プロパティを MediaAllowedTag (例: 'img' | 'video' | 'iframe' | 'picture') に制限します。
  */
-export type MediaProps = LismBaseProps & { as?: MediaAllowedTag }
+export type MediaProps = LismBaseProps & {
+  as?: MediaAllowedTag
+}
 
 /**
  * LismHeading コンポーネント用のプロパティ型。

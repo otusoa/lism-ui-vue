@@ -4,12 +4,12 @@ import { computed, useAttrs } from 'vue'
 import { getLismPropsVue } from '../../core/lism-adapter'
 
 import type { Component } from 'vue'
-import type { LismCoreBaseProps } from '../../core/types'
+import type { LismBaseProps } from '../../core/types'
 
 defineOptions({ inheritAttrs: false })
 
 // propsは Lism のコアプロパティのみを型定義し、残りは attrs から透過的に取得する
-interface Props extends /* @vue-ignore */ LismCoreBaseProps {
+interface Props extends /* @vue-ignore */ LismBaseProps {
   /** レンダリングするHTML要素。 'as' よりも優先されます。 */
   tag?: keyof HTMLElementTagNameMap | (string & {})
   /** レンダリングするコンポーネントまたは要素 */
