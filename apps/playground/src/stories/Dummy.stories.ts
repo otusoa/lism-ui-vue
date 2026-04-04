@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { LismDummy, LismFlow, LismBox } from '@/components'
+import { LismUiDummy, LismFlow, LismBox } from '@/components'
 
-const meta: Meta<typeof LismDummy> = {
+const meta: Meta<typeof LismUiDummy> = {
   title: 'Components/Dummy',
-  component: LismDummy,
+  component: LismUiDummy,
   parameters: {
     layout: 'centered',
   },
@@ -11,7 +11,7 @@ const meta: Meta<typeof LismDummy> = {
 }
 
 export default meta
-type Story = StoryObj<typeof LismDummy>
+type Story = StoryObj<typeof LismUiDummy>
 
 export const Default: Story = {
   args: {
@@ -36,7 +36,7 @@ export const Arabic: Story = {
 
 export const List: Story = {
   args: {
-    as: "ol",
+    as: 'ol',
     lang: 'ja',
     length: 's',
   },
@@ -52,7 +52,7 @@ export const Image: Story = {
 
 export const InsideFlow: Story = {
   render: () => ({
-    components: { LismDummy, LismFlow, LismBox },
+    components: { LismUiDummy, LismFlow, LismBox },
     template: `
       <LismBox p="30" max-w="600px" bd>
         <LismFlow flow="l">

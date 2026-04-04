@@ -74,6 +74,33 @@
     </LismFlow> -->
 
     <LismUiDummy as="ol" length="xl" />
+
+    <LismBox p="30" bgc="base-2" bdrs="10" mt="50">
+      <LismHeading lv="1">Heading 1</LismHeading>
+      <LismHeading lv="2">Heading 2</LismHeading>
+      <LismHeading lv="3">Heading 3</LismHeading>
+
+      <LismText>This is a LismText component (p tag).</LismText>
+      <LismText>
+        This is <LismInline bd-b bdc="red">LismInline (span)</LismInline> inside a Text.
+      </LismText>
+
+      <LismGroup mt="20" p="20" bd bds="dashed">
+        <LismText>Inside a LismGroup (div).</LismText>
+        <LismLink href="https://lism-css.com">This is a LismLink (a tag)</LismLink>
+      </LismGroup>
+
+      <LismList mt="20" g="10">
+        <LismListItem>List Item 1</LismListItem>
+        <LismListItem>List Item 2</LismListItem>
+        <LismListItem>List Item 3</LismListItem>
+      </LismList>
+
+      <LismList as="ol" mt="20" g="10">
+        <LismListItem>Ordered Item 1</LismListItem>
+        <LismListItem>Ordered Item 2</LismListItem>
+      </LismList>
+    </LismBox>
   </Lism>
 </template>
 
