@@ -21,6 +21,7 @@ import type {
   GroupAllowedTag,
   ListAllowedTag,
   ListItemAllowedTag,
+  MediaAllowedTag,
 } from 'lism-css/lib/types/allowedTags'
 
 export type {
@@ -40,6 +41,7 @@ export type {
   GroupAllowedTag,
   ListAllowedTag,
   ListItemAllowedTag,
+  MediaAllowedTag,
 }
 
 /**
@@ -166,6 +168,12 @@ export type ListProps = LismBaseProps & { as?: ListAllowedTag }
  * as プロパティを ListItemAllowedTag (例: 'li' | 'dt' | 'dd') に制限します。
  */
 export type ListItemProps = LismBaseProps & { as?: ListItemAllowedTag }
+
+/**
+ * LismMedia コンポーネント用のプロパティ型。
+ * as プロパティを MediaAllowedTag (例: 'img' | 'video' | 'iframe' | 'picture') に制限します。
+ */
+export type MediaProps = LismBaseProps & { as?: MediaAllowedTag }
 
 /**
  * LismHeading コンポーネント用のプロパティ型。

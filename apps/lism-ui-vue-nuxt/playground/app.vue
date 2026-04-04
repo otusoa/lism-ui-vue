@@ -42,7 +42,7 @@
       </LismBox>
     </LismSideMain>
 
-    <LismCenter as="">
+    <LismCenter>
       <LismBox>あああ</LismBox>
     </LismCenter>
 
@@ -77,7 +77,18 @@
       <p></p>
     </LismFlow> -->
 
-    <Lism as="" />
+    <LismFrame as="figure" ar="2/1" pos="rel">
+      <LismMedia
+        src="https://cdn.lism-css.com/img/a-1.jpg"
+        width="960"
+        height="640"
+        style="filter: contrast(1.1) saturate(0.2)"
+        alt="Dummy Image"
+      />
+      <Lism as="figcaption" pos="abs" z="1" b="0" p="5" w="100%" c="white" ta="center" lts="l">
+        Lorem ipsum text.
+      </Lism>
+    </LismFrame>
 
     <LismUiDummy as="ol" length="xl" />
 
