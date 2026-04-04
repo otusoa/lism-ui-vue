@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { LismList, LismListItem, LismStack } from '@/components'
+import { LismList, LismListItem } from '@/components'
 
 const meta: Meta<typeof LismList> = {
   title: 'Components/Semantic/List',

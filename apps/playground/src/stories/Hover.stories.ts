@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { LismBox, LismText, LismStack } from '@/components'
+import { LismBox, LismText } from '@/components'
 
 const meta: Meta = {
   title: 'Labo/Hover',
@@ -49,8 +49,8 @@ export const CustomTransition: StoryObj = {
     components: { LismBox },
     template: `
       <LismStack g="20">
-        <LismBox p="30" bgc="base-2" 
-          :hov="{ bgc: 'accent', c: 'white', duration: '1s', easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }" 
+        <LismBox p="30" bgc="base-2"
+          :hov="{ bgc: 'accent', c: 'white', duration: '1s', easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }"
           setTransition
         >
           Slow & Bouncy (1s duration)
