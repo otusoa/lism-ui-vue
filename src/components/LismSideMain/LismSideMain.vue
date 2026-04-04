@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismCoreBaseProps, SideMainProps } from '../../core/types'
+import type { LismBaseProps, SideMainProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LismCoreBaseProps & {
+type Props = /* @vue-ignore */ LismBaseProps & {
   /**
    * サイドバーの幅を指定します。
    */

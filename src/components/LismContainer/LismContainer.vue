@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismCoreBaseProps } from '../../core/types'
+import type { LismBaseProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LismCoreBaseProps & {
+type Props = /* @vue-ignore */ LismBaseProps & {
   /**
    * コンテンツの最大幅を指定します（is-wrapperを有効にします）。
    * 's', 'm', 'l' などのサイズ、または true を指定できます。
    */
-  size?: LismCoreBaseProps['isWrapper']
-  // size?: boolean | string
+  size?: LismBaseProps['isWrapper']
 }
 
 defineOptions({ inheritAttrs: false })

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismCoreBaseProps, SwitchColsProps } from '../../core/types'
+import type { LismBaseProps, SwitchColsProps } from '../../core/types'
 
-interface Props extends /* @vue-ignore */ LismCoreBaseProps {
+interface Props extends /* @vue-ignore */ LismBaseProps {
   breakSize?: SwitchColsProps['breakSize']
 }
 
