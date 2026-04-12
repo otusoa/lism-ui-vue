@@ -100,4 +100,16 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
     expect(result['data-test']).toBe('data-value')
     expect(result.title).toBe('some-title')
   })
+
+  it('should handle set props correctly', () => {
+    const props = { set: 'transition', unset: ['hov', 'plain'] } as const
+    const result = getLismPropsVue(props as unknown as LismProps)
+
+    expect(result.class).toContain('set--transition')
+    expect(result.class).toContain('unset--hov')
+    expect(result.class).toContain('unset--plain')
+    // 原則として attrs には残らない
+    expect(result.set).toBeUndefined()
+    expect(result.unset).toBeUndefined()
+  })
 })
