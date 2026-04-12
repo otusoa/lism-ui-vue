@@ -14,14 +14,29 @@
     <Lism bre fz="5xl">Vitest</Lism>
 
     <!-- ホバーしたらシャドー -->
-    <Lism setTransition bxsh="10" :hov="{ bxsh: '40' }" bd p="30" bgc="base-2" bdrs="10" mb="50">
-      <p>aaa</p>
-    </Lism>
+    <LismLinkBox href="###" set="transition" bxsh="10" :hov="{ bxsh: '40' }" bd p="20">
+      <p>LinkBox</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </LismLinkBox>
 
-    <LismBox set-transition :hov="{ o: '0.5', c: 'red' }" bgc="base-2" bd p="20" my="20">
+    <LismBox set="transition" :hov="{ o: '0.5', c: 'red' }" bgc="base-2" bd p="20" my="20">
       <p>LinkBox</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
     </LismBox>
+
+    <LismLinkBox my="20" set="transition">
+      <LismGroup fz="xl" fw="bold">
+        <LismLink class="u--expandedLink" href="#linkbox-demo02"> Heading link text </LismLink>
+      </LismGroup>
+      <LismText c="text-2" lh="s" my="15">
+        Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor Incididunt
+        ut. Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        ullamco laboris nisi ut.
+      </LismText>
+      <LismGroup id="inner-link02" my="10">
+        <a href="#inner-link02" class="-hov:o"> Inner Link </a>
+      </LismGroup>
+    </LismLinkBox>
 
     <LismStack layout="box" bgc="base-2" g="20" p="30" bdrs="10">
       <LismBox>aaa</LismBox>

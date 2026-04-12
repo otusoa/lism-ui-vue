@@ -1,6 +1,6 @@
 import type { PropValueTypes } from 'lism-css/lib/types/PropValueTypes'
 import type { Component } from 'vue'
-import type { StateProps } from 'lism-css/lib/types/StateProps'
+import type { StateProps, SetPropValue } from 'lism-css/lib/types/StateProps'
 import type {
   LayoutProps,
   SideMainProps,
@@ -120,6 +120,14 @@ export type LismBaseProps = LismCoreProps & {
    */
   lismClass?: string
   /**
+   * LismCSSの 'set--' クラスを適用するためのプロパティです。
+   */
+  set?: SetPropValue
+  /**
+   * LismCSSの 'set--' クラスを解除、または負の値をセットするためのプロパティです。
+   */
+  unset?: SetPropValue
+  /**
    * Lism CSSの解析を通さずに直接要素に流し込むための拡張プロパティです。
    */
   exProps?: Record<string, unknown>
@@ -192,6 +200,12 @@ export type LinkProps = LismBaseProps & {
   /** ダウンロードする際のファイル名またはダウンロードを指示する真偽値 */
   download?: unknown
 }
+
+/**
+ * LismLinkBox コンポーネント用のプロパティ型。
+ * LinkProps を継承し、ボックス全体をリンクにするための設定を含みます。
+ */
+export type LinkBoxProps = LinkProps
 
 /**
  * LismList コンポーネント用のプロパティ型。
