@@ -44,10 +44,11 @@
     "release:alpha": "changelogen --dir . --release --bump --prerelease alpha",
     "release:beta": "changelogen --dir . --release --bump --prerelease beta",
     "release:rc": "changelogen --dir . --release --bump --prerelease rc",
-    "tag:push": "git push --follow-tags"
+    "tag:push": "git push --follow-tags",
+    "test": "vitest"
   },
   "dependencies": {
-    "lism-css": "^0.10.4"
+    "lism-css": "^0.12.0"
   },
   "devDependencies": {
     "@nuxt/schema": "^4.4.2",
@@ -55,6 +56,7 @@
     "@types/node": "^24.12.0",
     "@vitejs/plugin-vue": "^6.0.5",
     "@vue/eslint-config-typescript": "^14.7.0",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
     "changelogen": "^0.6.2",
     "eslint": "^10.1.0",
@@ -62,6 +64,7 @@
     "eslint-plugin-oxlint": "^1.57.0",
     "eslint-plugin-vue": "^10.8.0",
     "jiti": "^2.6.1",
+    "jsdom": "^29.0.2",
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.35.0",
     "oxlint": "^1.57.0",
@@ -71,6 +74,7 @@
     "vite": "^8.0.3",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-vue-devtools": "^8.1.1",
+    "vitest": "^4.1.4",
     "vue": "^3.5.31",
     "vue-tsc": "^3.2.6"
   },
