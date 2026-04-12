@@ -238,3 +238,13 @@ export type HeadingProps = LismBaseProps & {
    */
   lv?: 1 | 2 | 3 | 4 | 5 | 6 | '1' | '2' | '3' | '4' | '5' | '6'
 }
+
+/**
+ * LismDecorator コンポーネント用のプロパティ型。
+ * 本家 LismCSS の DecoratorProps に定義されている固有プロパティ（size, clipPath, boxSizing）を含みます。
+ */
+export type DecoratorProps = {
+  size?: string
+  clipPath?: string
+  boxSizing?: string
+}

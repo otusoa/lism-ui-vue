@@ -170,6 +170,16 @@
         <LismListItem as="dd">Ordered Item 2</LismListItem>
       </LismList>
     </LismBox>
+
+    <LismBox p="30" my="50" pos="relative">
+      <LismText>
+        Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor Incididunt
+        ut. Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        ullamco laboris nisi ut.
+      </LismText>
+      <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-x-s bd-y-s bdc="current" />
+      <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-x-e bd-y-e bdc="current" />
+    </LismBox>
   </Lism>
 </template>
 
