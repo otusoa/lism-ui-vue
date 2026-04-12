@@ -5,12 +5,12 @@ import type { LismBaseProps, TileGridProps } from '../../core/types'
 type Props = /* @vue-ignore */ LismBaseProps & Partial<TileGridProps>
 
 defineOptions({ inheritAttrs: false })
-defineProps<Props>()
+const props = defineProps<Props>()
 </script>
 
 <template>
   <Lism is-container>
-    <Lism layout="tileGrid" v-bind="$attrs">
+    <Lism v-bind="{ ...props, ...$attrs }" layout="tileGrid">
       <slot />
     </Lism>
   </Lism>
