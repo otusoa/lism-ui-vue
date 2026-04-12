@@ -11,7 +11,9 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism v-bind="{ ...props, ...$attrs }" layout="columns">
-    <slot />
+  <Lism is-container>
+    <Lism v-bind="{ ...props, ...$attrs }" layout="columns">
+      <slot />
+    </Lism>
   </Lism>
 </template>

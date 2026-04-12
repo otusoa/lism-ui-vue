@@ -51,7 +51,7 @@
       <LismBox>あああ</LismBox>
     </LismCenter>
 
-    <LismFrame as="figure" ar="16/9" pos="rel">
+    <LismFrame as="figure" ar="16/9" pos="relative">
       <img src="https://cdn.lism-css.com/img/a-1.jpg" alt="" width="960" height="640" />
       <LismLayer p="20" d="f" ai="c" jc="c">
         <Lism fz="2xl" fw="bold">BACKDROP BLUR</Lism>
@@ -64,11 +64,39 @@
       <LismBox>aaa</LismBox>
     </LismFlow>
 
-    <LismFluidCols auto-fill cols="240px" g="20">
+    <LismFluidCols auto-fill cols="240px" g="20" my="50">
       <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
     </LismFluidCols>
+
+    <LismTileGrid cols="3" rows="3" g="5" min-h="50svh" my="50">
+      <LismBox p="20" bgc="base-2"> item1 </LismBox>
+      <LismBox p="20" bgc="base-2"> item2 </LismBox>
+      <LismBox p="20" bgc="base-2"> item3 </LismBox>
+      <LismBox p="20" bgc="base-2"> item4 </LismBox>
+      <LismBox p="20" bgc="base-2" gc="span 2"> item5 </LismBox>
+      <LismCenter gc="3" gr="1 / -1" p="20" bgc="blue"> item6 </LismCenter>
+    </LismTileGrid>
+
+    <LismTileGrid :cols="['2', '3']" rows="4" min-h="50svh" gaf="row dense" my="50">
+      <LismBox :gc="['1 / -1', 'span 2']" :gr="['span 2', '1 / -1']" p="20" bgc="base-2">
+        A
+      </LismBox>
+      <LismBox p="20" bgc="green:20%"> B </LismBox>
+      <LismBox p="20" bgc="blue:20%"> C </LismBox>
+      <LismBox p="20" bgc="red:20%"> D </LismBox>
+      <LismBox p="20" bgc="purple:20%"> E </LismBox>
+    </LismTileGrid>
+
+    <LismColumns :cols="[1, 2, 3]" g="20" my="50">
+      <LismBox bgc="base-2" p="20"> Box1 </LismBox>
+      <LismBox bgc="base-2" p="20"> Box2 </LismBox>
+      <LismBox bgc="base-2" p="20"> Box3 </LismBox>
+      <LismBox bgc="base-2" p="20"> Box4 </LismBox>
+      <LismBox bgc="base-2" p="20"> Box5 </LismBox>
+      <LismBox bgc="base-2" p="20"> Box6 </LismBox>
+    </LismColumns>
 
     <LismSwitchCols break-size="">
       <LismBox m p="30" bgc="base-2" bd>Card 1</LismBox>
@@ -85,8 +113,13 @@
     <Lism :hov="{ bxsh: '10' }" p="20" bgc="base-2" bdrs="10"> ホバー</Lism>
 
     <LismFrame as="figure" ar="2/1" pos="rel">
-      <LismMedia src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
-        style="filter: contrast(1.1) saturate(0.2)" alt="Dummy Image" />
+      <LismMedia
+        src="https://cdn.lism-css.com/img/a-1.jpg"
+        width="960"
+        height="640"
+        style="filter: contrast(1.1) saturate(0.2)"
+        alt="Dummy Image"
+      />
       <Lism as="figcaption" pos="abs" z="1" b="0" p="5" w="100%" c="white" ta="center" lts="l">
         Lorem ipsum text.
       </Lism>
