@@ -55,19 +55,16 @@ jobs:
           TAG=$(echo "$REF" | sed -n 's/.*-\(alpha\|beta\|rc\|next\).*/\1/p')
           TAG=${TAG:-latest}
 
-          echo "Publishing $PKG@$VER with tag: $TAG"
-          pnpm publish -r --filter "$PKG" --access public --no-git-checks --provenance --tag "$TAG"
-
-          # 常に最新のバージョンにlatestをつけるように調整
-          # ただし、安定版が既にlatestにある場合は pre-release版で上書きしないようにする
+          # OIDC認証（--provenance）を使いつつ、最新の pre-release 版を latest として扱うための調整
+          # 注意: OIDC では 1 回のパブリッシュで 1 つのタグしか付与できないため、
+          # 現在の latest がプレリリース版の場合は、今回のパブリッシュを latest タグで行います。
           if [ "$TAG" != "latest" ]; then
-            # 現在のlatestに紐づいているバージョンを取得
             CURRENT_LATEST=$(npm view "$PKG" version 2>/dev/null || echo "")
-            
-            # current latest が pre-release版（-alpha, -beta などを含む）であるか、
-            # まだ存在しない場合は、今回の pre-release版を latest としてもタグ付けする
             if [[ -z "$CURRENT_LATEST" || "$CURRENT_LATEST" =~ -(alpha|beta|rc|next) ]]; then
-              echo "Updating 'latest' tag to $VER because current latest ($CURRENT_LATEST) is a pre-release or empty."
-              npm dist-tag add "$PKG@$VER" latest
+              echo "Promoting $TAG to 'latest' to satisfy OIDC publishing requirements."
+              TAG="latest"
             fi
           fi
+
+          echo "Publishing $PKG@$VER with tag: $TAG"
+          pnpm publish -r --filter "$PKG" --access public --no-git-checks --provenance --tag "$TAG"
