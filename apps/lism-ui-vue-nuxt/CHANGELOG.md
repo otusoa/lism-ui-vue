@@ -1,6 +1,28 @@
 # Changelog
 
 
+## @lism-ui-vue/nuxt@v0.1.1-alpha.4
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.9...@lism-ui-vue/nuxt@v0.1.1-alpha.4)
+
+### 🏡 Chore
+
+- **dev/changelogen:** Pushオプションを追加 ([04ee9d0](https://github.com/otusoa/lism-ui-vue/commit/04ee9d0))
+- **verbose:** ログをわかりやすく ([614366a](https://github.com/otusoa/lism-ui-vue/commit/614366a))
+
+### ✅ Tests
+
+- **nuxt-modules:** モジュールのテストをより充実させ厳格に ([9144962](https://github.com/otusoa/lism-ui-vue/commit/9144962))
+
+### 🤖 CI
+
+- **publish:** パブリッシュのlatestタグの付け方の挙動を変更 ([8665e7d](https://github.com/otusoa/lism-ui-vue/commit/8665e7d))
+- **publish:** アプローチの仕方を修正し、適切なアプローチをとる ([78ecd9a](https://github.com/otusoa/lism-ui-vue/commit/78ecd9a))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## @lism-ui-vue/nuxt@v0.1.1-alpha.3
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.6...@lism-ui-vue/nuxt@v0.1.1-alpha.3)

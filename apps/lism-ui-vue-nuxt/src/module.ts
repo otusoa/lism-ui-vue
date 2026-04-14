@@ -98,8 +98,10 @@ const module: NuxtModule = defineNuxtModule({
 
     const matchedComponentsDir = lookupDirs.find((dir) => existsSync(dir))
     if (verbose) {
+      console.log('[@lism-ui-vue/nuxt] Setup running...')
       console.log('[@lism-ui-vue/nuxt] isLocal:', isLocal)
       console.log('[@lism-ui-vue/nuxt] useSrc:', useSrc)
+      console.log('[@lism-ui-vue/nuxt] Transpile after:', nuxt.options.build.transpile)
       console.log('[@lism-ui-vue/nuxt] Resolved lookupDirs:', lookupDirs)
       console.log('[@lism-ui-vue/nuxt] matchedComponentsDir:', matchedComponentsDir)
     }
