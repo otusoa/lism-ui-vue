@@ -25,17 +25,28 @@ const decoratorOutput = computed(() => {
   const { size, clipPath, boxSizing, ...rest } = props
 
   // スタイルのマージ
-  const css: Record<string, string | number> =
-    typeof rest.css === 'object' && rest.css !== null ? { ...rest.css } : {}
+  let mergedCss: string | Record<string, string | number> | undefined = rest.css
 
-  if (clipPath) css.clipPath = clipPath
-  if (boxSizing) css.boxSizing = boxSizing
-
+  if (typeof mergedCss === 'string') {
+    const extra = [
+      clipPath ? `clip-path:${clipPath}` : '',
+      boxSizing ? `box-sizing:${boxSizing}` : '',
+    ]
+      .filter(Boolean)
+      .join(';')
+    if (extra) mergedCss = `${mergedCss}${mergedCss.trim().endsWith(';') ? '' : ';'}${extra}`
+  } else {
+    const cssObj: Record<string, string | number> =
+      mergedCss && typeof mergedCss === 'object' ? { ...mergedCss } : {}
+    if (clipPath) cssObj.clipPath = clipPath
+    if (boxSizing) cssObj.boxSizing = boxSizing
+    mergedCss = Object.keys(cssObj).length > 0 ? cssObj : undefined
+  }
   return {
     ...rest,
     ar: size ? '1/1' : rest.ar,
     w: size ? size : rest.w,
-    css: Object.keys(css).length > 0 ? css : rest.css,
+    css: mergedCss,
   }
 })
 </script>

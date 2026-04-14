@@ -14,7 +14,7 @@
     <Lism bre fz="5xl">Vitest</Lism>
 
     <!-- ホバーしたらシャドー -->
-    <LismLinkBox href="###" set="transition" bxsh="10" :hov="{ bxsh: '40' }" bd p="20">
+    <LismLinkBox href="#" set="transition" bxsh="10" :hov="{ bxsh: '40' }" bd p="20">
       <p>LinkBox</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
     </LismLinkBox>

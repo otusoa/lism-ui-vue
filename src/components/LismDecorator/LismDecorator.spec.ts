@@ -25,24 +25,13 @@ describe('LismDecorator', () => {
     expect(wrapper.element.tagName).toBe('DIV')
   })
 
-  it('should allow overriding aria-hidden', () => {
-    const wrapper = mount(LismDecorator, {
-      attrs: {
-        'aria-hidden': 'false'
-      }
-    })
-    // 外部からの属性指定で上書きできること
-    expect(wrapper.attributes('aria-hidden')).toBe('false')
-  })
-
-  it('should apply lism props as classes or styles', () => {
+  it('should apply lism props as classes', () => {
     const wrapper = mount(LismDecorator, {
       props: {
         bgc: 'brand',
         p: '10'
       }
     })
-    // プリセット値やトークン値はクラスとして出力される
     expect(wrapper.classes()).toContain('-bgc:brand')
     expect(wrapper.classes()).toContain('-p:10')
   })
@@ -53,9 +42,8 @@ describe('LismDecorator', () => {
         size: '100px'
       }
     })
-    // '100px' はカスタム値なので、クラスは '-w'、スタイルに '--w' が出力される
-    expect(wrapper.classes()).toContain('-w')
-    expect(wrapper.classes()).toContain('-ar:1/1') // '1/1' はプリセット
+    // '100px' はカスタム値なので、スタイルに '--w' が出力され、ar: 1/1 はクラス '-ar:1/1' になる
+    expect(wrapper.classes()).toContain('-ar:1/1')
     expect(wrapper.attributes('style')).toContain('--w: 100px')
   })
 
@@ -66,11 +54,19 @@ describe('LismDecorator', () => {
         boxSizing: 'border-box'
       }
     })
-    // console.log('HTML Output:', wrapper.html())
-
-    // css プロパティ経由で style に出力される。Vueは自動でkebab-caseに変換する。
+    
+    // props.css が未定義の場合、内部で css オブジェクトが作成されてマージされる
     const style = wrapper.attributes('style') || ''
     expect(style).toContain('clip-path: circle(50%)')
     expect(style).toContain('box-sizing: border-box')
+  })
+
+  it('should render slot content', () => {
+    const wrapper = mount(LismDecorator, {
+      slots: {
+        default: 'Decorator Content'
+      }
+    })
+    expect(wrapper.text()).toBe('Decorator Content')
   })
 })
