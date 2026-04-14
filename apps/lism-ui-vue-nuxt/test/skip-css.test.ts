@@ -7,15 +7,16 @@ describe('skipCss オプションの検証', async () => {
     rootDir: fileURLToPath(new URL('./fixtures/imports', import.meta.url)),
     nuxtConfig: {
       lism: {
-        skipCss: true
-      }
-    }
+        skipCss: true,
+      },
+    },
   })
+  const context = useTestContext()
 
   it('skipCss が true の時に CSS が追加されないことを確認する', () => {
-    const context = useTestContext()
-    const css = context.nuxt?.options.css || []
-    
+    expect(context.nuxt).toBeDefined()
+    const css = context.nuxt!.options.css ?? []
+
     // skipCss: true なので、どちらの CSS も含まれていないはずです
     expect(css).not.toContain('lism-ui-vue/style')
     expect(css).not.toContain('lism-css/main.css')
