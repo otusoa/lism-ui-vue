@@ -3,7 +3,7 @@ name: Publish to npm
 on:
   push:
     tags:
-      - '*@v*'
+      - '**@v*'
 
 jobs:
   ci:
@@ -50,7 +50,7 @@ jobs:
           PKG=$(echo "$REF" | sed 's/@v[0-9].*//')
           # タグ名からバージョンを抽出 (例: @scope/pkg@v1.0.0 -> 1.0.0)
           VER=$(echo "$REF" | sed 's/.*@v//')
-          
+
           # タグ名からリリース識別子 (alpha, beta, rc, next) を抽出して dist-tag を決定
           TAG=$(echo "$REF" | sed -n 's/.*-\(alpha\|beta\|rc\|next\).*/\1/p')
           TAG=${TAG:-latest}
