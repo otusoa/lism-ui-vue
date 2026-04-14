@@ -43,14 +43,28 @@ jobs:
         run: pnpm build
 
       - name: npmへパブリッシュ
+        shell: bash
         run: |
           REF="${{ github.ref_name }}"
           # タグ名からパッケージ名を抽出 (例: @scope/pkg@v1.0.0 -> @scope/pkg)
           PKG=$(echo "$REF" | sed 's/@v[0-9].*//')
+          # タグ名からバージョンを抽出 (例: @scope/pkg@v1.0.0 -> 1.0.0)
+          VER=$(echo "$REF" | sed 's/.*@v//')
           
           # タグ名からリリース識別子 (alpha, beta, rc, next) を抽出して dist-tag を決定
           TAG=$(echo "$REF" | sed -n 's/.*-\(alpha\|beta\|rc\|next\).*/\1/p')
           TAG=${TAG:-latest}
 
-          echo "Publishing $PKG with tag: $TAG"
+          # OIDC認証（--provenance）を使いつつ、最新の pre-release 版を latest として扱うための調整
+          # 注意: OIDC では 1 回のパブリッシュで 1 つのタグしか付与できないため、
+          # 現在の latest がプレリリース版の場合は、今回のパブリッシュを latest タグで行います。
+          if [ "$TAG" != "latest" ]; then
+            CURRENT_LATEST=$(npm view "$PKG" version 2>/dev/null || echo "")
+            if [[ -z "$CURRENT_LATEST" || "$CURRENT_LATEST" =~ -(alpha|beta|rc|next) ]]; then
+              echo "Promoting $TAG to 'latest' to satisfy OIDC publishing requirements."
+              TAG="latest"
+            fi
+          fi
+
+          echo "Publishing $PKG@$VER with tag: $TAG"
           pnpm publish -r --filter "$PKG" --access public --no-git-checks --provenance --tag "$TAG"
