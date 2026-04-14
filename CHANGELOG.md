@@ -1,6 +1,32 @@
 # Changelog
 
 
+## lism-ui-vue@v0.1.2-alpha.8
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.7...lism-ui-vue@v0.1.2-alpha.8)
+
+### 🚀 Enhancements
+
+- **TileGrid:** TileGridを追加 ([83b3a86](https://github.com/otusoa/lism-ui-vue/commit/83b3a86))
+- **LismLinkBox): LismLinkBoxを追加 types(setClass:** 型を追加 ([88cb822](https://github.com/otusoa/lism-ui-vue/commit/88cb822))
+
+### 🩹 Fixes
+
+- **core/lism-adapter:** SetClassに関する処理を追加 ([1b0a83a](https://github.com/otusoa/lism-ui-vue/commit/1b0a83a))
+- **TileGrid:** Lismコンポーネント荷転送する周りを修正 ([8d7d1d2](https://github.com/otusoa/lism-ui-vue/commit/8d7d1d2))
+
+### ✅ Tests
+
+- 重要なファイルにテストを追加 ([1b9ce59](https://github.com/otusoa/lism-ui-vue/commit/1b9ce59))
+
+### 🤖 CI
+
+- **ci:** テストをするように追加 ([132cb3b](https://github.com/otusoa/lism-ui-vue/commit/132cb3b))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## lism-ui-vue@v0.1.2-alpha.7
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.3...lism-ui-vue@v0.1.2-alpha.7)
