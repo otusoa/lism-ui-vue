@@ -43,14 +43,31 @@ jobs:
         run: pnpm build
 
       - name: npmへパブリッシュ
+        shell: bash
         run: |
           REF="${{ github.ref_name }}"
           # タグ名からパッケージ名を抽出 (例: @scope/pkg@v1.0.0 -> @scope/pkg)
           PKG=$(echo "$REF" | sed 's/@v[0-9].*//')
+          # タグ名からバージョンを抽出 (例: @scope/pkg@v1.0.0 -> 1.0.0)
+          VER=$(echo "$REF" | sed 's/.*@v//')
           
           # タグ名からリリース識別子 (alpha, beta, rc, next) を抽出して dist-tag を決定
           TAG=$(echo "$REF" | sed -n 's/.*-\(alpha\|beta\|rc\|next\).*/\1/p')
           TAG=${TAG:-latest}
 
-          echo "Publishing $PKG with tag: $TAG"
+          echo "Publishing $PKG@$VER with tag: $TAG"
           pnpm publish -r --filter "$PKG" --access public --no-git-checks --provenance --tag "$TAG"
+
+          # 常に最新のバージョンにlatestをつけるように調整
+          # ただし、安定版が既にlatestにある場合は pre-release版で上書きしないようにする
+          if [ "$TAG" != "latest" ]; then
+            # 現在のlatestに紐づいているバージョンを取得
+            CURRENT_LATEST=$(npm view "$PKG" version 2>/dev/null || echo "")
+            
+            # current latest が pre-release版（-alpha, -beta などを含む）であるか、
+            # まだ存在しない場合は、今回の pre-release版を latest としてもタグ付けする
+            if [[ -z "$CURRENT_LATEST" || "$CURRENT_LATEST" =~ -(alpha|beta|rc|next) ]]; then
+              echo "Updating 'latest' tag to $VER because current latest ($CURRENT_LATEST) is a pre-release or empty."
+              npm dist-tag add "$PKG@$VER" latest
+            fi
+          fi
