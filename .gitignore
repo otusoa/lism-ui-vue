@@ -41,3 +41,6 @@ __screenshots__/
 
 *storybook.log
 storybook-static
+
+# AI(LLM)
+.agents
