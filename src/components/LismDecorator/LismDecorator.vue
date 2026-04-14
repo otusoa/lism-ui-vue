@@ -5,10 +5,10 @@
  */
 import { computed, type Component } from 'vue'
 import Lism from '../Lism/Lism.vue'
-import type { DecoratorProps, LismCoreBaseProps } from '../../core/types'
+import type { DecoratorProps, LismBaseProps } from '../../core/types'
 
 // 処理が必要なプロパティを明示的に定義する
-interface Props extends /* @vue-ignore */ LismCoreBaseProps {
+interface Props extends /* @vue-ignore */ Omit<LismBaseProps, 'as'> {
   as?: keyof HTMLElementTagNameMap | (string & {}) | Component
   size?: DecoratorProps['size']
   clipPath?: DecoratorProps['clipPath']
