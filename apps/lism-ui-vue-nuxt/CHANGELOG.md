@@ -1,6 +1,22 @@
 # Changelog
 
 
+## @lism-ui-vue/nuxt@v0.1.1-alpha.5
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.4...@lism-ui-vue/nuxt@v0.1.1-alpha.5)
+
+### 🩹 Fixes
+
+- **test:** Testの修正 ([8434ef6](https://github.com/otusoa/lism-ui-vue/commit/8434ef6))
+
+### 🤖 CI
+
+- **publish:** Ciのモノレポ上の不備を修正 ([6e5b783](https://github.com/otusoa/lism-ui-vue/commit/6e5b783))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## @lism-ui-vue/nuxt@v0.1.1-alpha.4
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.9...@lism-ui-vue/nuxt@v0.1.1-alpha.4)
