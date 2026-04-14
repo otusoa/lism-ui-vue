@@ -16,7 +16,7 @@ import { Lism } from '../../../../src/components/Lism'
 
     <section class="mb-20">
       <h2 class="text-xl font-semibold mb-5">Responsive Props</h2>
-      <Lism :p="['10', '20', '30']" :bgc="['base-2', 'blue:10%', 'green:10%']" bd="base" bdrs="2">
+      <Lism :p="['10', '20', '30']" bgc="base-2" bd="base" bdrs="2">
         <Lism as="p" fz="l">Responsive Padding and Background Color</Lism>
         <Lism as="p" :d="{ base: 'none', md: 'block' }">Visible only on md screens and above</Lism>
       </Lism>
@@ -60,6 +60,6 @@ import { Lism } from '../../../../src/components/Lism'
       </Lism>
     </section>
     <Lism lismClass="c--myComponent" variant="secondary"> LismClass + variant </Lism>
-    <Lism h="fit" as=""> aa </Lism>
+    <Lism h="fit"> aa </Lism>
   </div>
 </template>

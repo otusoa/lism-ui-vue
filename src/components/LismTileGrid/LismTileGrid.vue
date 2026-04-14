@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { Lism } from '../Lism'
-import type { LismBaseProps } from '../../core/types'
+import type { LismBaseProps, TileGridProps } from '../../core/types'
 
-interface Props extends /* @vue-ignore */ LismBaseProps {
-  cols?: LismBaseProps['cols']
-}
+type Props = /* @vue-ignore */ LismBaseProps & Partial<TileGridProps>
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<Props>()
@@ -12,7 +10,7 @@ const props = defineProps<Props>()
 
 <template>
   <Lism is-container>
-    <Lism v-bind="{ ...props, ...$attrs }" layout="columns">
+    <Lism v-bind="{ ...props, ...$attrs }" layout="tileGrid">
       <slot />
     </Lism>
   </Lism>

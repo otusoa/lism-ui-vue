@@ -284,6 +284,20 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           setAttrs(key, bpData[bp], config, bp)
         })
       }
+    } else if (key === 'set' || key === 'unset') {
+      const prefix = `${key}--`
+      if (Array.isArray(val)) {
+        val.forEach((v) => {
+          if (v) lismState.push(`${prefix}${v}`)
+        })
+      } else if (typeof val === 'string') {
+        val
+          .split(' ')
+          .filter(Boolean)
+          .forEach((v) => {
+            lismState.push(`${prefix}${v}`)
+          })
+      }
     } else if (FILTERS.includes(key)) {
       if (val) {
         const kebabName = key.replace(/([A-Z])/g, '-$1').toLowerCase()

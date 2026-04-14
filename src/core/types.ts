@@ -1,6 +1,6 @@
 import type { PropValueTypes } from 'lism-css/lib/types/PropValueTypes'
 import type { Component } from 'vue'
-import type { StateProps } from 'lism-css/lib/types/StateProps'
+import type { StateProps, SetPropValue } from 'lism-css/lib/types/StateProps'
 import type {
   LayoutProps,
   SideMainProps,
@@ -14,6 +14,7 @@ import type {
   FluidColsProps,
   ColumnsProps,
   SwitchColsProps,
+  TileGridProps,
 } from 'lism-css/lib/types/LayoutProps'
 import type {
   TextAllowedTag,
@@ -42,6 +43,7 @@ export type {
   ListAllowedTag,
   ListItemAllowedTag,
   MediaAllowedTag,
+  TileGridProps,
 }
 
 /**
@@ -90,25 +92,25 @@ export type LismBaseProps = LismCoreProps & {
    * hov={{ bgc: 'brand', c: 'white' }}
    */
   hov?:
-  | (string & {})
-  | 'o'
-  | 'c'
-  | 'bgc'
-  | 'bdc'
-  | 'bxsh'
-  | 'fade'
-  | 'zoom'
-  | 'shadowUp'
-  | 'to:show'
-  | 'to:hide'
-  | 'to:zoom'
-  | (Partial<PropValueTypes> & {
-    duration?: string | number
-    delay?: string | number
-    easing?: string
-    class?: string
-    [key: string]: unknown
-  })
+    | (string & {})
+    | 'o'
+    | 'c'
+    | 'bgc'
+    | 'bdc'
+    | 'bxsh'
+    | 'fade'
+    | 'zoom'
+    | 'shadowUp'
+    | 'to:show'
+    | 'to:hide'
+    | 'to:zoom'
+    | (Partial<PropValueTypes> & {
+        duration?: string | number
+        delay?: string | number
+        easing?: string
+        class?: string
+        [key: string]: unknown
+      })
   /**
    * インラインスタイルを追加で指定します。
    */
@@ -117,6 +119,14 @@ export type LismBaseProps = LismCoreProps & {
    * 独自のLismクラス（プレフィックス等を持つクラス）を追加で指定します。
    */
   lismClass?: string
+  /**
+   * LismCSSの 'set--' クラスを適用するためのプロパティです。
+   */
+  set?: SetPropValue
+  /**
+   * LismCSSの 'set--' クラスを解除、または負の値をセットするためのプロパティです。
+   */
+  unset?: SetPropValue
   /**
    * Lism CSSの解析を通さずに直接要素に流し込むための拡張プロパティです。
    */
@@ -192,6 +202,12 @@ export type LinkProps = LismBaseProps & {
 }
 
 /**
+ * LismLinkBox コンポーネント用のプロパティ型。
+ * LinkProps を継承し、ボックス全体をリンクにするための設定を含みます。
+ */
+export type LinkBoxProps = LinkProps
+
+/**
  * LismList コンポーネント用のプロパティ型。
  * as プロパティを ListAllowedTag (例: 'ul' | 'ol' | 'dl') に制限します。
  */
@@ -221,4 +237,14 @@ export type HeadingProps = LismBaseProps & {
    * 入力に基づく h1 〜 h6 タグのレンダリングに使用されます。
    */
   lv?: 1 | 2 | 3 | 4 | 5 | 6 | '1' | '2' | '3' | '4' | '5' | '6'
+}
+
+/**
+ * LismDecorator コンポーネント用のプロパティ型。
+ * 本家 LismCSS の DecoratorProps に定義されている固有プロパティ（size, clipPath, boxSizing）を含みます。
+ */
+export type DecoratorProps = {
+  size?: string
+  clipPath?: string
+  boxSizing?: string
 }

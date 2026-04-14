@@ -56,6 +56,9 @@ jobs:
       - name: 型チェックの実行
         run: pnpm type-check
 
+      - name: テストの実行 (Vitest)
+        run: pnpm run test
+
       - name: ビルドの実行
         run: pnpm build
 

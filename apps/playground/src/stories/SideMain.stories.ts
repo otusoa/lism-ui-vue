@@ -43,7 +43,7 @@ export const RightSide: Story = {
     `,
   }),
   args: {
-    side: 'right',
+    isSide: true,
     sideW: '180px',
   },
 }
