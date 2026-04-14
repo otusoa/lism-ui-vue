@@ -1,6 +1,19 @@
 # Changelog
 
 
+## lism-ui-vue@v0.1.2-alpha.9
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.8...lism-ui-vue@v0.1.2-alpha.9)
+
+### 🩹 Fixes
+
+- **Decorator:** Nitpickを修正 ([0a71924](https://github.com/otusoa/lism-ui-vue/commit/0a71924))
+- **decorator:** Nitpickを処理 ([6f06708](https://github.com/otusoa/lism-ui-vue/commit/6f06708))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## lism-ui-vue@v0.1.2-alpha.8
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.7...lism-ui-vue@v0.1.2-alpha.8)
