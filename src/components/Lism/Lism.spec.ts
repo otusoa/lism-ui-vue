@@ -59,18 +59,6 @@ describe('Lism component', () => {
     expect(wrapper.attributes('data-test')).toBe('value')
   })
 
-  it('should handle variant prop and main class', () => {
-    // variantは lismClass と組み合わせて使用される
-    const wrapper = mount(Lism, {
-      props: {
-        lismClass: 'c--box',
-        variant: 'test'
-      }
-    })
-    expect(wrapper.classes()).toContain('c--box')
-    expect(wrapper.classes()).toContain('c--box--test')
-  })
-
   it('should overwrite class and style with exProps', () => {
     const wrapper = mount(Lism, {
       props: {

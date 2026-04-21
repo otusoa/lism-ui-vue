@@ -80,8 +80,6 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   > & {
     class?: string
     className?: string
-    lismClass?: string
-    variant?: string
     style?: string | Record<string, unknown> | unknown[]
     _propConfig?: Record<string, unknown>
   }
@@ -91,29 +89,13 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   const styles: Record<string, string | number> = {}
   const attrs: Record<string, unknown> = {}
 
-  // baseクラスの生成 (lismClassとvariant)
+  // baseクラスの生成
   const baseClasses: string[] = []
   if (props.class) baseClasses.push(props.class as string)
   if (props.className) baseClasses.push(props.className as string)
 
-  let mainClass = (props.lismClass as string) || ''
-  if (props.variant && mainClass) {
-    const arr = mainClass.split(' ')
-    const first = arr[0]
-    const variantClass = `${first}--${props.variant}`
-    mainClass = [first, variantClass, ...arr.slice(1)].join(' ')
-  }
-  if (mainClass) {
-    mainClass
-      .split(' ')
-      .filter(Boolean)
-      .forEach((c) => baseClasses.push(c))
-  }
-
   delete props.class
   delete props.className
-  delete props.lismClass
-  delete props.variant
 
   // _propConfig や style などの抽出
   const inlineStyle = (props.style as Record<string, unknown>) || {}

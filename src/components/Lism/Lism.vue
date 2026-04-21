@@ -15,8 +15,6 @@ interface Props extends /* @vue-ignore */ LismBaseProps {
   /** レンダリングするコンポーネントまたは要素 */
   as?: keyof HTMLElementTagNameMap | (string & {}) | Component
   /** Lism の解析を通さずに直接要素に渡す属性 */
-  variant?: string
-  lismClass?: string
   exProps?: Record<string, unknown>
 }
 
