@@ -2,7 +2,7 @@
 /**
  * @file LismプロパティをVue.jsに適合させるためのアダプター
  */
-import { STATES, PROPS } from 'lism-css/config'
+import { TRAITS, PROPS } from 'lism-css/config'
 import getLayoutProps from 'lism-css/lib/getLayoutProps'
 import isPresetValue from 'lism-css/lib/isPresetValue'
 import isTokenValue from 'lism-css/lib/isTokenValue'
@@ -57,9 +57,12 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       continue
     }
 
-    // 1. そのままのキーで PROPS または STATES に存在するか確認
+    // 1. そのままのキーで PROPS または TRAITS に存在するか確認
     // LismCSS の PROPS には 'max-w' や 'min-w' などケバブケースのキーが含まれているため。
-    if (Object.prototype.hasOwnProperty.call(PROPS, key) || Object.prototype.hasOwnProperty.call(STATES, key)) {
+    if (
+      Object.prototype.hasOwnProperty.call(PROPS, key) ||
+      Object.prototype.hasOwnProperty.call(TRAITS, key)
+    ) {
       normalizedInput[key] = value
     } else if (key.includes('-')) {
       // 2. 存在しない場合でハイフンを含むなら、camelCase に変換 (is-container -> isContainer, side-w -> sideW 等)
@@ -71,10 +74,10 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   }
 
   const { layout, ...restInput } = normalizedInput as { layout?: string } & Record<string, unknown>
-  const props = getLayoutProps(
-    layout as Parameters<typeof getLayoutProps>[0],
-    restInput
-  ) as Record<string, unknown> & {
+  const props = getLayoutProps(layout as Parameters<typeof getLayoutProps>[0], restInput) as Record<
+    string,
+    unknown
+  > & {
     class?: string
     className?: string
     lismClass?: string
@@ -101,7 +104,10 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     mainClass = [first, variantClass, ...arr.slice(1)].join(' ')
   }
   if (mainClass) {
-    mainClass.split(' ').filter(Boolean).forEach(c => baseClasses.push(c))
+    mainClass
+      .split(' ')
+      .filter(Boolean)
+      .forEach((c) => baseClasses.push(c))
   }
 
   delete props.class
@@ -255,14 +261,14 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   Object.keys(props).forEach((key) => {
     const rawVal = props[key]
     if (rawVal === undefined) return
-    
+
     // Vue の場合、`<Lism bd>` のようなフラグ属性は `""` (空文字) として `$attrs` に渡るが、
     // js実装側では `true` として扱う仕様のため変換。
     // target外の純粋な HTML 属性等は `rawVal` を使用して元の `""` を反映させる。
     const val = rawVal === '' ? true : rawVal
 
-    if (Object.prototype.hasOwnProperty.call(STATES, key)) {
-      const stateConfig = (STATES as Record<string, unknown>)[key]
+    if (Object.prototype.hasOwnProperty.call(TRAITS, key)) {
+      const stateConfig = (TRAITS as Record<string, unknown>)[key]
       if (typeof stateConfig === 'string') {
         if (val) lismState.push(stateConfig)
       } else {
