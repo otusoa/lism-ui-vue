@@ -60,7 +60,7 @@ export type LismCoreBaseProps = Partial<PropValueTypes & TraitProps & LayoutProp
 
 /**
  * LismCSSで用意されている標準のプロパティをまとめた型
- * 現在は LismCoreBaseProps へのエイリアスとして利用されています。
+ * @deprecated Beta版で廃止予定。 LismCoreBaseProps を使用してください。
  */
 export type LismCoreProps = LismCoreBaseProps
 
@@ -68,7 +68,7 @@ export type LismCoreProps = LismCoreBaseProps
  * プロジェクト内のほぼすべてのコンポーネント（LismBoxやLismCenterなど）のベースとなる型
  * スタイリング・レイアウトプロパティに加え、Vueでレンダリングするタグの指定などを含みます。
  */
-export type LismBaseProps = LismCoreProps & {
+export type LismBaseProps = LismCoreBaseProps & {
   /**
    * レンダリングするHTML要素を指定します。'as' よりも優先して適用されます。
    */
@@ -237,6 +237,4 @@ export type HeadingProps = LismBaseProps & {
  */
 export type DecoratorProps = {
   size?: string
-  clipPath?: string
-  boxSizing?: string
 }
