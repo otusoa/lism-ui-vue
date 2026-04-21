@@ -1,19 +1,19 @@
 import type { PropValueTypes } from 'lism-css/lib/types/PropValueTypes'
 import type { Component } from 'vue'
-import type { StateProps, SetPropValue } from 'lism-css/lib/types/StateProps'
+import type { TraitProps, SetPropValue } from 'lism-css/lib/types/TraitProps'
 import type {
   LayoutProps,
-  SideMainProps,
   FlexProps,
+  WithSideProps,
   StackProps,
   GridLayoutProps,
   ClusterProps,
   FrameProps,
   BoxProps,
   FlowLayoutProps,
-  FluidColsProps,
+  AutoColumnsProps,
   ColumnsProps,
-  SwitchColsProps,
+  SwitchColumnsProps,
   TileGridProps,
 } from 'lism-css/lib/types/LayoutProps'
 import type {
@@ -26,7 +26,7 @@ import type {
 } from 'lism-css/lib/types/allowedTags'
 
 export type {
-  SideMainProps,
+  WithSideProps,
   FlexProps,
   StackProps,
   GridLayoutProps,
@@ -34,9 +34,9 @@ export type {
   FrameProps,
   BoxProps,
   FlowLayoutProps,
-  FluidColsProps,
+  AutoColumnsProps,
   ColumnsProps,
-  SwitchColsProps,
+  SwitchColumnsProps,
   TextAllowedTag,
   InlineAllowedTag,
   GroupAllowedTag,
@@ -56,7 +56,7 @@ export type FlowValue = 's' | 'l' | ((string & {}) | number)
  * LismCSS本家からインポートされた純粋なスタイリング・レイアウト用の基底プロパティ型
  * HTMLレンダリングに関連する属性（'as', 'tag' など）は含まれません。
  */
-export type LismCoreBaseProps = Partial<PropValueTypes & StateProps & LayoutProps>
+export type LismCoreBaseProps = Partial<PropValueTypes & TraitProps & LayoutProps>
 
 /**
  * LismCSSで用意されている標準のプロパティをまとめた型
@@ -77,10 +77,6 @@ export type LismBaseProps = LismCoreProps & {
    * レンダリングするコンポーネントまたはHTML要素を指定します。
    */
   as?: keyof HTMLElementTagNameMap | (string & {}) | Component
-  /**
-   * LismCSSのバリアントクラスを指定します。
-   */
-  variant?: string
   /**
    * ホバー時のスタイルを指定します。
    * 文字列でカンマ区切りのクラス指定、またはオブジェクト形式での指定が可能です。
@@ -115,10 +111,6 @@ export type LismBaseProps = LismCoreProps & {
    * インラインスタイルを追加で指定します。
    */
   css?: string | Record<string, string | number>
-  /**
-   * 独自のLismクラス（プレフィックス等を持つクラス）を追加で指定します。
-   */
-  lismClass?: string
   /**
    * LismCSSの 'set--' クラスを適用するためのプロパティです。
    */
