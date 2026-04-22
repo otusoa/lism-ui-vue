@@ -70,10 +70,6 @@ export type LismCoreProps = LismCoreBaseProps
  */
 export type LismBaseProps = LismCoreBaseProps & {
   /**
-   * レンダリングするHTML要素を指定します。'as' よりも優先して適用されます。
-   */
-  tag?: keyof HTMLElementTagNameMap | (string & {})
-  /**
    * レンダリングするコンポーネントまたはHTML要素を指定します。
    */
   as?: keyof HTMLElementTagNameMap | (string & {}) | Component

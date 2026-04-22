@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import { getLismPropsVue } from './lism-adapter'
 import getLismProps from 'lism-css/lib/getLismProps'
-import type { LismCoreProps, LismProps } from './types'
+import type { LismCoreBaseProps, LismProps } from './types'
 
 describe('getLismPropsVue vs getLismProps (React)', () => {
   it('React reference test for cols array', () => {
     const props = { cols: [1, 2, 3] as const }
-    const result = getLismProps(props as LismCoreProps)
+    const result = getLismProps(props as LismCoreBaseProps)
 
     // React implementation behavior check
     // console.log('React output:', JSON.stringify(result, null, 2))
@@ -30,11 +30,11 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
   })
 
   it('should normalize kebab-case props to camelCase and handle layout props', () => {
-    const props = { layout: 'sideMain', 'is-container': true, 'side-w': '20rem' } as const
+    const props = { layout: 'withSide', 'is-container': true, 'side-w': '20rem' } as const
     const result = getLismPropsVue(props as LismProps)
 
     expect(result.class).toContain('is--container')
-    expect(result.class).toContain('l--sideMain')
+    expect(result.class).toContain('l--withSide')
     expect(result.style).toHaveProperty('--sideW', '20rem')
   })
 
