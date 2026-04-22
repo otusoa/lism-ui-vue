@@ -91,11 +91,17 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
 
   // baseクラスの生成
   const baseClasses: string[] = []
-  if (props.class) baseClasses.push(props.class as string)
-  if (props.className) baseClasses.push(props.className as string)
+  if (props.class) baseClasses.push(...(Array.isArray(props.class) ? props.class : [props.class]))
+  if (props.className)
+    baseClasses.push(...(Array.isArray(props.className) ? props.className : [props.className]))
+  if (props.primitiveClass)
+    baseClasses.push(
+      ...(Array.isArray(props.primitiveClass) ? props.primitiveClass : [props.primitiveClass]),
+    )
 
   delete props.class
   delete props.className
+  delete props.primitiveClass
 
   // _propConfig や style などの抽出
   const inlineStyle = (props.style as Record<string, unknown>) || {}
@@ -219,7 +225,9 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           splitWithComma(v).forEach((c: string) => addUtil(`-hov:${c}`))
         } else if (typeof v === 'string' || typeof v === 'number') {
           const finalV = getMaybeCssVar(v, getTokenKey(k))
-          addUtil(`-hov:${k}`)
+          // PROPS に含まれるキー（bxsh, c, bgc 等）の場合は -hov:-bxsh のようにダッシュを付与する
+          const isProp = Object.prototype.hasOwnProperty.call(PROPS, k)
+          addUtil(`-hov:${isProp ? '-' : ''}${k}`)
           addStyle(`--hov-${k}`, finalV)
         }
       })
