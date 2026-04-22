@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import { Lism } from '../Lism'
-import type { LinkBoxProps } from '../../core/types'
+import type { BoxLinkProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LinkBoxProps
+type Props = /* @vue-ignore */ BoxLinkProps
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<Props>()
 const attrs = useAttrs()
 
 const componentTag = computed(() => {
-  return props.tag || props.as || (attrs.href ? 'a' : 'div')
+  return props.as || (attrs.href ? 'a' : 'div')
 })
 </script>
 
 <template>
-  <Lism :is-link-box="true" :as="componentTag" v-bind="$attrs">
+  <Lism :as="componentTag" :is-link-box="true" v-bind="$attrs">
     <slot />
   </Lism>
 </template>

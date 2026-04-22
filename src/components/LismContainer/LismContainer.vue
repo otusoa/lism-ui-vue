@@ -2,20 +2,14 @@
 import { Lism } from '../Lism'
 import type { LismBaseProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LismBaseProps & {
-  /**
-   * コンテンツの最大幅を指定します（is-wrapperを有効にします）。
-   * 's', 'm', 'l' などのサイズ、または true を指定できます。
-   */
-  size?: LismBaseProps['isWrapper']
-}
+type Props = /* @vue-ignore */ LismBaseProps
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism is-container :is-wrapper="props.size" v-bind="$attrs">
+  <Lism v-bind="{ ...props, ...$attrs }" is-container>
     <slot />
   </Lism>
 </template>

@@ -197,7 +197,7 @@ export type LinkProps = LismBaseProps & {
  * LismLinkBox コンポーネント用のプロパティ型。
  * LinkProps を継承し、ボックス全体をリンクにするための設定を含みます。
  */
-export type LinkBoxProps = LinkProps
+export type BoxLinkProps = LinkProps
 
 /**
  * LismList コンポーネント用のプロパティ型。
