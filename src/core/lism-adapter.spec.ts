@@ -112,4 +112,35 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
     expect(result.set).toBeUndefined()
     expect(result.unset).toBeUndefined()
   })
+
+  it('should handle util props correctly', () => {
+    const props = { util: 'cbox' } as const
+    const result = getLismPropsVue(props as unknown as LismProps)
+
+    expect(result.class).toContain('u--cbox')
+    expect(result.util).toBeUndefined()
+
+    const arrayProps = { util: ['cbox', 'fs-o'] } as const
+    const arrayResult = getLismPropsVue(arrayProps as unknown as LismProps)
+    expect(arrayResult.class).toContain('u--cbox')
+    expect(arrayResult.class).toContain('u--fs-o')
+
+    const stringProps = { util: 'cbox fs-o' } as const
+    const stringResult = getLismPropsVue(stringProps as unknown as LismProps)
+    expect(stringResult.class).toContain('u--cbox')
+    expect(stringResult.class).toContain('u--fs-o')
+  })
+
+  it('should handle atomic props correctly', () => {
+    const props = { atomic: 'divider' } as const
+    const result = getLismPropsVue(props as unknown as LismProps)
+
+    expect(result.class).toContain('a--divider')
+    expect(result.atomic).toBeUndefined()
+
+    const spacerProps = { atomic: 'spacer', w: '50' } as const
+    const spacerResult = getLismPropsVue(spacerProps as unknown as LismProps)
+
+    expect(spacerResult.class).toContain('a--spacer')
+  })
 })

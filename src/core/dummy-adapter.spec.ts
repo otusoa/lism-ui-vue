@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { getContent } from './dummy-adapter'
 
 describe('getContent (DummyAdapter)', () => {
-  it('should return default dummy text (en, length m, tag p)', () => {
+  it('should return default dummy text (en, length m, as p)', () => {
     const result = getContent({})
     // デフォルトの英語(en)かつ長さ m のテキストが含まれているか
     expect(result).toContain('Lorem ipsum')
@@ -25,8 +25,8 @@ describe('getContent (DummyAdapter)', () => {
     expect(xl.length).toBeGreaterThan(xs.length)
   })
 
-  it('should render as a list when tag is "ul" or "ol"', () => {
-    const result = getContent({ tag: 'ul', length: 's' })
+  it('should render as a list when as is "ul" or "ol"', () => {
+    const result = getContent({ as: 'ul', length: 's' })
     // s の長さは2文あるので <li> が2つ以上生成されるはず
     expect(result).toMatch(/^<li>.*<\/li><li>.*<\/li>$/)
     expect(result).toContain('<li>Lorem ipsum')
@@ -53,8 +53,8 @@ describe('getContent (DummyAdapter)', () => {
     expect(offsetResult[0]).toBe(offsetResult[0]?.toUpperCase())
   })
 
-  it('should handle pre correctly with list tag', () => {
-    const result = getContent({ tag: 'ul', pre: 'Prefix item', length: 'xs' })
+  it('should handle pre correctly with list as', () => {
+    const result = getContent({ as: 'ul', pre: 'Prefix item', length: 'xs' })
     // <li>Prefix item</li> + 他のアイテム
     expect(result).toContain('<li>Prefix item</li><li>')
   })
