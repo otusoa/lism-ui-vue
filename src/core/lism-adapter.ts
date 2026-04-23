@@ -4,6 +4,7 @@
  */
 import { TRAITS, PROPS } from 'lism-css/config'
 import getLayoutProps from 'lism-css/lib/getLayoutProps'
+import getAtomicProps from 'lism-css/lib/getAtomicProps'
 import isPresetValue from 'lism-css/lib/isPresetValue'
 import isTokenValue from 'lism-css/lib/isTokenValue'
 import getUtilKey from 'lism-css/lib/getUtilKey'
@@ -11,6 +12,7 @@ import getMaybeCssVar from 'lism-css/lib/getMaybeCssVar'
 import getBpData from 'lism-css/lib/getBpData'
 import splitWithComma from 'lism-css/lib/helper/splitWithComma'
 import type { LismProps } from './types'
+import type { AtomicProps } from 'lism-css/lib/types/AtomicProps'
 
 // isEmptyObj / filterEmptyObj の簡易実装
 const isEmptyObj = (obj: Record<string, unknown>) => Object.keys(obj).length === 0
@@ -73,8 +75,14 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     }
   }
 
-  const { layout, ...restInput } = normalizedInput as { layout?: string } & Record<string, unknown>
-  const props = getLayoutProps(layout as Parameters<typeof getLayoutProps>[0], restInput) as Record<
+  const { layout, atomic, ...restInput } = normalizedInput as {
+    layout?: string
+    atomic?: AtomicProps['atomic']
+  } & Record<string, unknown>
+
+  const atomicParsed = getAtomicProps(atomic, restInput)
+
+  const props = getLayoutProps(layout as Parameters<typeof getLayoutProps>[0], atomicParsed) as Record<
     string,
     unknown
   > & {
@@ -280,18 +288,18 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           setAttrs(key, bpData[bp], config, bp)
         })
       }
-    } else if (key === 'set' || key === 'unset') {
-      const prefix = `${key}--`
+    } else if (key === 'set' || key === 'unset' || key === 'util') {
+      const prefix = key === 'util' ? 'u--' : `${key}--`
       if (Array.isArray(val)) {
         val.forEach((v) => {
-          if (v) lismState.push(`${prefix}${v}`)
+          if (v) (key === 'util' ? uClasses : lismState).push(`${prefix}${v}`)
         })
       } else if (typeof val === 'string') {
         val
           .split(' ')
           .filter(Boolean)
           .forEach((v) => {
-            lismState.push(`${prefix}${v}`)
+            ; (key === 'util' ? uClasses : lismState).push(`${prefix}${v}`)
           })
       }
     } else if (FILTERS.includes(key)) {

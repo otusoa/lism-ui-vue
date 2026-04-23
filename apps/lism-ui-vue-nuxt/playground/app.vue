@@ -12,6 +12,11 @@
     </LismBox>
 
     <Lism bre fz="5xl">Vitest</Lism>
+    <Lism util="cbox" keycolor="blue" p="20">
+      <p>Lorem ipsum dolor <i>sit amet</i>. consectetur <a href="###">adipisicing elit</a>, sed do eiusmod tempor. Non
+        facere <code>Laudantium</code> ex eos <b>doloribus aut dolore</b> nisi provident.</p>
+    </Lism>
+    <Lism atomic="divider"></Lism>
 
     <!-- ホバーでシャドウが変化するボックスの実装例 -->
     <LismBox bgc="base" p="30" bdrs="20" bd bxsh="10" has-transition :hov="{ bxsh: '40' }" my="40">
@@ -112,13 +117,8 @@
     <Lism :hov="{ bxsh: '10' }" p="20" bgc="base-2" bdrs="10"> ホバー</Lism>
 
     <LismFrame as="figure" ar="2/1" pos="rel">
-      <LismMedia
-        src="https://cdn.lism-css.com/img/a-1.jpg"
-        width="960"
-        height="640"
-        style="filter: contrast(1.1) saturate(0.2)"
-        alt="Dummy Image"
-      />
+      <LismMedia src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
+        style="filter: contrast(1.1) saturate(0.2)" alt="Dummy Image" />
       <Lism as="figcaption" pos="abs" z="1" b="0" p="5" w="100%" c="white" ta="center" lts="l">
         Lorem ipsum text.
       </Lism>

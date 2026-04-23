@@ -1,6 +1,7 @@
 import type { PropValueTypes } from 'lism-css/lib/types/PropValueTypes'
+import type { AtomicProps } from 'lism-css/lib/types/AtomicProps'
 import type { Component } from 'vue'
-import type { TraitProps, SetPropValue } from 'lism-css/lib/types/TraitProps'
+import type { TraitProps, SetPropValue, UtilPropValue, } from 'lism-css/lib/types/TraitProps'
 import type {
   LayoutProps,
   FlexProps,
@@ -84,25 +85,25 @@ export type LismBaseProps = LismCoreBaseProps & {
    * hov={{ bgc: 'brand', c: 'white' }}
    */
   hov?:
-    | (string & {})
-    | 'o'
-    | 'c'
-    | 'bgc'
-    | 'bdc'
-    | 'bxsh'
-    | 'fade'
-    | 'zoom'
-    | 'shadowUp'
-    | 'to:show'
-    | 'to:hide'
-    | 'to:zoom'
-    | (Partial<PropValueTypes> & {
-        duration?: string | number
-        delay?: string | number
-        easing?: string
-        class?: string
-        [key: string]: unknown
-      })
+  | (string & {})
+  | 'o'
+  | 'c'
+  | 'bgc'
+  | 'bdc'
+  | 'bxsh'
+  | 'fade'
+  | 'zoom'
+  | 'shadowUp'
+  | 'to:show'
+  | 'to:hide'
+  | 'to:zoom'
+  | (Partial<PropValueTypes> & {
+    duration?: string | number
+    delay?: string | number
+    easing?: string
+    class?: string
+    [key: string]: unknown
+  })
   /**
    * LismCSSの 'set--' クラスを適用するためのプロパティです。
    */
@@ -111,6 +112,14 @@ export type LismBaseProps = LismCoreBaseProps & {
    * LismCSSの 'set--' クラスを解除、または負の値をセットするためのプロパティです。
    */
   unset?: SetPropValue
+  /**
+   * Lism CSSのユーティリティプロパティ（破線、シェイプなど）Utility Class - スタイル・装飾をまとめてセットするようなクラスを分類しています。
+   */
+  util?: UtilPropValue
+  /**
+   * Lism CSSのプロパティ（Atomic Props）
+   */
+  atomic?: AtomicProps['atomic']
   /**
    * Lism CSSの解析を通さずに直接要素に流し込むための拡張プロパティです。
    */
