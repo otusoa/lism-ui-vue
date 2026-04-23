@@ -48,8 +48,8 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   }
 
   // Vue テンプレートでは kebab-case (is-container) で属性を記述するが、
-  // STATES/PROPS のキーは camelCase (isContainer) であるため変換が必要。
-  // ハイフンを含むキーのうち、camelCase に変換すると STATES または PROPS に一致するものだけを変換する。
+  // TRAITS/PROPS のキーは camelCase (isContainer) であるため変換が必要。
+  // ハイフンを含むキーのうち、camelCase に変換すると TRAITS または PROPS に一致するものだけを変換する。
   const normalizedInput: Record<string, unknown> = {}
   for (const [key, value] of Object.entries(inputProps)) {
     if (key.startsWith('data-') || key.startsWith('aria-')) {

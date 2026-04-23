@@ -104,10 +104,6 @@ export type LismBaseProps = LismCoreBaseProps & {
         [key: string]: unknown
       })
   /**
-   * インラインスタイルを追加で指定します。
-   */
-  css?: string | Record<string, string | number>
-  /**
    * LismCSSの 'set--' クラスを適用するためのプロパティです。
    */
   set?: SetPropValue
@@ -131,11 +127,7 @@ export type LismProps = LismBaseProps & {
 /**
  * LismUiDummy コンポーネント用のプロパティ型
  */
-export type DummyProps = {
-  /** レンダリングするコンポーネントまたは要素 */
-  as?: string | object
-  /** レンダリングするHTML要素 */
-  tag?: string
+export type LismDummyProps = LismBaseProps & {
   /** 画像のソースURL（asがimgなどの場合に使用） */
   src?: string
   /** コンテンツの幅 */
