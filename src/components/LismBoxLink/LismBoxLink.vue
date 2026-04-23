@@ -15,7 +15,7 @@ const componentTag = computed(() => {
 </script>
 
 <template>
-  <Lism :as="componentTag" :is-link-box="true" v-bind="$attrs">
+  <Lism :as="componentTag" is-box-link v-bind="$attrs">
     <slot />
   </Lism>
 </template>

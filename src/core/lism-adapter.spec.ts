@@ -69,7 +69,7 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
   it('should handle complex hov objects', () => {
     const props = {
       hov: {
-        color: 'brand',
+        c: 'brand',
         bgc: 'base-2',
         scale: '1.1',
       },
@@ -77,11 +77,11 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
     const result = getLismPropsVue(props as LismProps)
 
     // オブジェクト形式の場合は個別のホバーユーティリティが出力される
-    expect(result.class).toContain('-hov:color')
-    expect(result.class).toContain('-hov:bgc')
+    expect(result.class).toContain('-hov:-c')
+    expect(result.class).toContain('-hov:-bgc')
     expect(result.class).toContain('-hov:scale')
 
-    expect(result.style).toHaveProperty('--hov-color')
+    expect(result.style).toHaveProperty('--hov-c')
     expect(result.style).toHaveProperty('--hov-bgc')
     expect(result.style).toHaveProperty('--hov-scale', '1.1')
   })

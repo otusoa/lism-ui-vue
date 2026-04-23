@@ -13,30 +13,14 @@
 
     <Lism bre fz="5xl">Vitest</Lism>
 
-    <!-- ホバーしたらシャドー -->
-    <LismLinkBox href="#" set="transition" bxsh="10" :hov="{ bxsh: '40' }" bd p="20">
-      <p>LinkBox</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </LismLinkBox>
-
-    <LismBox set="transition" :hov="{ o: '0.5', c: 'red' }" bgc="base-2" bd p="20" my="20">
-      <p>LinkBox</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </LismBox>
-
-    <LismLinkBox my="20" set="transition">
-      <LismGroup fz="xl" fw="bold">
-        <LismLink class="u--expandedLink" href="#linkbox-demo02"> Heading link text </LismLink>
-      </LismGroup>
-      <LismText c="text-2" lh="s" my="15">
-        Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor Incididunt
-        ut. Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut.
+    <!-- ホバーでシャドウが変化するボックスの実装例 -->
+    <LismBox bgc="base" p="30" bdrs="20" bd bxsh="10" has-transition :hov="{ bxsh: '40' }" my="40">
+      <LismHeading lv="3" mb="15">Hover Shadow Box</LismHeading>
+      <LismText c="text-2">
+        マウスをホバーすると <code>bxsh</code>（box-shadow）トークンが切り替わります。
+        <code>has-transition</code> を指定することで、影の変化が滑らかになります。
       </LismText>
-      <LismGroup id="inner-link02" my="10">
-        <a href="#inner-link02" class="-hov:o"> Inner Link </a>
-      </LismGroup>
-    </LismLinkBox>
+    </LismBox>
 
     <LismStack layout="box" bgc="base-2" g="20" p="30" bdrs="10">
       <LismBox>aaa</LismBox>
@@ -44,7 +28,7 @@
       <LismBox>aaa</LismBox>
     </LismStack>
 
-    <LismContainer bd size="s" is-wrapper="l" p="20">
+    <LismContainer bd is-wrapper="l" p="20">
       <LismBox :p="[10, 30]">このBOXは、paddingが切り替わります。</LismBox>
     </LismContainer>
     <LismFlex g="10">
@@ -53,14 +37,14 @@
       <LismBox bgc="base-2">aaa</LismBox>
     </LismFlex>
 
-    <LismSideMain sideW="12rem" mainW="20rem" g="20">
+    <LismWithSide sideW="12rem" mainW="20rem" g="20">
       <LismBox layout="box" p="15" bd bdc="blue">
         <p>Main Content</p>
       </LismBox>
       <LismBox isSide p="15" bd bdc="red">
         <p>Side Content</p>
       </LismBox>
-    </LismSideMain>
+    </LismWithSide>
 
     <LismCenter>
       <LismBox>あああ</LismBox>
@@ -79,11 +63,11 @@
       <LismBox>aaa</LismBox>
     </LismFlow>
 
-    <LismFluidCols auto-fill cols="240px" g="20" my="50">
+    <LismAutoColumns auto-fill cols="240px" g="20" my="50">
       <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
-    </LismFluidCols>
+    </LismAutoColumns>
 
     <LismTileGrid cols="3" rows="3" g="5" min-h="50svh" my="50">
       <LismBox p="20" bgc="base-2"> item1 </LismBox>
@@ -113,11 +97,11 @@
       <LismBox bgc="base-2" p="20"> Box6 </LismBox>
     </LismColumns>
 
-    <LismSwitchCols break-size="">
+    <LismSwitchColumns break-size="">
       <LismBox m p="30" bgc="base-2" bd>Card 1</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
-    </LismSwitchCols>
+    </LismSwitchColumns>
 
     <pre><code>{{ useTest().message }}</code></pre>
 
@@ -180,6 +164,8 @@
       <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-x-s bd-y-s bdc="current" />
       <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-x-e bd-y-e bdc="current" />
     </LismBox>
+
+    <Lism as=""></Lism>
   </Lism>
 </template>
 

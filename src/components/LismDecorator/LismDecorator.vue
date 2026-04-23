@@ -43,7 +43,7 @@ const decoratorOutput = computed(() => {
 </script>
 
 <template>
-  <Lism v-bind="{ 'aria-hidden': 'true', ...decoratorOutput, ...$attrs }" lism-class="a--decorator">
+  <Lism v-bind="{ 'aria-hidden': 'true', ...decoratorOutput, ...$attrs }" class="a--decorator">
     <slot />
   </Lism>
 </template>
