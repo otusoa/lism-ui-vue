@@ -25,6 +25,7 @@ export * from './LismColumns'
 export * from './LismSwitchColumns'
 export * from './LismDecorator'
 export * from './LismDivider'
+export * from './LismIcon'
 
 // UIコンポーネント
 export * from './LismUi/Dummy'

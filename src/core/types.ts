@@ -1,7 +1,7 @@
 import type { PropValueTypes } from 'lism-css/lib/types/PropValueTypes'
 import type { AtomicProps } from 'lism-css/lib/types/AtomicProps'
 import type { Component } from 'vue'
-import type { TraitProps, SetPropValue, UtilPropValue, } from 'lism-css/lib/types/TraitProps'
+import type { TraitProps, SetPropValue, UtilPropValue } from 'lism-css/lib/types/TraitProps'
 import type {
   LayoutProps,
   FlexProps,
@@ -85,25 +85,25 @@ export type LismBaseProps = LismCoreBaseProps & {
    * hov={{ bgc: 'brand', c: 'white' }}
    */
   hov?:
-  | (string & {})
-  | 'o'
-  | 'c'
-  | 'bgc'
-  | 'bdc'
-  | 'bxsh'
-  | 'fade'
-  | 'zoom'
-  | 'shadowUp'
-  | 'to:show'
-  | 'to:hide'
-  | 'to:zoom'
-  | (Partial<PropValueTypes> & {
-    duration?: string | number
-    delay?: string | number
-    easing?: string
-    class?: string
-    [key: string]: unknown
-  })
+    | (string & {})
+    | 'o'
+    | 'c'
+    | 'bgc'
+    | 'bdc'
+    | 'bxsh'
+    | 'fade'
+    | 'zoom'
+    | 'shadowUp'
+    | 'to:show'
+    | 'to:hide'
+    | 'to:zoom'
+    | (Partial<PropValueTypes> & {
+        duration?: string | number
+        delay?: string | number
+        easing?: string
+        class?: string
+        [key: string]: unknown
+      })
   /**
    * LismCSSの 'set--' クラスを適用するためのプロパティです。
    */
@@ -234,4 +234,23 @@ export type HeadingProps = LismBaseProps & {
  */
 export type DecoratorProps = {
   size?: string
+}
+
+/**
+ * LismIcon コンポーネント用のプロパティ型。
+ * icon, size, label などのアイコン固有のプロパティを含みます。
+ */
+export type IconProps = LismBaseProps & {
+  /**
+   * アイコンを指定します。文字列（プリセット名）またはオブジェクト（{as, ...exProps}）が指定可能です。
+   */
+  icon?: string | ({ as: string } & Record<string, unknown>)
+  /**
+   * アイコンのサイズを指定します。
+   */
+  size?: string | number
+  /**
+   * aria-label として出力されます。指定がある場合 role="img" が、ない場合 aria-hidden="true" が付与されます。
+   */
+  label?: string
 }

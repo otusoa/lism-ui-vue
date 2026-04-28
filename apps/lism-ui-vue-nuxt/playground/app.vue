@@ -36,6 +36,59 @@
     <LismContainer bd is-wrapper="l" p="20">
       <LismBox :p="[10, 30]">このBOXは、paddingが切り替わります。</LismBox>
     </LismContainer>
+
+    <!-- LismIcon の使用例 -->
+    <Lism p="40" my="40" bd>
+      <LismHeading lv="2" mb="30">LismIcon Samples</LismHeading>
+      
+      <LismCluster g="30">
+        <!-- プリセットアイコン -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Preset icons</LismText>
+          <LismCluster g="15" fz="3xl">
+            <LismIcon icon="menu" />
+            <LismIcon icon="home" c="blue" />
+            <LismIcon icon="warning" c="red" />
+            <LismIcon icon="check-circle" c="green" />
+            <LismIcon icon="gear" hov="zoom" />
+          </LismCluster>
+        </LismBox>
+
+        <!-- サイズとカラー -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Sizes & Colors</LismText>
+          <LismCluster g="20" ai="center">
+            <LismIcon icon="heart" size="1em" c="red-3" />
+            <LismIcon icon="heart" size="1.5em" c="red-5" />
+            <LismIcon icon="heart" size="2em" c="red-7" />
+            <LismIcon icon="heart" size="3em" c="red" />
+          </LismCluster>
+        </LismBox>
+
+        <!-- ラベル付き（アクセシブル） -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">With Label (aria-label)</LismText>
+          <LismIcon icon="chat" label="チャットを開く" fz="3xl" hov="o" cursor="pointer" />
+        </LismBox>
+
+        <!-- スロットによるSVG直接記述 -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Custom SVG (Slot)</LismText>
+          <LismIcon viewBox="0 0 256 256" fz="4xl" c="orange">
+            <circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="16" />
+            <circle cx="92" cy="108" r="12" />
+            <circle cx="164" cy="108" r="12" />
+            <path d="M169.6,176a48,48,0,0,1-83.2,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+          </LismIcon>
+        </LismBox>
+
+        <!-- 画像をアイコンとして使用 -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Image as Icon</LismText>
+          <LismIcon src="https://picsum.photos/id/64/100/100" fz="4xl" bdrs="full" />
+        </LismBox>
+      </LismCluster>
+    </Lism>
     <LismFlex g="10">
       <LismBox bgc="base-2">aaa</LismBox>
       <LismBox bgc="base-2">aaa</LismBox>
