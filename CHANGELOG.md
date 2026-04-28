@@ -1,6 +1,47 @@
 # Changelog
 
 
+## lism-ui-vue@v0.1.2-alpha.10
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.5...lism-ui-vue@v0.1.2-alpha.10)
+
+### 🚀 Enhancements
+
+- **Rename:** CoreAdapterのSTATESをTRAITSにリネーム ([6f338e2](https://github.com/otusoa/lism-ui-vue/commit/6f338e2))
+- **Props:** Atomicとutilを追加し、型を変更、そしてAdapterでatomicとutilを解析対象に入れる ([c02aba7](https://github.com/otusoa/lism-ui-vue/commit/c02aba7))
+- **Divider:** Dividerを追加し、軽微な修正 ([fad5d9d](https://github.com/otusoa/lism-ui-vue/commit/fad5d9d))
+- **spacer:** Spacerを追加 ([0c18664](https://github.com/otusoa/lism-ui-vue/commit/0c18664))
+- **Iconコンポーネント:** Iconを追加 ([7807349](https://github.com/otusoa/lism-ui-vue/commit/7807349))
+
+### 🩹 Fixes
+
+- **Core:** PrimitiveClassで帰ってくるのをclassで受け止めるようにし、ホバー周りのバグを直した。 testの追加 ([f5a9d0f](https://github.com/otusoa/lism-ui-vue/commit/f5a9d0f))
+- **UI:** DummyUIコンポーネントが壊れていたため修正 ([6788004](https://github.com/otusoa/lism-ui-vue/commit/6788004))
+- バグを修正 ([07bb694](https://github.com/otusoa/lism-ui-vue/commit/07bb694))
+
+### 💅 Refactors
+
+- **Lismコンポーネント,Core:** LismClassとvariantの存在を抹消 ([9269ea4](https://github.com/otusoa/lism-ui-vue/commit/9269ea4))
+- **components:** 新しいバージョンの名称に合わせ、リネームリファクタリング ([dd58e2d](https://github.com/otusoa/lism-ui-vue/commit/dd58e2d))
+- **test, types:** 型を整理、アダプターのクラスを修正 ([8b633e8](https://github.com/otusoa/lism-ui-vue/commit/8b633e8))
+- **コンポーネント:** 書き方の揺れを統一 ([abab33b](https://github.com/otusoa/lism-ui-vue/commit/abab33b))
+
+### 🌊 Types
+
+- **core:** 変更に合わせ、型(Props)の名前をリネーム ([18e55f5](https://github.com/otusoa/lism-ui-vue/commit/18e55f5))
+- **core:** 本家のほうでだいぶ前から消された、tagを削除 ([3a59d6a](https://github.com/otusoa/lism-ui-vue/commit/3a59d6a))
+- **core:** 仕様に沿っていない型を削除 ([bebb578](https://github.com/otusoa/lism-ui-vue/commit/bebb578))
+
+### ✅ Tests
+
+- テストを仕様変更に合わせて変更、LinkBoxをリネーム ([5f018a0](https://github.com/otusoa/lism-ui-vue/commit/5f018a0))
+- **Core,DummyUI:** テストファイルを変更した仕様に沿って変更 ([bfddcd9](https://github.com/otusoa/lism-ui-vue/commit/bfddcd9))
+- **fix:** Class名が違ったので、テストファイルの整合性を取った ([2ecfbcd](https://github.com/otusoa/lism-ui-vue/commit/2ecfbcd))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## lism-ui-vue@v0.1.2-alpha.9
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.8...lism-ui-vue@v0.1.2-alpha.9)
