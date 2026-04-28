@@ -10,14 +10,14 @@ describe('LismBox component', () => {
 
   it('should render as different tag', () => {
     const wrapper = mount(LismBox, {
-      props: { tag: 'section' }
+      props: { as: 'section' },
     })
     expect(wrapper.element.tagName.toLowerCase()).toBe('section')
   })
 
   it('should apply lism props', () => {
     const wrapper = mount(LismBox, {
-      props: { p: '20', bgc: 'brand' }
+      props: { p: '20', bgc: 'brand' },
     })
     expect(wrapper.classes()).toContain('-p:20')
     expect(wrapper.classes()).toContain('-bgc:brand')
@@ -26,8 +26,8 @@ describe('LismBox component', () => {
   it('should render slot content', () => {
     const wrapper = mount(LismBox, {
       slots: {
-        default: 'Box Content'
-      }
+        default: 'Box Content',
+      },
     })
     expect(wrapper.text()).toBe('Box Content')
   })

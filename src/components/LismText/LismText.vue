@@ -9,13 +9,13 @@ interface Props extends /* @vue-ignore */ LismCoreBaseProps {
 }
 
 type PropsBase = /* @vue-ignore */ LismCoreBaseProps
-defineProps<Props & PropsBase>()
+const props = defineProps<Props & PropsBase>()
 
 defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-  <Lism v-bind="$attrs" :as="$props.as ?? 'p'">
+  <Lism v-bind="{ ...props, ...$attrs }" :as="props.as ?? 'p'">
     <slot />
   </Lism>
 </template>

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Lism } from '../Lism'
+import Lism from '../Lism/Lism.vue'
 import type { LismBaseProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LismBaseProps
+interface Props extends /* @vue-ignore */ LismBaseProps {
+  as?: LismBaseProps['as']
+}
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism v-bind="{ ...props, ...$attrs }" layout="box">
+  <Lism v-bind="{ ...props, ...$attrs }" atomic="spacer" aria-hidden="true">
     <slot />
   </Lism>
 </template>
-
-<style scoped></style>

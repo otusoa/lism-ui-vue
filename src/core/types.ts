@@ -1,19 +1,20 @@
 import type { PropValueTypes } from 'lism-css/lib/types/PropValueTypes'
+import type { AtomicProps } from 'lism-css/lib/types/AtomicProps'
 import type { Component } from 'vue'
-import type { StateProps, SetPropValue } from 'lism-css/lib/types/StateProps'
+import type { TraitProps, SetPropValue, UtilPropValue } from 'lism-css/lib/types/TraitProps'
 import type {
   LayoutProps,
-  SideMainProps,
   FlexProps,
+  WithSideProps,
   StackProps,
   GridLayoutProps,
   ClusterProps,
   FrameProps,
   BoxProps,
   FlowLayoutProps,
-  FluidColsProps,
+  AutoColumnsProps,
   ColumnsProps,
-  SwitchColsProps,
+  SwitchColumnsProps,
   TileGridProps,
 } from 'lism-css/lib/types/LayoutProps'
 import type {
@@ -26,7 +27,7 @@ import type {
 } from 'lism-css/lib/types/allowedTags'
 
 export type {
-  SideMainProps,
+  WithSideProps,
   FlexProps,
   StackProps,
   GridLayoutProps,
@@ -34,9 +35,9 @@ export type {
   FrameProps,
   BoxProps,
   FlowLayoutProps,
-  FluidColsProps,
+  AutoColumnsProps,
   ColumnsProps,
-  SwitchColsProps,
+  SwitchColumnsProps,
   TextAllowedTag,
   InlineAllowedTag,
   GroupAllowedTag,
@@ -56,11 +57,11 @@ export type FlowValue = 's' | 'l' | ((string & {}) | number)
  * LismCSS本家からインポートされた純粋なスタイリング・レイアウト用の基底プロパティ型
  * HTMLレンダリングに関連する属性（'as', 'tag' など）は含まれません。
  */
-export type LismCoreBaseProps = Partial<PropValueTypes & StateProps & LayoutProps>
+export type LismCoreBaseProps = Partial<PropValueTypes & TraitProps & LayoutProps>
 
 /**
  * LismCSSで用意されている標準のプロパティをまとめた型
- * 現在は LismCoreBaseProps へのエイリアスとして利用されています。
+ * @deprecated Beta版で廃止予定。 LismCoreBaseProps を使用してください。
  */
 export type LismCoreProps = LismCoreBaseProps
 
@@ -68,19 +69,11 @@ export type LismCoreProps = LismCoreBaseProps
  * プロジェクト内のほぼすべてのコンポーネント（LismBoxやLismCenterなど）のベースとなる型
  * スタイリング・レイアウトプロパティに加え、Vueでレンダリングするタグの指定などを含みます。
  */
-export type LismBaseProps = LismCoreProps & {
-  /**
-   * レンダリングするHTML要素を指定します。'as' よりも優先して適用されます。
-   */
-  tag?: keyof HTMLElementTagNameMap | (string & {})
+export type LismBaseProps = LismCoreBaseProps & {
   /**
    * レンダリングするコンポーネントまたはHTML要素を指定します。
    */
   as?: keyof HTMLElementTagNameMap | (string & {}) | Component
-  /**
-   * LismCSSのバリアントクラスを指定します。
-   */
-  variant?: string
   /**
    * ホバー時のスタイルを指定します。
    * 文字列でカンマ区切りのクラス指定、またはオブジェクト形式での指定が可能です。
@@ -112,14 +105,6 @@ export type LismBaseProps = LismCoreProps & {
         [key: string]: unknown
       })
   /**
-   * インラインスタイルを追加で指定します。
-   */
-  css?: string | Record<string, string | number>
-  /**
-   * 独自のLismクラス（プレフィックス等を持つクラス）を追加で指定します。
-   */
-  lismClass?: string
-  /**
    * LismCSSの 'set--' クラスを適用するためのプロパティです。
    */
   set?: SetPropValue
@@ -127,6 +112,14 @@ export type LismBaseProps = LismCoreProps & {
    * LismCSSの 'set--' クラスを解除、または負の値をセットするためのプロパティです。
    */
   unset?: SetPropValue
+  /**
+   * Lism CSSのユーティリティプロパティ（破線、シェイプなど）Utility Class - スタイル・装飾をまとめてセットするようなクラスを分類しています。
+   */
+  util?: UtilPropValue
+  /**
+   * Lism CSSのプロパティ（Atomic Props）
+   */
+  atomic?: AtomicProps['atomic']
   /**
    * Lism CSSの解析を通さずに直接要素に流し込むための拡張プロパティです。
    */
@@ -143,11 +136,7 @@ export type LismProps = LismBaseProps & {
 /**
  * LismUiDummy コンポーネント用のプロパティ型
  */
-export type DummyProps = {
-  /** レンダリングするコンポーネントまたは要素 */
-  as?: string | object
-  /** レンダリングするHTML要素 */
-  tag?: string
+export type LismDummyProps = LismBaseProps & {
   /** 画像のソースURL（asがimgなどの場合に使用） */
   src?: string
   /** コンテンツの幅 */
@@ -205,7 +194,7 @@ export type LinkProps = LismBaseProps & {
  * LismLinkBox コンポーネント用のプロパティ型。
  * LinkProps を継承し、ボックス全体をリンクにするための設定を含みます。
  */
-export type LinkBoxProps = LinkProps
+export type BoxLinkProps = LinkProps
 
 /**
  * LismList コンポーネント用のプロパティ型。
@@ -245,6 +234,23 @@ export type HeadingProps = LismBaseProps & {
  */
 export type DecoratorProps = {
   size?: string
-  clipPath?: string
-  boxSizing?: string
+}
+
+/**
+ * LismIcon コンポーネント用のプロパティ型。
+ * icon, size, label などのアイコン固有のプロパティを含みます。
+ */
+export type IconProps = LismBaseProps & {
+  /**
+   * アイコンを指定します。文字列（プリセット名）またはオブジェクト（{as, ...exProps}）が指定可能です。
+   */
+  icon?: string | ({ as: string } & Record<string, unknown>)
+  /**
+   * アイコンのサイズを指定します。
+   */
+  size?: string | number
+  /**
+   * aria-label として出力されます。指定がある場合 role="img" が、ない場合 aria-hidden="true" が付与されます。
+   */
+  label?: string
 }

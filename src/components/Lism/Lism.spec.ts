@@ -3,32 +3,25 @@ import { mount } from '@vue/test-utils'
 import { Lism } from './index'
 
 describe('Lism component', () => {
-  it('should render correct tag', () => {
+  it('should render correct "as"', () => {
     const wrapper = mount(Lism, {
-      props: { tag: 'section' }
+      props: { as: 'section' },
     })
     expect(wrapper.element.tagName.toLowerCase()).toBe('section')
   })
 
-  it('should render correct "as" component/tag', () => {
+  it('should render correct "as" component/as', () => {
     const wrapper = mount(Lism, {
-      props: { as: 'span' }
+      props: { as: 'span' },
     })
     expect(wrapper.element.tagName.toLowerCase()).toBe('span')
-  })
-
-  it('should prioritize "tag" over "as"', () => {
-    const wrapper = mount(Lism, {
-      props: { tag: 'h1', as: 'p' }
-    })
-    expect(wrapper.element.tagName.toLowerCase()).toBe('h1')
   })
 
   it('should render slot content', () => {
     const wrapper = mount(Lism, {
       slots: {
-        default: '<div class="child">Hello</div>'
-      }
+        default: '<div class="child">Hello</div>',
+      },
     })
     expect(wrapper.find('.child').exists()).toBe(true)
     expect(wrapper.text()).toBe('Hello')
@@ -39,8 +32,8 @@ describe('Lism component', () => {
       props: {
         p: '20',
         bgc: 'brand',
-        style: { color: 'red' }
-      }
+        style: { color: 'red' },
+      },
     })
 
     expect(wrapper.classes()).toContain('-p:20')
@@ -52,23 +45,11 @@ describe('Lism component', () => {
     const wrapper = mount(Lism, {
       attrs: {
         id: 'test-id',
-        'data-test': 'value'
-      }
+        'data-test': 'value',
+      },
     })
     expect(wrapper.attributes('id')).toBe('test-id')
     expect(wrapper.attributes('data-test')).toBe('value')
-  })
-
-  it('should handle variant prop and main class', () => {
-    // variantは lismClass と組み合わせて使用される
-    const wrapper = mount(Lism, {
-      props: {
-        lismClass: 'c--box',
-        variant: 'test'
-      }
-    })
-    expect(wrapper.classes()).toContain('c--box')
-    expect(wrapper.classes()).toContain('c--box--test')
   })
 
   it('should overwrite class and style with exProps', () => {
@@ -77,9 +58,9 @@ describe('Lism component', () => {
         p: '10',
         exProps: {
           class: 'extra-class',
-          style: { padding: '50px' }
-        }
-      }
+          style: { padding: '50px' },
+        },
+      },
     })
 
     // class should be overwritten by exProps.class

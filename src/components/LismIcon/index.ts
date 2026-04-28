@@ -1,0 +1,1 @@
+export { default as LismIcon } from './LismIcon.vue'

@@ -21,10 +21,10 @@
     <LismFrame id="test-frame" ar="16/9">
       <img src="https://example.com/test.jpg" alt="" />
     </LismFrame>
-    <LismSideMain id="test-sidemain" side-w="200px" main-w="400px" g="20">
-      <Lism is-side>Side</Lism>
+    <LismWithSide id="test-sidemain" side-w="200px" main-w="400px" g="20">
+      <Lism isSide>Side</Lism>
       <Lism>Main</Lism>
-    </LismSideMain>
+    </LismWithSide>
     <LismLayer id="test-layer" blur="5px" bgc="rgba(0,0,0,0.5)">
       Layer Content
     </LismLayer>

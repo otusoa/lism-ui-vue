@@ -2,8 +2,9 @@
 /**
  * @file LismプロパティをVue.jsに適合させるためのアダプター
  */
-import { STATES, PROPS } from 'lism-css/config'
+import { TRAITS, PROPS } from 'lism-css/config'
 import getLayoutProps from 'lism-css/lib/getLayoutProps'
+import getAtomicProps from 'lism-css/lib/getAtomicProps'
 import isPresetValue from 'lism-css/lib/isPresetValue'
 import isTokenValue from 'lism-css/lib/isTokenValue'
 import getUtilKey from 'lism-css/lib/getUtilKey'
@@ -11,6 +12,7 @@ import getMaybeCssVar from 'lism-css/lib/getMaybeCssVar'
 import getBpData from 'lism-css/lib/getBpData'
 import splitWithComma from 'lism-css/lib/helper/splitWithComma'
 import type { LismProps } from './types'
+import type { AtomicProps } from 'lism-css/lib/types/AtomicProps'
 
 // isEmptyObj / filterEmptyObj の簡易実装
 const isEmptyObj = (obj: Record<string, unknown>) => Object.keys(obj).length === 0
@@ -48,8 +50,8 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   }
 
   // Vue テンプレートでは kebab-case (is-container) で属性を記述するが、
-  // STATES/PROPS のキーは camelCase (isContainer) であるため変換が必要。
-  // ハイフンを含むキーのうち、camelCase に変換すると STATES または PROPS に一致するものだけを変換する。
+  // TRAITS/PROPS のキーは camelCase (isContainer) であるため変換が必要。
+  // ハイフンを含むキーのうち、camelCase に変換すると TRAITS または PROPS に一致するものだけを変換する。
   const normalizedInput: Record<string, unknown> = {}
   for (const [key, value] of Object.entries(inputProps)) {
     if (key.startsWith('data-') || key.startsWith('aria-')) {
@@ -57,9 +59,12 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       continue
     }
 
-    // 1. そのままのキーで PROPS または STATES に存在するか確認
+    // 1. そのままのキーで PROPS または TRAITS に存在するか確認
     // LismCSS の PROPS には 'max-w' や 'min-w' などケバブケースのキーが含まれているため。
-    if (Object.prototype.hasOwnProperty.call(PROPS, key) || Object.prototype.hasOwnProperty.call(STATES, key)) {
+    if (
+      Object.prototype.hasOwnProperty.call(PROPS, key) ||
+      Object.prototype.hasOwnProperty.call(TRAITS, key)
+    ) {
       normalizedInput[key] = value
     } else if (key.includes('-')) {
       // 2. 存在しない場合でハイフンを含むなら、camelCase に変換 (is-container -> isContainer, side-w -> sideW 等)
@@ -70,15 +75,19 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     }
   }
 
-  const { layout, ...restInput } = normalizedInput as { layout?: string } & Record<string, unknown>
-  const props = getLayoutProps(
-    layout as Parameters<typeof getLayoutProps>[0],
-    restInput
-  ) as Record<string, unknown> & {
+  const { layout, atomic, ...restInput } = normalizedInput as {
+    layout?: string
+    atomic?: AtomicProps['atomic']
+  } & Record<string, unknown>
+
+  const atomicParsed = getAtomicProps(atomic, restInput)
+
+  const props = getLayoutProps(layout as Parameters<typeof getLayoutProps>[0], atomicParsed) as Record<
+    string,
+    unknown
+  > & {
     class?: string
     className?: string
-    lismClass?: string
-    variant?: string
     style?: string | Record<string, unknown> | unknown[]
     _propConfig?: Record<string, unknown>
   }
@@ -88,26 +97,19 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   const styles: Record<string, string | number> = {}
   const attrs: Record<string, unknown> = {}
 
-  // baseクラスの生成 (lismClassとvariant)
+  // baseクラスの生成
   const baseClasses: string[] = []
-  if (props.class) baseClasses.push(props.class as string)
-  if (props.className) baseClasses.push(props.className as string)
-
-  let mainClass = (props.lismClass as string) || ''
-  if (props.variant && mainClass) {
-    const arr = mainClass.split(' ')
-    const first = arr[0]
-    const variantClass = `${first}--${props.variant}`
-    mainClass = [first, variantClass, ...arr.slice(1)].join(' ')
-  }
-  if (mainClass) {
-    mainClass.split(' ').filter(Boolean).forEach(c => baseClasses.push(c))
-  }
+  if (props.class) baseClasses.push(...(Array.isArray(props.class) ? props.class : [props.class]))
+  if (props.className)
+    baseClasses.push(...(Array.isArray(props.className) ? props.className : [props.className]))
+  if (props.primitiveClass)
+    baseClasses.push(
+      ...(Array.isArray(props.primitiveClass) ? props.primitiveClass : [props.primitiveClass]),
+    )
 
   delete props.class
   delete props.className
-  delete props.lismClass
-  delete props.variant
+  delete props.primitiveClass
 
   // _propConfig や style などの抽出
   const inlineStyle = (props.style as Record<string, unknown>) || {}
@@ -231,7 +233,9 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           splitWithComma(v).forEach((c: string) => addUtil(`-hov:${c}`))
         } else if (typeof v === 'string' || typeof v === 'number') {
           const finalV = getMaybeCssVar(v, getTokenKey(k))
-          addUtil(`-hov:${k}`)
+          // PROPS に含まれるキー（bxsh, c, bgc 等）の場合は -hov:-bxsh のようにダッシュを付与する
+          const isProp = Object.prototype.hasOwnProperty.call(PROPS, k)
+          addUtil(`-hov:${isProp ? '-' : ''}${k}`)
           addStyle(`--hov-${k}`, finalV)
         }
       })
@@ -255,14 +259,14 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   Object.keys(props).forEach((key) => {
     const rawVal = props[key]
     if (rawVal === undefined) return
-    
+
     // Vue の場合、`<Lism bd>` のようなフラグ属性は `""` (空文字) として `$attrs` に渡るが、
     // js実装側では `true` として扱う仕様のため変換。
     // target外の純粋な HTML 属性等は `rawVal` を使用して元の `""` を反映させる。
     const val = rawVal === '' ? true : rawVal
 
-    if (Object.prototype.hasOwnProperty.call(STATES, key)) {
-      const stateConfig = (STATES as Record<string, unknown>)[key]
+    if (Object.prototype.hasOwnProperty.call(TRAITS, key)) {
+      const stateConfig = (TRAITS as Record<string, unknown>)[key]
       if (typeof stateConfig === 'string') {
         if (val) lismState.push(stateConfig)
       } else {
@@ -284,18 +288,18 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           setAttrs(key, bpData[bp], config, bp)
         })
       }
-    } else if (key === 'set' || key === 'unset') {
-      const prefix = `${key}--`
+    } else if (key === 'set' || key === 'unset' || key === 'util') {
+      const prefix = key === 'util' ? 'u--' : `${key}--`
       if (Array.isArray(val)) {
         val.forEach((v) => {
-          if (v) lismState.push(`${prefix}${v}`)
+          if (v) (key === 'util' ? uClasses : lismState).push(`${prefix}${v}`)
         })
       } else if (typeof val === 'string') {
         val
           .split(' ')
           .filter(Boolean)
           .forEach((v) => {
-            lismState.push(`${prefix}${v}`)
+            ; (key === 'util' ? uClasses : lismState).push(`${prefix}${v}`)
           })
       }
     } else if (FILTERS.includes(key)) {

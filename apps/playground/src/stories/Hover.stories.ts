@@ -14,13 +14,13 @@ export const Basic: StoryObj = {
     components: { LismBox, LismStack },
     template: `
       <LismStack g="20">
-        <LismBox p="30" bgc="base-2" hov="o" setTransition>
+        <LismBox p="30" bgc="base-2" hov="o" has-transition>
           Hover me (hov="o")
         </LismBox>
-        <LismBox p="30" bgc="base-2" :hov="{ bgc: 'brand', c: 'white' }" setTransition>
+        <LismBox p="30" bgc="base-2" :hov="{ bgc: 'brand', c: 'white' }" has-transition>
           Hover me (Object: brand bgc)
         </LismBox>
-        <LismBox p="30" bd="-" :hov="{ bdc: 'accent', bdw: '2px' }" setTransition>
+        <LismBox p="30" bd="-" :hov="{ bdc: 'accent', bdw: '2px' }" has-transition>
           Hover me (Border changes)
         </LismBox>
       </LismStack>

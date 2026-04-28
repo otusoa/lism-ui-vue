@@ -82,7 +82,7 @@ const escapeHtml = (value: string): string => {
 }
 
 export interface GetContentOptions {
-  tag?: string
+  as?: string
   pre?: string
   length?: string
   lang?: Lang
@@ -93,7 +93,7 @@ export interface GetContentOptions {
  * ダミーテキストを生成するロジック（LismCSSの本家ロジックをVue/TS向けに移植）
  */
 export function getContent({
-  tag = 'p',
+  as = 'p',
   pre = '',
   length = 'm',
   lang = 'en',
@@ -103,8 +103,8 @@ export function getContent({
   let content = langTexts?.[length] || langTexts?.['s'] || ''
   const safePre = escapeHtml(pre)
 
-  const normalizedTag = tag?.toString().toLowerCase()
-  const isList = normalizedTag === 'ul' || normalizedTag === 'ol'
+  const normalizedAs = as?.toString().toLowerCase()
+  const isList = normalizedAs === 'ul' || normalizedAs === 'ol'
 
   if (isList) {
     // リスト形式の場合は全テキストを分割して <li> に変換

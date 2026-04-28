@@ -3,9 +3,9 @@ import { mount } from '@vue/test-utils'
 import { LismLinkBox } from './index'
 
 describe('LismLinkBox component', () => {
-  it('should render with class "is--linkBox"', () => {
+  it('should render with class "is--boxLink"', () => {
     const wrapper = mount(LismLinkBox)
-    expect(wrapper.classes()).toContain('is--linkBox')
+    expect(wrapper.classes()).toContain('is--boxLink')
   })
 
   it('should render as div by default', () => {
@@ -15,7 +15,7 @@ describe('LismLinkBox component', () => {
 
   it('should render as a tag when href is provided', () => {
     const wrapper = mount(LismLinkBox, {
-      props: { href: '#' }
+      props: { href: '#' },
     })
     expect(wrapper.element.tagName.toLowerCase()).toBe('a')
     expect(wrapper.attributes('href')).toBe('#')
@@ -23,7 +23,7 @@ describe('LismLinkBox component', () => {
 
   it('should render as different tag via props', () => {
     const wrapper = mount(LismLinkBox, {
-      props: { tag: 'article' }
+      props: { as: 'article' },
     })
     expect(wrapper.element.tagName.toLowerCase()).toBe('article')
   })
@@ -31,8 +31,8 @@ describe('LismLinkBox component', () => {
   it('should render slot content', () => {
     const wrapper = mount(LismLinkBox, {
       slots: {
-        default: 'LinkBox Content'
-      }
+        default: 'LinkBox Content',
+      },
     })
     expect(wrapper.text()).toBe('LinkBox Content')
   })

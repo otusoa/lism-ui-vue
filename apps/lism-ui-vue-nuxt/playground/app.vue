@@ -12,31 +12,20 @@
     </LismBox>
 
     <Lism bre fz="5xl">Vitest</Lism>
+    <Lism util="-cbox" keycolor="blue" p="20">
+      <p>Lorem ipsum dolor <i>sit amet</i>. consectetur <a href="###">adipisicing elit</a>, sed do eiusmod tempor. Non
+        facere <code>Laudantium</code> ex eos <b>doloribus aut dolore</b> nisi provident.</p>
+    </Lism>
+    <Lism atomic="divider"></Lism>
 
-    <!-- ホバーしたらシャドー -->
-    <LismLinkBox href="#" set="transition" bxsh="10" :hov="{ bxsh: '40' }" bd p="20">
-      <p>LinkBox</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </LismLinkBox>
-
-    <LismBox set="transition" :hov="{ o: '0.5', c: 'red' }" bgc="base-2" bd p="20" my="20">
-      <p>LinkBox</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </LismBox>
-
-    <LismLinkBox my="20" set="transition">
-      <LismGroup fz="xl" fw="bold">
-        <LismLink class="u--expandedLink" href="#linkbox-demo02"> Heading link text </LismLink>
-      </LismGroup>
-      <LismText c="text-2" lh="s" my="15">
-        Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor Incididunt
-        ut. Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut.
+    <!-- ホバーでシャドウが変化するボックスの実装例 -->
+    <LismBox bgc="base" p="30" bdrs="20" bd bxsh="10" has-transition :hov="{ bxsh: '40' }" my="40">
+      <LismHeading lv="3" mb="15">Hover Shadow Box</LismHeading>
+      <LismText c="text-2">
+        マウスをホバーすると <code>bxsh</code>（box-shadow）トークンが切り替わります。
+        <code>has-transition</code> を指定することで、影の変化が滑らかになります。
       </LismText>
-      <LismGroup id="inner-link02" my="10">
-        <a href="#inner-link02" class="-hov:o"> Inner Link </a>
-      </LismGroup>
-    </LismLinkBox>
+    </LismBox>
 
     <LismStack layout="box" bgc="base-2" g="20" p="30" bdrs="10">
       <LismBox>aaa</LismBox>
@@ -44,23 +33,76 @@
       <LismBox>aaa</LismBox>
     </LismStack>
 
-    <LismContainer bd size="s" is-wrapper="l" p="20">
+    <LismContainer bd is-wrapper="l" p="20">
       <LismBox :p="[10, 30]">このBOXは、paddingが切り替わります。</LismBox>
     </LismContainer>
+
+    <!-- LismIcon の使用例 -->
+    <Lism p="40" my="40" bd>
+      <LismHeading lv="2" mb="30">LismIcon Samples</LismHeading>
+      
+      <LismCluster g="30">
+        <!-- プリセットアイコン -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Preset icons</LismText>
+          <LismCluster g="15" fz="3xl">
+            <LismIcon icon="menu" />
+            <LismIcon icon="home" c="blue" />
+            <LismIcon icon="warning" c="red" />
+            <LismIcon icon="check-circle" c="green" />
+            <LismIcon icon="gear" hov="zoom" />
+          </LismCluster>
+        </LismBox>
+
+        <!-- サイズとカラー -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Sizes & Colors</LismText>
+          <LismCluster g="20" ai="center">
+            <LismIcon icon="heart" size="1em" c="red-3" />
+            <LismIcon icon="heart" size="1.5em" c="red-5" />
+            <LismIcon icon="heart" size="2em" c="red-7" />
+            <LismIcon icon="heart" size="3em" c="red" />
+          </LismCluster>
+        </LismBox>
+
+        <!-- ラベル付き（アクセシブル） -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">With Label (aria-label)</LismText>
+          <LismIcon icon="chat" label="チャットを開く" fz="3xl" hov="o" cursor="pointer" />
+        </LismBox>
+
+        <!-- スロットによるSVG直接記述 -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Custom SVG (Slot)</LismText>
+          <LismIcon viewBox="0 0 256 256" fz="4xl" c="orange">
+            <circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="16" />
+            <circle cx="92" cy="108" r="12" />
+            <circle cx="164" cy="108" r="12" />
+            <path d="M169.6,176a48,48,0,0,1-83.2,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+          </LismIcon>
+        </LismBox>
+
+        <!-- 画像をアイコンとして使用 -->
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">Image as Icon</LismText>
+          <LismIcon src="https://picsum.photos/id/64/100/100" fz="4xl" bdrs="full" />
+        </LismBox>
+      </LismCluster>
+    </Lism>
     <LismFlex g="10">
       <LismBox bgc="base-2">aaa</LismBox>
       <LismBox bgc="base-2">aaa</LismBox>
       <LismBox bgc="base-2">aaa</LismBox>
     </LismFlex>
 
-    <LismSideMain sideW="12rem" mainW="20rem" g="20">
+    <LismWithSide sideW="12rem" mainW="20rem" g="20">
       <LismBox layout="box" p="15" bd bdc="blue">
         <p>Main Content</p>
       </LismBox>
       <LismBox isSide p="15" bd bdc="red">
         <p>Side Content</p>
       </LismBox>
-    </LismSideMain>
+    </LismWithSide>
 
     <LismCenter>
       <LismBox>あああ</LismBox>
@@ -79,11 +121,11 @@
       <LismBox>aaa</LismBox>
     </LismFlow>
 
-    <LismFluidCols auto-fill cols="240px" g="20" my="50">
+    <LismAutoColumns auto-fill cols="240px" g="20" my="50">
       <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
-    </LismFluidCols>
+    </LismAutoColumns>
 
     <LismTileGrid cols="3" rows="3" g="5" min-h="50svh" my="50">
       <LismBox p="20" bgc="base-2"> item1 </LismBox>
@@ -113,11 +155,11 @@
       <LismBox bgc="base-2" p="20"> Box6 </LismBox>
     </LismColumns>
 
-    <LismSwitchCols break-size="">
+    <LismSwitchColumns break-size="">
       <LismBox m p="30" bgc="base-2" bd>Card 1</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
-    </LismSwitchCols>
+    </LismSwitchColumns>
 
     <pre><code>{{ useTest().message }}</code></pre>
 
@@ -128,13 +170,8 @@
     <Lism :hov="{ bxsh: '10' }" p="20" bgc="base-2" bdrs="10"> ホバー</Lism>
 
     <LismFrame as="figure" ar="2/1" pos="rel">
-      <LismMedia
-        src="https://cdn.lism-css.com/img/a-1.jpg"
-        width="960"
-        height="640"
-        style="filter: contrast(1.1) saturate(0.2)"
-        alt="Dummy Image"
-      />
+      <LismMedia src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
+        style="filter: contrast(1.1) saturate(0.2)" alt="Dummy Image" />
       <Lism as="figcaption" pos="abs" z="1" b="0" p="5" w="100%" c="white" ta="center" lts="l">
         Lorem ipsum text.
       </Lism>
@@ -180,6 +217,14 @@
       <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-x-s bd-y-s bdc="current" />
       <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-x-e bd-y-e bdc="current" />
     </LismBox>
+
+    <LismStack g="20">
+      <LismBox p="30" bgc="base-2"
+        :hov="{ bgc: 'accent', c: 'white', duration: '1s', easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }"
+        setTransition>
+        Slow & Bouncy (1s duration)
+      </LismBox>
+    </LismStack>
   </Lism>
 </template>
 
