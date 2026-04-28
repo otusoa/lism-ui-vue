@@ -3,7 +3,7 @@ import { LismDivider } from '../../../../src/components'
 import LismBox from '@/components/LismBox/LismBox.vue'
 import LismFlex from '@/components/LismFlex/LismFlex.vue'
 
-const meta = {
+const meta: Meta<typeof LismDivider> = {
   title: 'Components/Atomic/LismDivider',
   component: LismDivider,
   tags: ['autodocs'],
@@ -13,7 +13,7 @@ const meta = {
       description: 'The HTML element or Vue component to render as.',
     },
   },
-} satisfies Meta<typeof LismDivider>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

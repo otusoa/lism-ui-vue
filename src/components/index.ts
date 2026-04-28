@@ -28,3 +28,5 @@ export * from './LismDivider'
 
 // UIコンポーネント
 export * from './LismUi/Dummy'
+
+export * from './LismSpacer'
