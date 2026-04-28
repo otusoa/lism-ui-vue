@@ -12,7 +12,7 @@
     </LismBox>
 
     <Lism bre fz="5xl">Vitest</Lism>
-    <Lism util="cbox" keycolor="blue" p="20">
+    <Lism util="-cbox" keycolor="blue" p="20">
       <p>Lorem ipsum dolor <i>sit amet</i>. consectetur <a href="###">adipisicing elit</a>, sed do eiusmod tempor. Non
         facere <code>Laudantium</code> ex eos <b>doloribus aut dolore</b> nisi provident.</p>
     </Lism>
@@ -165,7 +165,13 @@
       <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-x-e bd-y-e bdc="current" />
     </LismBox>
 
-    <Lism as=""></Lism>
+    <LismStack g="20">
+      <LismBox p="30" bgc="base-2"
+        :hov="{ bgc: 'accent', c: 'white', duration: '1s', easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }"
+        setTransition>
+        Slow & Bouncy (1s duration)
+      </LismBox>
+    </LismStack>
   </Lism>
 </template>
 
