@@ -15,7 +15,7 @@ defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-  <Lism :as="props.as || 'div'" v-bind="$attrs">
+  <Lism v-bind="{ ...props, ...$attrs }" :as="props.as || 'div'">
     <slot />
   </Lism>
 </template>

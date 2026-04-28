@@ -1,1 +1,1 @@
-export { default as LismFluidCols } from './LismAutoColumns.vue'
+export { default as LismAutoColumns } from './LismAutoColumns.vue'

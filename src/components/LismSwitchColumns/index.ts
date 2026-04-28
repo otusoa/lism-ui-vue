@@ -1,1 +1,1 @@
-export { default as LismSwitchCols } from './LismSwitchColumns.vue'
+export { default as LismSwitchColumns } from './LismSwitchColumns.vue'

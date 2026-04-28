@@ -8,13 +8,13 @@ interface Props extends /* @vue-ignore */ LismCoreBaseProps {
 }
 
 type PropsBase = /* @vue-ignore */ LismCoreBaseProps
-defineProps<Props & PropsBase>()
+const props = defineProps<Props & PropsBase>()
 
 defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-  <Lism :as="as ?? 'ul'" v-bind="$attrs">
+  <Lism v-bind="{ ...props, ...$attrs }" :as="props.as ?? 'ul'">
     <slot />
   </Lism>
 </template>

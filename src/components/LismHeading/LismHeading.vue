@@ -22,7 +22,7 @@ const componentTag = computed(() => {
 </script>
 
 <template>
-	<Lism v-bind="$attrs" :as="componentTag">
+	<Lism v-bind="{ ...props, ...$attrs }" :as="componentTag">
 		<slot />
 	</Lism>
 </template>

@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <Lism v-bind="$attrs" :as="props.as" aria-hidden="true" atomic="divider">
+  <Lism v-bind="{ ...props, ...$attrs }" :as="props.as" aria-hidden="true" atomic="divider">
     <slot />
   </Lism>
 </template>

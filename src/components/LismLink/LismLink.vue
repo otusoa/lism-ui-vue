@@ -1,16 +1,18 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { Lism } from '../Lism'
 import type { LinkProps } from '../../core/types'
 
-type Props = /* @vue-ignore */ LinkProps
+interface Props extends /* @vue-ignore */ LinkProps {
+  as?: LinkProps['as']
+  href?: LinkProps['href']
+}
 
 defineOptions({ inheritAttrs: false })
 const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism :as="props.as ?? 'a'" v-bind="$attrs">
+  <Lism v-bind="{ ...props, ...$attrs }" :as="props.as ?? 'a'">
     <slot />
   </Lism>
 </template>

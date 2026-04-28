@@ -20,7 +20,7 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism layout="withSide" :side-w="props.sideW" :main-w="props.mainW" v-bind="$attrs">
+  <Lism v-bind="{ ...props, ...$attrs }" layout="withSide">
     <slot />
   </Lism>
 </template>

@@ -13,7 +13,7 @@ defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-  <Lism :as="props.as ?? 'li'" v-bind="$attrs">
+  <Lism v-bind="{ ...props, ...$attrs }" :as="props.as ?? 'li'">
     <slot />
   </Lism>
 </template>
