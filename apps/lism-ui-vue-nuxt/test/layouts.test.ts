@@ -58,9 +58,9 @@ describe('Layout Components SSR', async () => {
     expect(html).toContain('-ar:16/9')
   })
 
-  it('renders LismSideMain with css variables', async () => {
+  it('renders LismWithSide with css variables', async () => {
     const html = await $fetch('/')
-    expect(html).toContain('l--sideMain')
+    expect(html).toContain('l--withSide')
     expect(html).toContain('--sideW:200px')
     expect(html).toContain('--mainW:400px')
   })

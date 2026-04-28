@@ -20,21 +20,21 @@ describe('getLismPropsVue', () => {
   })
 
   it('handles SideMain specific props correctly', () => {
-    // SideMain layout logic (mocked by lism-css/lib/getLayoutProps)
-    const output = getLismPropsVue({ layout: 'sideMain', sideW: '200px' } as any)
-    expect(output.class).toContain('l--sideMain')
+    // WithSide layout logic (mocked by lism-css/lib/getLayoutProps)
+    const output = getLismPropsVue({ layout: 'withSide', sideW: '200px' } as any)
+    expect(output.class).toContain('l--withSide')
     expect(output.style['--sideW']).toBe('200px')
   })
 
   it('automatically converts kebab-case layout props to camelCase', () => {
     // side-w should be converted to sideW and then to --sideW by lism-css
-    const output = getLismPropsVue({ layout: 'sideMain', 'side-w': '300px' } as any)
+    const output = getLismPropsVue({ layout: 'withSide', 'side-w': '300px' } as any)
     expect(output.style['--sideW']).toBe('300px')
   })
 
-  it('merges class and variant correctly', () => {
-    const output = getLismPropsVue({ lismClass: 'l--box', variant: 'test' })
-    expect(output.class).toContain('l--box')
-    expect(output.class).toContain('l--box--test')
+  it('merges class and set correctly', () => {
+    const output = getLismPropsVue({ className: 'c--test', set: 'test' })
+    expect(output.class).toContain('c--test')
+    expect(output.class).toContain('set--test')
   })
 })
