@@ -9,7 +9,7 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism layout="stack" v-bind="{ ...props, ...$attrs }">
+  <Lism v-bind="{ ...props, ...$attrs }" layout="stack">
     <slot />
   </Lism>
 </template>
