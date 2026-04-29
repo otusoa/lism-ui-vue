@@ -45,7 +45,8 @@
     "release:beta": "changelogen --dir . --release --bump --prerelease beta --push",
     "release:rc": "changelogen --dir . --release --bump --prerelease rc --push",
     "tag:push": "git push --follow-tags",
-    "test": "vitest"
+    "test": "vitest",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "lism-css": "^0.16.0"
@@ -66,6 +67,7 @@
     "eslint-plugin-vue": "^10.8.0",
     "jiti": "^2.6.1",
     "jsdom": "^29.0.2",
+    "lefthook": "^2.1.6",
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.44.0",
     "oxlint": "^1.59.0",

@@ -13,8 +13,8 @@ describe('Layout Components SSR', async () => {
       expect(html).toContain('l--box')
       expect(html).toContain('-p:20')
       expect(html).toContain('-bgc:base-2')
-    } catch (e: any) {
-      console.error('FETCH ERROR:', e.data || e.message)
+    } catch (e) {
+      console.error('FETCH ERROR:')
       throw e
     }
   })

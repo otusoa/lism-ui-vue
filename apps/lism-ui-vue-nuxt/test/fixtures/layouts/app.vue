@@ -22,7 +22,7 @@
       <img src="https://example.com/test.jpg" alt="" />
     </LismFrame>
     <LismWithSide id="test-sidemain" side-w="200px" main-w="400px" g="20">
-      <Lism isSide>Side</Lism>
+      <Lism is-side>Side</Lism>
       <Lism>Main</Lism>
     </LismWithSide>
     <LismLayer id="test-layer" blur="5px" bgc="rgba(0,0,0,0.5)">
