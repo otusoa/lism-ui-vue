@@ -95,11 +95,11 @@
       <LismBox bgc="base-2">aaa</LismBox>
     </LismFlex>
 
-    <LismWithSide sideW="12rem" mainW="20rem" g="20">
+    <LismWithSide side-w="12rem" main-w="20rem" g="20">
       <LismBox layout="box" p="15" bd bdc="blue">
         <p>Main Content</p>
       </LismBox>
-      <LismBox isSide p="15" bd bdc="red">
+      <LismBox is-side p="15" bd bdc="red">
         <p>Side Content</p>
       </LismBox>
     </LismWithSide>
@@ -170,7 +170,8 @@
     <Lism :hov="{ bxsh: '10' }" p="20" bgc="base-2" bdrs="10"> ホバー</Lism>
 
     <LismFrame as="figure" ar="2/1" pos="rel">
-      <LismMedia src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
+      <LismMedia
+src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
         style="filter: contrast(1.1) saturate(0.2)" alt="Dummy Image" />
       <Lism as="figcaption" pos="abs" z="1" b="0" p="5" w="100%" c="white" ta="center" lts="l">
         Lorem ipsum text.
@@ -219,9 +220,10 @@
     </LismBox>
 
     <LismStack g="20">
-      <LismBox p="30" bgc="base-2"
+      <LismBox
+p="30" bgc="base-2"
         :hov="{ bgc: 'accent', c: 'white', duration: '1s', easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }"
-        setTransition>
+        set-transition>
         Slow & Bouncy (1s duration)
       </LismBox>
     </LismStack>

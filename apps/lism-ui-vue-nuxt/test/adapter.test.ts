@@ -10,7 +10,7 @@ describe('getLismPropsVue', () => {
 
   it('handles kebab-case props automatically', () => {
     // is-container should become isContainer and map to is--container
-    const output = getLismPropsVue({ 'is-container': true } as any)
+    const output = getLismPropsVue({ 'is-container': true })
     expect(output.class).toContain('is--container')
   })
 
@@ -21,14 +21,14 @@ describe('getLismPropsVue', () => {
 
   it('handles SideMain specific props correctly', () => {
     // WithSide layout logic (mocked by lism-css/lib/getLayoutProps)
-    const output = getLismPropsVue({ layout: 'withSide', sideW: '200px' } as any)
+    const output = getLismPropsVue({ layout: 'withSide', sideW: '200px' })
     expect(output.class).toContain('l--withSide')
     expect(output.style['--sideW']).toBe('200px')
   })
 
   it('automatically converts kebab-case layout props to camelCase', () => {
     // side-w should be converted to sideW and then to --sideW by lism-css
-    const output = getLismPropsVue({ layout: 'withSide', 'side-w': '300px' } as any)
+    const output = getLismPropsVue({ layout: 'withSide', 'side-w': '300px' })
     expect(output.style['--sideW']).toBe('300px')
   })
 
