@@ -1,5 +1,5 @@
-// @ts-check
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import skipFormatting from 'eslint-config-prettier/flat'
 
 // Run `npx @eslint/config-inspector` to inspect the resolved config interactively
 export default createConfigForNuxt({
@@ -12,10 +12,11 @@ export default createConfigForNuxt({
   dirs: {
     src: ['./playground'],
   },
-}).append({
-  extends: ['prettier'],
-  rules: {
-    'vue/singleline-html-element-content-newline': 'off',
-    'vue/multiline-html-element-content-newline': 'off',
-  },
 })
+  .append(skipFormatting)
+  .append({
+    rules: {
+      'vue/singleline-html-element-content-newline': 'off',
+      'vue/multiline-html-element-content-newline': 'off',
+    },
+  })

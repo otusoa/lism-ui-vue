@@ -1,0 +1,23 @@
+# Lefthook configuration
+#
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+
+pre-commit:
+  parallel: true
+  commands:
+    # Root package checks
+    lint:root:
+      run: pnpm run lint:oxlint
+    type-check:root:
+      run: pnpm run type-check
+    test:root:
+      run: pnpm run test run
+
+    # Nuxt package checks
+    lint:nuxt:
+      run: pnpm --filter @lism-ui-vue/nuxt run lint
+    type-check:nuxt:
+      run: pnpm --filter @lism-ui-vue/nuxt run test:types
+    test:nuxt:
+      run: pnpm --filter @lism-ui-vue/nuxt run test
