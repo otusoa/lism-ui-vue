@@ -4,20 +4,31 @@ Copyright © 2026 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "vue-lism",
-	Short: "LismUI-VueのCLIです。",
-	Long:  `注意として、本家Lism CSSのlism-cliとは別物です。`,
+	Use:   "lism-ui-vue",
+	Short: "LismUI-VueのCLI",
+	Long:  "LismUI-VueのCLIです。",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		viper.SetConfigFile("lism-ui-vue.config.yaml")
+		viper.SetConfigType("yaml")
+		if err := viper.ReadInConfig(); err != nil {
+			// 設定ファイルがない場合、エラーは出さず続行
+			if _, ok := err.(viper.ConfigFileNotFoundError); ok || os.IsNotExist(err) {
+				return
+			}
+			fmt.Printf("Error reading config file: %v\n", err)
+		}
+	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {

@@ -1,10 +1,9 @@
 /*
 Copyright © 2026 NAME HERE <EMAIL ADDRESS>
-
 */
 package main
 
-import "vue-lism/cmd"
+import "lism-vue/cmd"
 
 func main() {
 	cmd.Execute()
