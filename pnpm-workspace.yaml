@@ -1,6 +1,10 @@
 packages:
   - apps/*
 
+ignoredBuiltDependencies:
+  - unrs-resolver
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
+  - lefthook
