@@ -1,0 +1,26 @@
+# Changelog
+
+
+## cli-v0.1.1-alpha.0
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.10...cli-v0.1.1-alpha.0)
+
+### 🚀 Enhancements
+
+- **lefthook:** Lefthookを追加 ([0b6002e](https://github.com/otusoa/lism-ui-vue/commit/0b6002e))
+- **go-cli:** Init機能を追加 ([cc1096c](https://github.com/otusoa/lism-ui-vue/commit/cc1096c))
+- **npm:** 配布できるようにした ([815e4e1](https://github.com/otusoa/lism-ui-vue/commit/815e4e1))
+
+### 🩹 Fixes
+
+- Lintに合わせて修正 ([30926a7](https://github.com/otusoa/lism-ui-vue/commit/30926a7))
+- コードレビューに従って修正 ([a21d9bc](https://github.com/otusoa/lism-ui-vue/commit/a21d9bc))
+
+### 🏡 Chore
+
+- **init:** GoのCLIのinitをした ([1e7f6e8](https://github.com/otusoa/lism-ui-vue/commit/1e7f6e8))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+

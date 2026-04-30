@@ -1,6 +1,6 @@
 {
   "name": "@lism-ui-vue/cli",
-  "version": "0.1.0",
+  "version": "0.1.1-alpha.0",
   "description": "LismUI VueのCLIです。なぜかGoで作成されています",
   "type": "module",
   "bin": {
