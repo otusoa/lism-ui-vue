@@ -1,5 +1,5 @@
 /*
-Copyright © 2026 NAME HERE <EMAIL ADDRESS>
+Copyright © 2026 Eita Kobayashi <eita@pitamai.com>
 */
 package cmd
 
@@ -24,7 +24,7 @@ var initCmd = &cobra.Command{
 		pkgManager, err := wizard.AskPackageManager()
 		if err != nil {
 			pterm.Error.Println(err)
-			os.Exit(0)
+			os.Exit(1)
 		}
 
 		// ウィザードの実行
@@ -67,6 +67,7 @@ var initCmd = &cobra.Command{
 		err = viper.WriteConfigAs(configName)
 		if err != nil {
 			pterm.Error.Printfln("設定ファイルの作成に失敗しました: %v", err)
+			os.Exit(1)
 			return
 		}
 

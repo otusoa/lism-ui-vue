@@ -1,5 +1,5 @@
 /*
-Copyright © 2026 NAME HERE <EMAIL ADDRESS>
+Copyright © 2026 Eita Kobayashi <eita@pitamai.com>
 */
 package cmd
 

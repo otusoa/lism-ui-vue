@@ -9,13 +9,13 @@ pre-commit:
   commands:
     # Root package checks
     lint:root:
-      glob: '{src,package.json,*.ts}/**/*'
+      glob: '{src/**/*,package.json,*.ts}'
       run: pnpm run lint:oxlint
     type-check:root:
-      glob: '{src,package.json,*.ts}/**/*'
+      glob: '{src/**/*,package.json,*.ts}'
       run: pnpm run type-check
     test:root:
-      glob: '{src,package.json,*.ts}/**/*'
+      glob: '{src/**/*,package.json,*.ts}'
       run: pnpm run test run
 
     # Nuxt package checks
@@ -42,3 +42,4 @@ pre-commit:
       root: "apps/cli/"
       glob: "apps/cli/**/*.go"
       run: go fmt ./...
+      stage_fixed: true

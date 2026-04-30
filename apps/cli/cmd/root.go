@@ -1,5 +1,5 @@
 /*
-Copyright © 2026 NAME HERE <EMAIL ADDRESS>
+Copyright © 2026 Eita Kobayashi <eita@pitamai.com>
 */
 package cmd
 
@@ -21,7 +21,7 @@ var rootCmd = &cobra.Command{
 		viper.SetConfigType("yaml")
 		if err := viper.ReadInConfig(); err != nil {
 			// 設定ファイルがない場合、エラーは出さず続行
-			if _, ok := err.(viper.ConfigFileNotFoundError); ok || os.IsNotExist(err) {
+			if os.IsNotExist(err) {
 				return
 			}
 			fmt.Printf("Error reading config file: %v\n", err)

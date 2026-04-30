@@ -2,6 +2,7 @@ package wizard
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/pterm/pterm"
 )
@@ -37,6 +38,9 @@ func RunInitWizard(packageManager string, useTemplate bool) (InitConfig, error) 
 	if err != nil {
 		return config, fmt.Errorf("ウィザードがキャンセルされました。")
 	}
+	if strings.TrimSpace(outputDir) == "" {
+		return config, fmt.Errorf("出力先ディレクトリは必須です。")
+	}
 	config.OutputDir = outputDir
 
 	return config, nil
@@ -61,6 +65,10 @@ func AskPackageManager() (string, error) {
 			Show("パッケージマネージャー名を入力してください (例: bower)")
 		if err != nil {
 			return "", fmt.Errorf("入力がキャンセルされました。")
+		}
+		custom = strings.TrimSpace(custom)
+		if custom == "" {
+			return "", fmt.Errorf("パッケージマネージャー名は必須です。")
 		}
 		return custom, nil
 	}
