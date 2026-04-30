@@ -40,8 +40,3 @@ jobs:
         run: |
           cd apps/cli
           node scripts/publish-npm.js
-
-      - name: Publish main wrapper to npm
-        run: |
-          cd apps/cli
-          npm publish --access public --provenance

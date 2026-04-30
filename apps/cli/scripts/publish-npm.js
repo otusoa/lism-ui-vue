@@ -11,6 +11,25 @@ const distDir = path.join(cliDir, 'dist');
 const mainPkgJson = JSON.parse(fs.readFileSync(path.join(cliDir, 'package.json'), 'utf-8'));
 const version = mainPkgJson.version;
 
+const getNpmTag = (pkgVersion) => {
+  const prereleaseMatch = pkgVersion.match(/-(alpha|beta|rc|next)(?:\.|$)/)
+  return prereleaseMatch ? prereleaseMatch[1] : 'latest'
+}
+
+const npmTag = getNpmTag(version)
+
+const publishPackage = (cwd, name, tag) => {
+  console.log(`Publishing ${name} with tag ${tag}...`)
+  const { status } = spawnSync('npm', ['publish', '--access', 'public', '--provenance', '--tag', tag], {
+    cwd,
+    stdio: 'inherit',
+  })
+  if (status !== 0) {
+    console.error(`Failed to publish ${name}`)
+    process.exit(1)
+  }
+}
+
 // GoのOS/Arch表記とNodeのOS/Arch表記のマッピング
 const targets = [
   { goOs: 'darwin', goArch: 'amd64', nodeOs: 'darwin', nodeArch: 'x64' },
@@ -54,12 +73,7 @@ for (const target of targets) {
   fs.writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
   // 3. 各サブパッケージを npm publish
-  console.log(`Publishing ${pkgName}...`);
-  const { status } = spawnSync('npm', ['publish', '--access', 'public', '--provenance'], {
-    cwd: pkgDir, stdio: 'inherit'
-  });
-  if (status !== 0) {
-    console.error(`Failed to publish ${pkgName}`);
-    process.exit(1);
-  }
+  publishPackage(pkgDir, pkgName, npmTag)
 }
+
+publishPackage(cliDir, '@lism-ui-vue/cli', npmTag)
