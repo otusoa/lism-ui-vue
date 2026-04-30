@@ -1,6 +1,18 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.1
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.0...cli-v0.1.1-alpha.1)
+
+### 🤖 CI
+
+- **publish:** Publishを修正 ([5c6311a](https://github.com/otusoa/lism-ui-vue/commit/5c6311a))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## cli-v0.1.1-alpha.0
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v0.1.2-alpha.10...cli-v0.1.1-alpha.0)
