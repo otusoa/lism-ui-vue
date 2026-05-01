@@ -11,15 +11,26 @@ const distDir = path.join(cliDir, 'dist')
 const mainPkgJson = JSON.parse(fs.readFileSync(path.join(cliDir, 'package.json'), 'utf-8'))
 const version = mainPkgJson.version
 
-const getNpmTag = (pkgVersion) => {
+const getNpmTag = (pkgName, pkgVersion) => {
   const prereleaseMatch = pkgVersion.match(/-(alpha|beta|rc|next)(?:\.|$)/)
-  return prereleaseMatch ? prereleaseMatch[1] : 'latest'
+  let tag = prereleaseMatch ? prereleaseMatch[1] : 'latest'
+
+  // OIDC認証を使いつつ、最新の pre-release 版を latest として扱うための調整
+  if (tag !== 'latest' && process.env.GITHUB_ACTIONS) {
+    const { stdout } = spawnSync('npm', ['view', pkgName, 'version'], { encoding: 'utf-8' });
+    const currentLatest = stdout.trim();
+    if (!currentLatest || currentLatest.match(/-(alpha|beta|rc|next)(?:\.|$)/)) {
+      console.log(`Promoting ${tag} to 'latest' for ${pkgName} to satisfy OIDC publishing requirements.`);
+      tag = 'latest';
+    }
+  }
+
+  return tag
 }
 
-const npmTag = getNpmTag(version)
-
-const publishPackage = (cwd, name, tag) => {
-  console.log(`Publishing ${name} with tag ${tag}...`)
+const publishPackage = (cwd, name, version) => {
+  const tag = getNpmTag(name, version)
+  console.log(`Publishing ${name}@${version} with tag ${tag}...`)
 
   const args = ['publish', '--access', 'public', '--tag', tag]
   if (process.env.GITHUB_ACTIONS) {
@@ -32,7 +43,7 @@ const publishPackage = (cwd, name, tag) => {
   })
   if (status !== 0) {
     console.error(`Failed to publish ${name}`)
-    process.exit(1)
+    process.exit(1);
   }
 }
 
@@ -83,7 +94,7 @@ for (const target of targets) {
   fs.writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify(pkgJson, null, 2))
 
   // 3. 各サブパッケージを npm publish
-  publishPackage(pkgDir, pkgName, npmTag)
+  publishPackage(pkgDir, pkgName, version)
 }
 
-publishPackage(cliDir, '@lism-ui-vue/cli', npmTag)
+publishPackage(cliDir, '@lism-ui-vue/cli', version)
