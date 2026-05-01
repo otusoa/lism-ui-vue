@@ -1,6 +1,22 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.2
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.1...cli-v0.1.1-alpha.2)
+
+### 🩹 Fixes
+
+- Package.jsonに色々追加, 軽微な変更 ([94fbd37](https://github.com/otusoa/lism-ui-vue/commit/94fbd37))
+
+### 🏡 Chore
+
+- **comment:** いらないコメントを削除 ([fdd15e9](https://github.com/otusoa/lism-ui-vue/commit/fdd15e9))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## cli-v0.1.1-alpha.1
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.0...cli-v0.1.1-alpha.1)
