@@ -54,6 +54,14 @@ var checkCmd = &cobra.Command{
 				pterm.Error.Printfln("package.json の解析に失敗しました: %v", err)
 				allPassed = false
 			} else {
+				// Nuxt関連の確認
+				isNuxt := false
+				if _, ok := pkg.Dependencies["nuxt"]; ok {
+					isNuxt = true
+				} else if _, ok := pkg.DevDependencies["nuxt"]; ok {
+					isNuxt = true
+				}
+
 				// lism-ui-vue の確認
 				version, ok := pkg.Dependencies["lism-ui-vue"]
 				if !ok {
@@ -62,18 +70,13 @@ var checkCmd = &cobra.Command{
 
 				if ok {
 					pterm.Success.Printfln("lism-ui-vue がインストールされています (version: %s)", version)
+				} else if isNuxt && (pkg.Dependencies["@lism-ui-vue/nuxt"] != "" || pkg.DevDependencies["@lism-ui-vue/nuxt"] != "") {
+					pterm.Warning.Println("@lism-ui-vue/nuxt が依存関係にあるため、lism-ui-vue のチェックをスキップします(同梱されているため)。")
+					allPassed = false
 				} else {
 					pterm.Warning.Println("lism-ui-vue が依存関係に見つかりません。")
 					pterm.Info.Printfln("  実行してください: %s %s lism-ui-vue", pkgManager, installCmd)
 					allPassed = false
-				}
-
-				// Nuxt関連の確認
-				isNuxt := false
-				if _, ok := pkg.Dependencies["nuxt"]; ok {
-					isNuxt = true
-				} else if _, ok := pkg.DevDependencies["nuxt"]; ok {
-					isNuxt = true
 				}
 
 				if isNuxt {
@@ -103,13 +106,13 @@ var checkCmd = &cobra.Command{
 			pterm.Success.Println("lism-ui-vue.config.yaml が見つかりました。")
 		} else {
 			pterm.Warning.Println("lism-ui-vue.config.yaml が見つかりません。")
-			pterm.Info.Println("  実行してください: lism-ui-vue init")
+			pterm.Info.Printfln("  実行してください:  %s %s init", pkgManager, installCmd)
 			allPassed = false
 		}
 
 		fmt.Println()
 		if allPassed {
-			pterm.Success.Println("すべてのチェックをパスしました! LismUI-Vueを使用する準備が整っています。")
+			pterm.Success.Println("すべてのチェックをパスしました! LismUI-Vueを使用する準備が整っています!")
 		} else {
 			pterm.Warning.Println("いくつかの項目で修正が必要です。上記のメッセージを確認してください。")
 		}
