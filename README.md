@@ -8,6 +8,7 @@
 
 - **`lism-ui-vue`**: Vue 3 用のコアコンポーネントライブラリ。
 - **`@lism-ui-vue/nuxt`**: Nuxt 4+ / 3 対応の専用モジュール。
+- **`@lism-ui-vue/cli`**: LismUI-VueのCLI。Goで書かれており、プロジェクトの初期設定などを行うことができます。
 
 ---
 
@@ -24,6 +25,32 @@ npm install lism-ui-vue
 ```bash
 npm install @lism-ui-vue/nuxt
 ```
+
+### CLI
+
+プロジェクトの初期設定や Nuxt との連携をサポートする CLI ツールを提供しています。
+
+#### グローバルにインストールする
+
+```bash
+npm install -g @lism-ui-vue/cli
+```
+
+```bash
+lism-ui-vue --help
+```
+
+#### インストールせず実行する
+
+```bash
+# プロジェクトの初期化
+npx @lism-ui-vue/cli@latest init
+
+# Nuxt プロジェクトの自動セットアップ
+npx @lism-ui-vue/cli@latest nuxt
+```
+
+詳細は [apps/cli/README.md](./apps/cli/README.md) を参照してください。
 
 ---
 
