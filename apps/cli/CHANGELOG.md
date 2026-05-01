@@ -1,6 +1,22 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.7
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.6...cli-v0.1.1-alpha.7)
+
+### 🚀 Enhancements
+
+- **checkコマンド:** チェックコマンドを追加 ([9ead5c8](https://github.com/otusoa/lism-ui-vue/commit/9ead5c8))
+
+### 🩹 Fixes
+
+- **lefthook:** Sync-optional-dependencies.jsをpreで実行 ([6a26f95](https://github.com/otusoa/lism-ui-vue/commit/6a26f95))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## cli-v0.1.1-alpha.6
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.5...cli-v0.1.1-alpha.6)
