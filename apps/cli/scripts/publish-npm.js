@@ -20,7 +20,13 @@ const npmTag = getNpmTag(version)
 
 const publishPackage = (cwd, name, tag) => {
   console.log(`Publishing ${name} with tag ${tag}...`)
-  const { status } = spawnSync('npm', ['publish', '--access', 'public', '--provenance', '--tag', tag], {
+
+  const args = ['publish', '--access', 'public', '--tag', tag];
+  if (process.env.GITHUB_ACTIONS) {
+    args.push('--provenance');
+  }
+
+  const { status } = spawnSync('npm', args, {
     cwd,
     stdio: 'inherit',
   })
@@ -66,6 +72,10 @@ for (const target of targets) {
     name: pkgName,
     version: version,
     description: `The ${target.nodeOs}-${target.nodeArch} binary for @lism-ui-vue/cli`,
+    author: mainPkgJson.author,
+    license: mainPkgJson.license,
+    repository: mainPkgJson.repository,
+    publishConfig: mainPkgJson.publishConfig,
     os: [target.nodeOs],
     cpu: [target.nodeArch],
     type: "module"
