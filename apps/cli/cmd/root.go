@@ -37,4 +37,9 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	// 呼び出し元の名前に応じて表示を変更
+	if name := os.Getenv("LISM_VUE_CLI_NAME"); name != "" {
+		rootCmd.Use = name
+	}
 }

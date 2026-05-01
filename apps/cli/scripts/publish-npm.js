@@ -37,13 +37,14 @@ const publishPackage = (cwd, name, version) => {
     args.push('--provenance')
   }
 
-  const { status } = spawnSync('npm', args, {
+  const result = spawnSync('npm', args, {
     cwd,
     stdio: 'inherit',
     shell: true,
   })
-  if (status !== 0) {
-    console.error(`Failed to publish ${name}`)
+  if (result.status !== 0) {
+    console.error(`Failed to publish ${name}`);
+    if (result.error) console.error(result.error);
     process.exit(1);
   }
 }
