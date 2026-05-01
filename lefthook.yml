@@ -43,3 +43,8 @@ pre-commit:
       glob: "apps/cli/**/*.go"
       run: go fmt ./...
       stage_fixed: true
+    sync-deps:cli:
+      root: "apps/cli/"
+      glob: "apps/cli/package.json"
+      run: node scripts/sync-optional-dependencies.js
+      stage_fixed: true

@@ -1,6 +1,38 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.6
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.5...cli-v0.1.1-alpha.6)
+
+## cli-v0.1.1-alpha.5
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.4...cli-v0.1.1-alpha.5)
+
+### 🚀 Enhancements
+
+- **CLI:** Npxやローカルからの呼び出しを区別して、コマンドの内容を変える ([8b38f8a](https://github.com/otusoa/lism-ui-vue/commit/8b38f8a))
+
+### 🩹 Fixes
+
+- Reviewに沿って修正 ([89836fc](https://github.com/otusoa/lism-ui-vue/commit/89836fc))
+
+### 📖 Documentation
+
+- **README.md:** READMEを追加 ([fbd34b5](https://github.com/otusoa/lism-ui-vue/commit/fbd34b5))
+
+### 🎨 Styles
+
+- **pkg:** 整形、ついでにnuxt.goの日本語文字を置換 ([e22125d](https://github.com/otusoa/lism-ui-vue/commit/e22125d))
+
+### 🤖 CI
+
+- **publish:** タグ付け周りを改善 ([4e87015](https://github.com/otusoa/lism-ui-vue/commit/4e87015))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## cli-v0.1.1-alpha.4
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.3...cli-v0.1.1-alpha.4)

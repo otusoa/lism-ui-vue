@@ -65,7 +65,7 @@ var nuxtCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		pterm.Success.Println("Nuxtプロジェクトの作成が完了しました。良いNuxtライフを！")
+		pterm.Success.Println("Nuxtプロジェクトの作成が完了しました。良いNuxtライフを!")
 
 		// --- 追加のセットアップ ---
 		projectPath := projectName

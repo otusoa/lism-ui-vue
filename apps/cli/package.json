@@ -1,20 +1,20 @@
 {
   "name": "@lism-ui-vue/cli",
-  "version": "0.1.1-alpha.4",
+  "version": "0.1.1-alpha.6",
   "description": "LismUI VueのCLIです。なぜかGoで作成されています",
-  "author": "Eita Kobayashi",
   "license": "MIT",
+  "author": "Eita Kobayashi",
   "repository": {
     "type": "git",
     "url": "https://github.com/otusoa/lism-ui-vue",
     "directory": "apps/cli"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
   "bin": {
     "lism-ui-vue": "wrapper.js"
+  },
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "release": "changelogen --dir . --config changelog.config.ts --release --bump --push",
@@ -25,15 +25,15 @@
     "prepack": "node scripts/sync-optional-dependencies.js",
     "publish:npm": "node scripts/publish-npm.js"
   },
-  "optionalDependencies": {
-    "@lism-ui-vue/cli-darwin-x64": "0.1.1-alpha.4",
-    "@lism-ui-vue/cli-darwin-arm64": "0.1.1-alpha.4",
-    "@lism-ui-vue/cli-linux-x64": "0.1.1-alpha.4",
-    "@lism-ui-vue/cli-linux-arm64": "0.1.1-alpha.4",
-    "@lism-ui-vue/cli-win32-x64": "0.1.1-alpha.4",
-    "@lism-ui-vue/cli-win32-arm64": "0.1.1-alpha.4"
-  },
   "devDependencies": {
     "changelogen": "^0.6.2"
+  },
+  "optionalDependencies": {
+    "@lism-ui-vue/cli-darwin-arm64": "0.1.1-alpha.6",
+    "@lism-ui-vue/cli-darwin-x64": "0.1.1-alpha.6",
+    "@lism-ui-vue/cli-linux-arm64": "0.1.1-alpha.6",
+    "@lism-ui-vue/cli-linux-x64": "0.1.1-alpha.6",
+    "@lism-ui-vue/cli-win32-arm64": "0.1.1-alpha.6",
+    "@lism-ui-vue/cli-win32-x64": "0.1.1-alpha.6"
   }
 }
