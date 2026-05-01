@@ -44,10 +44,10 @@ lism-ui-vue --help
 
 ```bash
 # プロジェクトの初期化
-npx @lism-ui-vue/cli@latest init
+npx @lism-ui-vue/cli init
 
 # Nuxt プロジェクトの自動セットアップ
-npx @lism-ui-vue/cli@latest nuxt
+npx @lism-ui-vue/cli init nuxt
 ```
 
 詳細は [apps/cli/README.md](./apps/cli/README.md) を参照してください。
