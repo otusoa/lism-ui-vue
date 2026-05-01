@@ -18,7 +18,7 @@ const getNpmTag = (pkgName, pkgVersion) => {
   // OIDC認証を使いつつ、最新の pre-release 版を latest として扱うための調整
   if (tag !== 'latest' && process.env.GITHUB_ACTIONS) {
     const { stdout } = spawnSync('npm', ['view', pkgName, 'version'], { encoding: 'utf-8', shell: true });
-    const currentLatest = stdout.trim();
+    const currentLatest = (stdout || '').trim();
     if (!currentLatest || currentLatest.match(/-(alpha|beta|rc|next)(?:\.|$)/)) {
       console.log(`Promoting ${tag} to 'latest' for ${pkgName} to satisfy OIDC publishing requirements.`);
       tag = 'latest';

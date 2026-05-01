@@ -38,7 +38,9 @@ func RunInitWizard(packageManager string, useTemplate bool) (InitConfig, error) 
 	if err != nil {
 		return config, fmt.Errorf("ウィザードがキャンセルされました。")
 	}
-	if strings.TrimSpace(outputDir) == "" {
+
+	outputDir = strings.TrimSpace(outputDir)
+	if outputDir == "" {
 		return config, fmt.Errorf("出力先ディレクトリは必須です。")
 	}
 	config.OutputDir = outputDir
