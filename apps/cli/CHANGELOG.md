@@ -1,6 +1,10 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.3
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.2...cli-v0.1.1-alpha.3)
+
 ## cli-v0.1.1-alpha.2
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.1...cli-v0.1.1-alpha.2)
