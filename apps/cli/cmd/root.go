@@ -24,7 +24,12 @@ func Execute() {
 
 func init() {
 	// 呼び出し元の名前に応じて表示を変更
-	if name := os.Getenv("LISM_VUE_CLI_NAME"); name != "" {
-		rootCmd.Use = name
+	name := os.Getenv("LISM_VUE_CLI_NAME")
+
+	if name != "" {
+		if rootCmd.Annotations == nil {
+			rootCmd.Annotations = map[string]string{}
+		}
+		rootCmd.Annotations[cobra.CommandDisplayNameAnnotation] = name
 	}
 }

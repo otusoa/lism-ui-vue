@@ -37,10 +37,8 @@ try {
 
 // 引数をそのままGoバイナリに渡し、標準入出力をターミナルに繋ぐ
 const env = { ...process.env }
-if (process.env.npm_package_name) {
-  // npx や pnpm dlx 経由の場合は、npx @scope/pkg の形式にする
-  env.LISM_VUE_CLI_NAME = `npx ${process.env.npm_package_name}`
-}
+// npx や bunx / pnpm dlx 経由の場合は、表示名を npx @scope/pkg の形式にする
+env.LISM_VUE_CLI_NAME = `npx ${process.env.npm_package_name ?? '@lism-ui-vue/cli'}`
 
 const { status, error } = spawnSync(binPath, process.argv.slice(2), {
   stdio: 'inherit',
