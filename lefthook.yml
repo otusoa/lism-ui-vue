@@ -4,20 +4,42 @@
 # https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
 
 pre-commit:
+  verbose: true
   parallel: true
   commands:
     # Root package checks
     lint:root:
+      glob: '{src/**/*,package.json,*.ts}'
       run: pnpm run lint:oxlint
     type-check:root:
+      glob: '{src/**/*,package.json,*.ts}'
       run: pnpm run type-check
     test:root:
+      glob: '{src/**/*,package.json,*.ts}'
       run: pnpm run test run
 
     # Nuxt package checks
     lint:nuxt:
+      glob: 'apps/lism-ui-vue-nuxt/**/*'
       run: pnpm --filter @lism-ui-vue/nuxt run lint
     type-check:nuxt:
+      glob: '{apps/lism-ui-vue-nuxt,src}/**/*'
       run: pnpm --filter @lism-ui-vue/nuxt run test:types
     test:nuxt:
+      glob: '{apps/lism-ui-vue-nuxt,src}/**/*'
       run: pnpm --filter @lism-ui-vue/nuxt run test
+
+    # Go CLI checks
+    lint:cli:
+      root: "apps/cli/"
+      glob: "apps/cli/**/*.{go,mod,sum}"
+      run: go vet ./...
+    test:cli:
+      root: "apps/cli/"
+      glob: "apps/cli/**/*.{go,mod,sum}"
+      run: go test ./...
+    fmt:cli:
+      root: "apps/cli/"
+      glob: "apps/cli/**/*.go"
+      run: go fmt ./...
+      stage_fixed: true
