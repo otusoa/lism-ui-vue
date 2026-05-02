@@ -108,23 +108,23 @@ importers:
         version: 0.6.2(magicast@0.5.2)
     optionalDependencies:
       '@lism-ui-vue/cli-darwin-arm64':
-        specifier: 0.1.1-alpha.7
-        version: 0.1.1-alpha.7
+        specifier: 0.1.1-alpha.8
+        version: 0.1.1-alpha.8
       '@lism-ui-vue/cli-darwin-x64':
-        specifier: 0.1.1-alpha.7
-        version: 0.1.1-alpha.7
+        specifier: 0.1.1-alpha.8
+        version: 0.1.1-alpha.8
       '@lism-ui-vue/cli-linux-arm64':
-        specifier: 0.1.1-alpha.7
-        version: 0.1.1-alpha.7
+        specifier: 0.1.1-alpha.8
+        version: 0.1.1-alpha.8
       '@lism-ui-vue/cli-linux-x64':
-        specifier: 0.1.1-alpha.7
-        version: 0.1.1-alpha.7
+        specifier: 0.1.1-alpha.8
+        version: 0.1.1-alpha.8
       '@lism-ui-vue/cli-win32-arm64':
-        specifier: 0.1.1-alpha.7
-        version: 0.1.1-alpha.7
+        specifier: 0.1.1-alpha.8
+        version: 0.1.1-alpha.8
       '@lism-ui-vue/cli-win32-x64':
-        specifier: 0.1.1-alpha.7
-        version: 0.1.1-alpha.7
+        specifier: 0.1.1-alpha.8
+        version: 0.1.1-alpha.8
 
   apps/lism-ui-vue-nuxt:
     dependencies:
@@ -959,33 +959,33 @@ packages:
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
 
-  '@lism-ui-vue/cli-darwin-arm64@0.1.1-alpha.7':
-    resolution: {integrity: sha512-QUdqX6lGmzauQKJVz41JvnG74QJmOTDpH7qRMueWkbWsVwTBZs4Ix+wIjQ4S2/r5G2iBvmIrOZNi+WKIkPC7Aw==}
+  '@lism-ui-vue/cli-darwin-arm64@0.1.1-alpha.8':
+    resolution: {integrity: sha512-o6ppZu/YhDGvvhajSiVGLvvNskJfF/4lA4pRNu53CaChiB72GrwiN8foBdTj1q4fGA0y5OkIRxyOLa1m+Xbrbg==}
     cpu: [arm64]
     os: [darwin]
 
-  '@lism-ui-vue/cli-darwin-x64@0.1.1-alpha.7':
-    resolution: {integrity: sha512-VujKW9kNuhr4yWOEDViS8bnonT00eRP/3h5O6cws2cGo8uAKQF3nrFupBn/GpR2hR7xrdD9L5JCfmYqjWzpLXA==}
+  '@lism-ui-vue/cli-darwin-x64@0.1.1-alpha.8':
+    resolution: {integrity: sha512-cu97rpxc5Z+owlm9GbnMjfVcRkyiZ5odxfjZfhf9nRTgUbDbZiEMZ2aGA11VvYksKujMgGFYWri7rFuLi5Vj4A==}
     cpu: [x64]
     os: [darwin]
 
-  '@lism-ui-vue/cli-linux-arm64@0.1.1-alpha.7':
-    resolution: {integrity: sha512-lm8P/wG8D5jNipsRORU7Mex47KGpn/qOS/1gq2FC8rqkr5myxy8Ru/1bPTCkfH7Hm+Jkzg2j1qivsoeoXTMosQ==}
+  '@lism-ui-vue/cli-linux-arm64@0.1.1-alpha.8':
+    resolution: {integrity: sha512-hoUeY/8gWi0OFiKVk8nG6sKZEk1Zb0V0GT7bPWn6fdWaOgySaaVdOkK/WJ58X/1iTkgCkc9yxpZM2ipjAZrc0A==}
     cpu: [arm64]
     os: [linux]
 
-  '@lism-ui-vue/cli-linux-x64@0.1.1-alpha.7':
-    resolution: {integrity: sha512-MZrmQM5rQvVAKdFJCrxnSzRZqn9ptwICtvKua9eIGBuuDYapCnbibZ2PVHpW7VFGUvvs3f7Osh2naf5X7ppKJg==}
+  '@lism-ui-vue/cli-linux-x64@0.1.1-alpha.8':
+    resolution: {integrity: sha512-H6hMtw0S0ZqSjP+TvIGKthBRcozKRZH3C2NjInTCnnjftcXenGe6Kj7fjK17I82oLpx6XRU92Zm8SvsOsfQh6Q==}
     cpu: [x64]
     os: [linux]
 
-  '@lism-ui-vue/cli-win32-arm64@0.1.1-alpha.7':
-    resolution: {integrity: sha512-2dw40SFNdXTOrMbYmPQGQdcGrUfu9ZEimkxO9PGdAwbDF9QuhAcdomIJlMUPzCDlHWh7v68RJ07pF2BlgbaV1w==}
+  '@lism-ui-vue/cli-win32-arm64@0.1.1-alpha.8':
+    resolution: {integrity: sha512-Lg0Caex80WMSt2zb7A3kLNutCnvTFCT+hAUmfp2dN0mYop3gcm+KDbRCi5KDNlZnjRJBIPwWUBspt8pFu76WjQ==}
     cpu: [arm64]
     os: [win32]
 
-  '@lism-ui-vue/cli-win32-x64@0.1.1-alpha.7':
-    resolution: {integrity: sha512-cvYWmpzFd6ULHmWXs9USjp5yXMhe84IAKxT/NVAJ+eq7iLYEdQM8LHceTr7gwaRavBrxCr/AutZs2qJHj87/kA==}
+  '@lism-ui-vue/cli-win32-x64@0.1.1-alpha.8':
+    resolution: {integrity: sha512-YEQqgECvqKEw2nqfzaz2Iz08+xE02PT7uQFFeCtseD0dnaIolcTYPhphOUM6H11Kij18uJkhCnwuWE49etaGbQ==}
     cpu: [x64]
     os: [win32]
 
@@ -7557,22 +7557,22 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@lism-ui-vue/cli-darwin-arm64@0.1.1-alpha.7':
+  '@lism-ui-vue/cli-darwin-arm64@0.1.1-alpha.8':
     optional: true
 
-  '@lism-ui-vue/cli-darwin-x64@0.1.1-alpha.7':
+  '@lism-ui-vue/cli-darwin-x64@0.1.1-alpha.8':
     optional: true
 
-  '@lism-ui-vue/cli-linux-arm64@0.1.1-alpha.7':
+  '@lism-ui-vue/cli-linux-arm64@0.1.1-alpha.8':
     optional: true
 
-  '@lism-ui-vue/cli-linux-x64@0.1.1-alpha.7':
+  '@lism-ui-vue/cli-linux-x64@0.1.1-alpha.8':
     optional: true
 
-  '@lism-ui-vue/cli-win32-arm64@0.1.1-alpha.7':
+  '@lism-ui-vue/cli-win32-arm64@0.1.1-alpha.8':
     optional: true
 
-  '@lism-ui-vue/cli-win32-x64@0.1.1-alpha.7':
+  '@lism-ui-vue/cli-win32-x64@0.1.1-alpha.8':
     optional: true
 
   '@mapbox/node-pre-gyp@2.0.3':
