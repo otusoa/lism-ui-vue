@@ -26,7 +26,8 @@
     "publish:npm": "node scripts/publish-npm.js"
   },
   "devDependencies": {
-    "changelogen": "^0.6.2"
+    "changelogen": "^0.6.2",
+    "update-notifier": "^7.3.1"
   },
   "optionalDependencies": {
     "@lism-ui-vue/cli-darwin-arm64": "0.1.1-alpha.7",

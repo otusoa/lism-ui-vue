@@ -2,10 +2,16 @@
 import os from 'node:os'
 import { spawnSync } from 'node:child_process'
 import path from 'node:path'
-import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
+import updateNotifier from 'update-notifier'
+import pkg from './package.json' with { type: 'json' }
 
-const require = createRequire(import.meta.url)
+// バックグラウンドでアップデートを確認し、利用可能な場合はプロセスの最後に通知を表示する
+const notifier = updateNotifier({ pkg })
+notifier.notify({
+  isGlobal: true, // グローバルインストール向けの表示にする場合
+  defer: true, // プロセス終了時に通知を出す（デフォルト）
+})
 
 const platform = os.platform()
 const architecture = os.arch()
@@ -21,7 +27,7 @@ try {
 
   // optionalDependencies としてインストールされたパッケージの package.json を探す
   try {
-    const pkgJsonPath = require.resolve(`${pkgName}/package.json`)
+    const pkgJsonPath = import.meta.resolve(`${pkgName}/package.json`)
     const pkgDir = path.dirname(pkgJsonPath)
     const exeName = platform === 'win32' ? 'lism-ui-vue.exe' : 'lism-ui-vue'
     binPath = path.join(pkgDir, exeName)
