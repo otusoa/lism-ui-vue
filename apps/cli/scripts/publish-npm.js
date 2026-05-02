@@ -68,6 +68,7 @@ const targets = [
 
 const main = async () => {
   const publishTasks = []
+  const missingTargets = []
 
   for (const target of targets) {
     const ext = target.ext || ''
@@ -76,6 +77,7 @@ const main = async () => {
 
     if (!fs.existsSync(binaryPath)) {
       console.warn(`Binary not found: ${binaryFileName}. Skipping...`)
+      missingTargets.push(binaryFileName)
       continue
     }
 

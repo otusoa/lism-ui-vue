@@ -32,8 +32,8 @@ try {
 
   // optionalDependencies としてインストールされたパッケージの package.json を探す
   try {
-    const pkgJsonPath = import.meta.resolve(`${pkgName}/package.json`)
-    const pkgDir = path.dirname(pkgJsonPath)
+    const pkgJsonUrl = import.meta.resolve(`${pkgName}/package.json`)
+    const pkgDir = path.dirname(fileURLToPath(pkgJsonUrl))
     binPath = path.join(pkgDir, getBinaryFileName(platform))
   } catch {
     // インストールされていない場合はローカルをフォールバックとして試す

@@ -98,13 +98,14 @@ importers:
         version: 3.2.6(typescript@5.9.3)
 
   apps/cli:
+    dependencies:
+      update-notifier:
+        specifier: ^7.3.1
+        version: 7.3.1
     devDependencies:
       changelogen:
         specifier: ^0.6.2
         version: 0.6.2(magicast@0.5.2)
-      update-notifier:
-        specifier: ^7.3.1
-        version: 7.3.1
     optionalDependencies:
       '@lism-ui-vue/cli-darwin-arm64':
         specifier: 0.1.1-alpha.7
