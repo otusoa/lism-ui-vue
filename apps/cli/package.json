@@ -1,6 +1,6 @@
 {
   "name": "@lism-ui-vue/cli",
-  "version": "0.1.1-alpha.8",
+  "version": "0.1.1-alpha.9",
   "description": "LismUI VueのCLIです。なぜかGoで作成されています",
   "license": "MIT",
   "author": "Eita Kobayashi",
@@ -29,12 +29,12 @@
     "changelogen": "^0.6.2"
   },
   "optionalDependencies": {
-    "@lism-ui-vue/cli-darwin-arm64": "0.1.1-alpha.8",
-    "@lism-ui-vue/cli-darwin-x64": "0.1.1-alpha.8",
-    "@lism-ui-vue/cli-linux-arm64": "0.1.1-alpha.8",
-    "@lism-ui-vue/cli-linux-x64": "0.1.1-alpha.8",
-    "@lism-ui-vue/cli-win32-arm64": "0.1.1-alpha.8",
-    "@lism-ui-vue/cli-win32-x64": "0.1.1-alpha.8"
+    "@lism-ui-vue/cli-darwin-arm64": "0.1.1-alpha.9",
+    "@lism-ui-vue/cli-darwin-x64": "0.1.1-alpha.9",
+    "@lism-ui-vue/cli-linux-arm64": "0.1.1-alpha.9",
+    "@lism-ui-vue/cli-linux-x64": "0.1.1-alpha.9",
+    "@lism-ui-vue/cli-win32-arm64": "0.1.1-alpha.9",
+    "@lism-ui-vue/cli-win32-x64": "0.1.1-alpha.9"
   },
   "dependencies": {
     "update-notifier": "^7.3.1"

@@ -1,6 +1,22 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.9
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.8...cli-v0.1.1-alpha.9)
+
+### 🩹 Fixes
+
+- **CLI check:** 間違ったコマンドを提案するのを修正 ([2f37861](https://github.com/otusoa/lism-ui-vue/commit/2f37861))
+
+### 🤖 CI
+
+- Goのpublish以外のCiを追加 ([9d2015f](https://github.com/otusoa/lism-ui-vue/commit/9d2015f))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## cli-v0.1.1-alpha.8
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.7...cli-v0.1.1-alpha.8)
