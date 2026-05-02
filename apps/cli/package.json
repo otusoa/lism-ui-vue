@@ -35,5 +35,8 @@
     "@lism-ui-vue/cli-linux-x64": "0.1.1-alpha.7",
     "@lism-ui-vue/cli-win32-arm64": "0.1.1-alpha.7",
     "@lism-ui-vue/cli-win32-x64": "0.1.1-alpha.7"
+  },
+  "dependencies": {
+    "update-notifier": "^7.3.1"
   }
 }

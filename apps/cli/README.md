@@ -38,6 +38,23 @@ Nuxt プロジェクトを新規作成し、以下のセットアップを自動
 2. `lism-ui-vue` および `@lism-ui-vue/nuxt` のインストール
 3. `nuxt.config.ts` へのモジュール追加設定
 
+### `check`
+
+現在のプロジェクトに対して、LismUI-Vue のセットアップ状況を確認します。
+
+```bash
+npx @lism-ui-vue/cli@latest check
+```
+
+確認する項目は次のとおりです。
+
+- `package.json` に `lism-ui-vue` がインストールされているか
+- 設定ファイル `lism-ui-vue.config.yaml` が存在するか
+- Nuxt プロジェクトの場合、`@lism-ui-vue/nuxt` がインストールされているか
+- Nuxt プロジェクトの場合、`nuxt.config.ts` または `nuxt.config.js` に `@lism-ui-vue/nuxt` が追加されているか
+
+不足している項目がある場合は、`init` や `install` / `add` の実行例もあわせて表示します。
+
 ## 設定ファイル (`lism-ui-vue.config.yaml`)
 
 `init` コマンドで生成される設定ファイルです。
