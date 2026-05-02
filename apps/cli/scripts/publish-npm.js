@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { spawnSync } from 'node:child_process'
+import { spawn, spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -29,24 +29,31 @@ const getNpmTag = (pkgName, pkgVersion) => {
 }
 
 const publishPackage = (cwd, name, version) => {
-  const tag = getNpmTag(name, version)
-  console.log(`Publishing ${name}@${version} with tag ${tag}...`)
+  return new Promise((resolve, reject) => {
+    const tag = getNpmTag(name, version)
+    console.log(`Publishing ${name}@${version} with tag ${tag}...`)
 
-  const args = ['publish', '--access', 'public', '--tag', tag]
-  if (process.env.GITHUB_ACTIONS) {
-    args.push('--provenance')
-  }
+    const args = ['publish', '--access', 'public', '--tag', tag]
+    if (process.env.GITHUB_ACTIONS) {
+      args.push('--provenance')
+    }
 
-  const result = spawnSync('npm', args, {
-    cwd,
-    stdio: 'inherit',
-    shell: true,
+    const child = spawn('npm', args, {
+      cwd,
+      stdio: 'inherit',
+      shell: true,
+    })
+
+    child.on('error', reject)
+    child.on('close', (code) => {
+      if (code === 0) {
+        resolve()
+        return
+      }
+
+      reject(new Error(`Failed to publish ${name} (exit code ${code ?? 'unknown'})`))
+    })
   })
-  if (result.status !== 0) {
-    console.error(`Failed to publish ${name}`);
-    if (result.error) console.error(result.error);
-    process.exit(1);
-  }
 }
 
 // GoのOS/Arch表記とNodeのOS/Arch表記のマッピング
@@ -59,44 +66,63 @@ const targets = [
   { goOs: 'windows', goArch: 'arm64', nodeOs: 'win32', nodeArch: 'arm64', ext: '.exe' },
 ]
 
-for (const target of targets) {
-  const ext = target.ext || ''
-  const binaryFileName = `lism-ui-vue-${target.goOs}-${target.goArch}${ext}`
-  const binaryPath = path.join(distDir, binaryFileName)
+const main = async () => {
+  const publishTasks = []
 
-  if (!fs.existsSync(binaryPath)) {
-    console.warn(`Binary not found: ${binaryFileName}. Skipping...`)
-    continue
+  for (const target of targets) {
+    const ext = target.ext || ''
+    const binaryFileName = `lism-ui-vue-${target.goOs}-${target.goArch}${ext}`
+    const binaryPath = path.join(distDir, binaryFileName)
+
+    if (!fs.existsSync(binaryPath)) {
+      console.warn(`Binary not found: ${binaryFileName}. Skipping...`)
+      continue
+    }
+
+    const pkgName = `@lism-ui-vue/cli-${target.nodeOs}-${target.nodeArch}`
+    const pkgDir = path.join(cliDir, 'packages', pkgName)
+    fs.mkdirSync(pkgDir, { recursive: true })
+
+    // 1. バイナリのコピー
+    const destBinName = `lism-ui-vue${ext}`
+    fs.copyFileSync(binaryPath, path.join(pkgDir, destBinName))
+    if (target.goOs !== 'windows') {
+      fs.chmodSync(path.join(pkgDir, destBinName), 0o755) // 実行権限を付与
+    }
+
+    // 2. サブパッケージ用 package.json 作成
+    const pkgJson = {
+      name: pkgName,
+      version: version,
+      description: `The ${target.nodeOs}-${target.nodeArch} binary for @lism-ui-vue/cli`,
+      author: mainPkgJson.author,
+      license: mainPkgJson.license,
+      repository: mainPkgJson.repository,
+      publishConfig: mainPkgJson.publishConfig,
+      os: [target.nodeOs],
+      cpu: [target.nodeArch],
+      type: 'module',
+    }
+    fs.writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify(pkgJson, null, 2))
+
+    // 3. 各サブパッケージを npm publish
+    publishTasks.push(publishPackage(pkgDir, pkgName, version))
   }
 
-  const pkgName = `@lism-ui-vue/cli-${target.nodeOs}-${target.nodeArch}`
-  const pkgDir = path.join(cliDir, 'packages', pkgName)
-  fs.mkdirSync(pkgDir, { recursive: true })
+  publishTasks.push(publishPackage(cliDir, '@lism-ui-vue/cli', version))
 
-  // 1. バイナリのコピー
-  const destBinName = `lism-ui-vue${ext}`
-  fs.copyFileSync(binaryPath, path.join(pkgDir, destBinName))
-  if (target.goOs !== 'windows') {
-    fs.chmodSync(path.join(pkgDir, destBinName), 0o755) // 実行権限を付与
+  const results = await Promise.allSettled(publishTasks)
+  const failed = results.filter((result) => result.status === 'rejected')
+
+  if (failed.length > 0) {
+    for (const result of failed) {
+      console.error(result.reason)
+    }
+    process.exit(1)
   }
-
-  // 2. サブパッケージ用 package.json 作成
-  const pkgJson = {
-    name: pkgName,
-    version: version,
-    description: `The ${target.nodeOs}-${target.nodeArch} binary for @lism-ui-vue/cli`,
-    author: mainPkgJson.author,
-    license: mainPkgJson.license,
-    repository: mainPkgJson.repository,
-    publishConfig: mainPkgJson.publishConfig,
-    os: [target.nodeOs],
-    cpu: [target.nodeArch],
-    type: 'module',
-  }
-  fs.writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify(pkgJson, null, 2))
-
-  // 3. 各サブパッケージを npm publish
-  publishPackage(pkgDir, pkgName, version)
 }
 
-publishPackage(cliDir, '@lism-ui-vue/cli', version)
+main().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})
