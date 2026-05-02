@@ -1,6 +1,29 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.8
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.7...cli-v0.1.1-alpha.8)
+
+### 🩹 Fixes
+
+- **Usage:** Usageコマンドのヘルプ表示がうまく動作していなかったので修正 ([15a252d](https://github.com/otusoa/lism-ui-vue/commit/15a252d))
+- **check:** チェックコマンドの挙動がUX的に悪かったので修正 ([feaa278](https://github.com/otusoa/lism-ui-vue/commit/feaa278))
+- Update notifierの依存関係を整理し、devDependenciesからdependenciesに移動。その他コードをリファクタリング ([6c39581](https://github.com/otusoa/lism-ui-vue/commit/6c39581))
+
+### 💅 Refactors
+
+- **publish-npm:** 処理を非同期にして、効率化。またエラー耐性をつけた ([7d8da60](https://github.com/otusoa/lism-ui-vue/commit/7d8da60))
+- ESmoduleにすべて統一。バージョンが古いと新しいバージョンありますと表示する機能を追加 ([84f9458](https://github.com/otusoa/lism-ui-vue/commit/84f9458))
+
+### ✅ Tests
+
+- **wrapper:** 簡単なテストファイルを設置 ([b79cff7](https://github.com/otusoa/lism-ui-vue/commit/b79cff7))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## cli-v0.1.1-alpha.7
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.6...cli-v0.1.1-alpha.7)
