@@ -41,6 +41,7 @@ var checkCmd = &cobra.Command{
 		if pkgManager != "npm" {
 			installCmd = "add"
 		}
+		cliInitCmd := "npx @lism-ui-vue/cli@latest init"
 
 		// 1. package.json の確認
 		pterm.Info.Println("package.json を確認しています...")
@@ -106,7 +107,7 @@ var checkCmd = &cobra.Command{
 			pterm.Success.Println("lism-ui-vue.config.yaml が見つかりました。")
 		} else {
 			pterm.Warning.Println("lism-ui-vue.config.yaml が見つかりません。")
-			pterm.Info.Printfln("  実行してください:  %s %s init", pkgManager, installCmd)
+			pterm.Info.Printfln("  実行してください:  %s", cliInitCmd)
 			allPassed = false
 		}
 
