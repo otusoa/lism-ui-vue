@@ -5,6 +5,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import updateNotifier from 'update-notifier'
 import pkg from './package.json' with { type: 'json' }
+import {
+  createCliEnv,
+  getBinaryFileName,
+  getOptionalDependencyPackageName,
+} from './wrapper-utils.js'
 
 // バックグラウンドでアップデートを確認し、利用可能な場合はプロセスの最後に通知を表示する
 const notifier = updateNotifier({ pkg })
@@ -15,22 +20,21 @@ notifier.notify({
 
 const platform = os.platform()
 const architecture = os.arch()
-const pkgName = `@lism-ui-vue/cli-${platform}-${architecture}`
+const pkgName = getOptionalDependencyPackageName(platform, architecture)
 
 let binPath
 try {
   // 開発環境用のローカルバイナリ確認（`go build`で直接作られた場合など）
   const localBinPath = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
-    platform === 'win32' ? 'lism-ui-vue.exe' : 'lism-ui-vue',
+    getBinaryFileName(platform),
   )
 
   // optionalDependencies としてインストールされたパッケージの package.json を探す
   try {
     const pkgJsonPath = import.meta.resolve(`${pkgName}/package.json`)
     const pkgDir = path.dirname(pkgJsonPath)
-    const exeName = platform === 'win32' ? 'lism-ui-vue.exe' : 'lism-ui-vue'
-    binPath = path.join(pkgDir, exeName)
+    binPath = path.join(pkgDir, getBinaryFileName(platform))
   } catch {
     // インストールされていない場合はローカルをフォールバックとして試す
     binPath = localBinPath
@@ -42,9 +46,7 @@ try {
 }
 
 // 引数をそのままGoバイナリに渡し、標準入出力をターミナルに繋ぐ
-const env = { ...process.env }
-// npx や bunx / pnpm dlx 経由の場合は、表示名を npx @scope/pkg の形式にする
-env.LISM_VUE_CLI_NAME = `npx ${process.env.npm_package_name ?? '@lism-ui-vue/cli'}`
+const env = createCliEnv(process.env)
 
 const { status, error } = spawnSync(binPath, process.argv.slice(2), {
   stdio: 'inherit',
