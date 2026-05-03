@@ -23,10 +23,12 @@
     "release:rc": "changelogen --dir . --config changelog.config.ts --release --bump --prerelease rc --push",
     "tag:push": "git push --follow-tags",
     "prepack": "node scripts/sync-optional-dependencies.js",
-    "publish:npm": "node scripts/publish-npm.js"
+    "publish:npm": "node scripts/publish-npm.js",
+    "test": "vitest run"
   },
   "devDependencies": {
-    "changelogen": "^0.6.2"
+    "changelogen": "^0.6.2",
+    "vitest": "^4.1.5"
   },
   "optionalDependencies": {
     "@lism-ui-vue/cli-darwin-arm64": "0.1.1-alpha.9",
