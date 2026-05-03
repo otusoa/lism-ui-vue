@@ -26,6 +26,7 @@ export function run() {
   const pkgName = getOptionalDependencyPackageName()
 
   let binPath
+  let resolveError = null
   try {
     // 開発環境用のローカルバイナリ確認（`go build`で直接作られた場合など）
     const localBinPath = path.resolve(
@@ -38,7 +39,8 @@ export function run() {
       const pkgJsonUrl = import.meta.resolve(`${pkgName}/package.json`)
       const pkgDir = path.dirname(fileURLToPath(pkgJsonUrl))
       binPath = path.join(pkgDir, getBinaryFileName())
-    } catch {
+    } catch (err) {
+      resolveError = err
       // インストールされていない場合はローカルをフォールバックとして試す
       binPath = localBinPath
     }
@@ -60,8 +62,12 @@ export function run() {
   if (error) {
     if (error.code === 'ENOENT') {
       console.error(`Error: Binary not found at ${binPath}`)
+      if (resolveError) {
+        console.error(`\nFailed to resolve optional dependency '${pkgName}':`)
+        console.error(resolveError.message)
+      }
       console.error(
-        `This might mean the optional dependency was not installed or the local build is missing.`,
+        `\nThis might mean the optional dependency was not installed or the local build is missing.`,
       )
     } else {
       console.error(error.message)
