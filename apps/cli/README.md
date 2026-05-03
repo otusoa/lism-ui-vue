@@ -10,7 +10,7 @@
 npx @lism-ui-vue/cli@latest init
 
 # Nuxt プロジェクトの新規作成と自動セットアップ
-npx @lism-ui-vue/cli@latest nuxt [project-name]
+npx @lism-ui-vue/cli@latest template nuxt [project-name]
 ```
 
 グローバルにインストールして使用することも可能です。
@@ -30,7 +30,7 @@ LismUI-Vue のプロジェクト設定ファイル `lism-ui-vue.config.yaml` を
 - コンポーネント等の出力先ディレクトリの指定
 - テンプレートの選択 (開発中)
 
-### `nuxt`
+### `template nuxt`
 
 Nuxt プロジェクトを新規作成し、以下のセットアップを自動的に行います。
 
