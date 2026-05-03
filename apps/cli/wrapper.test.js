@@ -28,15 +28,19 @@ describe('wrapper-utils', () => {
     expect(getBinaryFileName('linux')).toBe('lism-ui-vue')
   })
 
-  it('createCliEnv exposes the npx-style display name', () => {
-    expect(createCliEnv({ npm_package_name: '@lism-ui-vue/cli', PATH: 'x' })).toEqual({
+  it('createCliEnv exposes the npx-style display name when invoked as wrapper', () => {
+    expect(createCliEnv({ npm_package_name: '@lism-ui-vue/cli', PATH: 'x' }, 'wrapper')).toEqual({
       npm_package_name: '@lism-ui-vue/cli',
       PATH: 'x',
       LISM_VUE_CLI_NAME: 'npx @lism-ui-vue/cli',
     })
   })
 
-  it('createCliEnv falls back to the package default when npm_package_name is missing', () => {
+  it('createCliEnv uses the invoked name when it is not a generic wrapper name', () => {
+    expect(createCliEnv({}, 'lism-ui-vue').LISM_VUE_CLI_NAME).toBe('lism-ui-vue')
+  })
+
+  it('createCliEnv falls back to the package default when invokedAs is missing', () => {
     expect(createCliEnv({}).LISM_VUE_CLI_NAME).toBe('npx @lism-ui-vue/cli')
   })
 })

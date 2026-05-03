@@ -51,8 +51,9 @@ export function run() {
     process.exit(1)
   }
 
-  // 引数をそのままGoバイナリに渡し、標準入出力をターミナルに繋ぐ
-  const env = createCliEnv(process.env)
+  // 実行時のコマンド名を取得（npx経由かグローバルインストール経由かを判別するため）
+  const invokedAs = path.basename(process.argv[1], '.js')
+  const env = createCliEnv(process.env, invokedAs)
 
   const { status, error } = spawnSync(binPath, process.argv.slice(2), {
     stdio: 'inherit',
