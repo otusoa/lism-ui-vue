@@ -82,11 +82,28 @@ export function run() {
 }
 
 // 直接実行された場合のみ run() を呼び出す
-if (
-  process.argv[1] &&
-  (path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url)) ||
-    path.basename(process.argv[1], '.js') === 'wrapper' ||
-    path.basename(process.argv[1], '.js') === 'cli')
-) {
-  run()
+if (process.argv[1]) {
+  try {
+    const argvPath = fs.realpathSync(process.argv[1])
+    const thisPath = fs.realpathSync(fileURLToPath(import.meta.url))
+    const binName = Object.keys(pkg.bin)[0]
+    const baseName = path.basename(argvPath, '.js')
+
+    if (
+      argvPath === thisPath ||
+      baseName === 'wrapper' ||
+      baseName === 'cli' ||
+      baseName === binName ||
+      path.basename(argvPath) === binName
+    ) {
+      run()
+    }
+  } catch {
+    // 稀にパス解決に失敗する場合のフォールバック
+    const binName = Object.keys(pkg.bin)[0]
+    const baseName = path.basename(process.argv[1], '.js')
+    if (baseName === 'wrapper' || baseName === 'cli' || baseName === binName) {
+      run()
+    }
+  }
 }
