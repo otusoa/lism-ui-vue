@@ -1,6 +1,32 @@
 # Changelog
 
 
+## cli-v0.1.1-alpha.10
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.9...cli-v0.1.1-alpha.10)
+
+### 🩹 Fixes
+
+- **command:** ⚠️  Templateコマンドを追加 Nuxtテンプレートもそこに統合 ([3fd30f9](https://github.com/otusoa/lism-ui-vue/commit/3fd30f9))
+- **cli:** JSをfix ([a1e7224](https://github.com/otusoa/lism-ui-vue/commit/a1e7224))
+
+### 📖 Documentation
+
+- **readme:** Readmeを更新 ([631420d](https://github.com/otusoa/lism-ui-vue/commit/631420d))
+
+### ✅ Tests
+
+- **cli:** 既存テストをVitestへ移行 & update-notifierの検証を追加 ([9c8cde2](https://github.com/otusoa/lism-ui-vue/commit/9c8cde2))
+- **cli:** Vitestを導入し通知テストを追加 & ヘルプメッセージを改善 ([b3aa0af](https://github.com/otusoa/lism-ui-vue/commit/b3aa0af))
+
+#### ⚠️ Breaking Changes
+
+- **command:** ⚠️  Templateコマンドを追加 Nuxtテンプレートもそこに統合 ([3fd30f9](https://github.com/otusoa/lism-ui-vue/commit/3fd30f9))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## cli-v0.1.1-alpha.9
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.8...cli-v0.1.1-alpha.9)
