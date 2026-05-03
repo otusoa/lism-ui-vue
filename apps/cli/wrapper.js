@@ -76,6 +76,6 @@ export function run() {
 }
 
 // 直接実行された場合のみ run() を呼び出す
-if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   run()
 }
