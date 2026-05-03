@@ -140,5 +140,5 @@ func addNuxtModule(path string) error {
 }
 
 func init() {
-	rootCmd.AddCommand(nuxtCmd)
+	templateCmd.AddCommand(nuxtCmd)
 }
