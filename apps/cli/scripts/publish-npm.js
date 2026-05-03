@@ -70,9 +70,10 @@ const main = async () => {
   const publishTasks = []
   const missingTargets = []
 
+  const binName = Object.keys(mainPkgJson.bin)[0]
   for (const target of targets) {
     const ext = target.ext || ''
-    const binaryFileName = `lism-ui-vue-${target.goOs}-${target.goArch}${ext}`
+    const binaryFileName = `${binName}-${target.goOs}-${target.goArch}${ext}`
     const binaryPath = path.join(distDir, binaryFileName)
 
     if (!fs.existsSync(binaryPath)) {
@@ -81,12 +82,12 @@ const main = async () => {
       continue
     }
 
-    const pkgName = `@lism-ui-vue/cli-${target.nodeOs}-${target.nodeArch}`
+    const pkgName = `${mainPkgJson.name}-${target.nodeOs}-${target.nodeArch}`
     const pkgDir = path.join(cliDir, 'packages', pkgName)
     fs.mkdirSync(pkgDir, { recursive: true })
 
     // 1. バイナリのコピー
-    const destBinName = `lism-ui-vue${ext}`
+    const destBinName = `${binName}${ext}`
     fs.copyFileSync(binaryPath, path.join(pkgDir, destBinName))
     if (target.goOs !== 'windows') {
       fs.chmodSync(path.join(pkgDir, destBinName), 0o755) // 実行権限を付与
@@ -96,7 +97,7 @@ const main = async () => {
     const pkgJson = {
       name: pkgName,
       version: version,
-      description: `The ${target.nodeOs}-${target.nodeArch} binary for @lism-ui-vue/cli`,
+      description: `The ${target.nodeOs}-${target.nodeArch} binary for ${mainPkgJson.name}`,
       author: mainPkgJson.author,
       license: mainPkgJson.license,
       repository: mainPkgJson.repository,
@@ -111,7 +112,7 @@ const main = async () => {
     publishTasks.push(publishPackage(pkgDir, pkgName, version))
   }
 
-  publishTasks.push(publishPackage(cliDir, '@lism-ui-vue/cli', version))
+  publishTasks.push(publishPackage(cliDir, mainPkgJson.name, version))
 
   const results = await Promise.allSettled(publishTasks)
   const failed = results.filter((result) => result.status === 'rejected')

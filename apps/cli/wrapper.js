@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import os from 'node:os'
 import { spawnSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -24,29 +23,27 @@ export function setupUpdateNotifier(pkg) {
 export function run() {
   setupUpdateNotifier(pkg)
 
-  const platform = os.platform()
-  const architecture = os.arch()
-  const pkgName = getOptionalDependencyPackageName(platform, architecture)
+  const pkgName = getOptionalDependencyPackageName()
 
   let binPath
   try {
     // 開発環境用のローカルバイナリ確認（`go build`で直接作られた場合など）
     const localBinPath = path.resolve(
       path.dirname(fileURLToPath(import.meta.url)),
-      getBinaryFileName(platform),
+      getBinaryFileName(),
     )
 
     // optionalDependencies としてインストールされたパッケージの package.json を探す
     try {
       const pkgJsonUrl = import.meta.resolve(`${pkgName}/package.json`)
       const pkgDir = path.dirname(fileURLToPath(pkgJsonUrl))
-      binPath = path.join(pkgDir, getBinaryFileName(platform))
+      binPath = path.join(pkgDir, getBinaryFileName())
     } catch {
       // インストールされていない場合はローカルをフォールバックとして試す
       binPath = localBinPath
     }
   } catch {
-    console.error(`Error: Unsupported platform/architecture: ${platform}-${architecture}`)
+    console.error(`Error: Unsupported platform/architecture: ${process.platform}-${process.arch}`)
     console.error(`Make sure the optional dependency '${pkgName}' was installed successfully.`)
     process.exit(1)
   }
