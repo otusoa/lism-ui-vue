@@ -13,7 +13,6 @@ jobs:
     outputs:
       core: ${{ steps.changes.outputs.core }}
       nuxt: ${{ steps.changes.outputs.nuxt }}
-      cli: ${{ steps.changes.outputs.cli }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -28,25 +27,6 @@ jobs:
               - 'vite.config.ts'
             nuxt:
               - 'apps/lism-ui-vue-nuxt/**'
-            cli:
-              - 'apps/cli/**'
-
-  ci-cli:
-    name: Go CLI Lint
-    needs: filter
-    if: needs.filter.outputs.cli == 'true' || github.ref_type == 'tag'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.26'
-
-      - name: Go lint の実行 (go vet)
-        working-directory: apps/cli
-        run: go vet ./...
 
   ci-core:
     name: Core CI
