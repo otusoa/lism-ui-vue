@@ -28,23 +28,3 @@ pre-commit:
     test:nuxt:
       glob: '{apps/lism-ui-vue-nuxt,src}/**/*'
       run: pnpm --filter @lism-ui-vue/nuxt run test
-
-    # Go CLI checks
-    lint:cli:
-      root: "apps/cli/"
-      glob: "apps/cli/**/*.{go,mod,sum}"
-      run: go vet ./...
-    test:cli:
-      root: "apps/cli/"
-      glob: "apps/cli/**/*.{go,mod,sum}"
-      run: go test ./...
-    fmt:cli:
-      root: "apps/cli/"
-      glob: "apps/cli/**/*.go"
-      run: go fmt ./...
-      stage_fixed: true
-    sync-deps:cli:
-      root: "apps/cli/"
-      glob: "apps/cli/package.json"
-      run: node scripts/sync-optional-dependencies.js
-      stage_fixed: true
