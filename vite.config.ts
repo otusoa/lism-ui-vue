@@ -2,8 +2,20 @@ import { fileURLToPath, URL } from 'node:url'
 import { cpSync, statSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import dts from 'vite-plugin-dts'
+import { dts } from 'rolldown-plugin-dts'
 import AutoImport from 'unplugin-auto-import/vite'
+
+const dtsPlugins = dts({
+  generator: 'tsc',
+  tsconfig: './tsconfig.app.json',
+  vue: true,
+  compilerOptions: {
+    noEmit: false,
+    declaration: true,
+    emitDeclarationOnly: true,
+  },
+  eager: true,
+}).map((plugin) => ({ ...plugin, apply: 'build' as const }))
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,14 +25,7 @@ export default defineConfig({
       dirs: ['src/composables'],
       dts: 'dist/auto-imports.d.ts',
     }),
-    dts({
-      tsconfigPath: './tsconfig.app.json',
-      rollupTypes: true,
-      entryRoot: 'src',
-      outDir: 'dist',
-      insertTypesEntry: true,
-      copyDtsFiles: false,
-    }),
+    ...dtsPlugins,
     // ビルド完了後に .vue ファイルを dist/runtime/components/ にコピーする
     // nuxt.ts の addComponentsDir がこのパスを参照する
     {
@@ -54,6 +59,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  oxc: {
+    exclude: [/\.js$/, /\.d\.[cm]?ts$/],
+  },
   build: {
     lib: {
       entry: {
@@ -65,7 +73,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', /^lism-css(?:\/|$)/],
       output: {
         globals: {
           vue: 'Vue',
