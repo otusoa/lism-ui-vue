@@ -21,9 +21,11 @@ jobs:
           filters: |
             core:
               - 'package.json'
+              - 'pnpm-lock.yaml'
               - 'pnpm-workspace.yaml'
               - 'src/**'
               - 'tsconfig.json'
+              - 'tsconfig.app.json'
               - 'tsdown.config.ts'
               - 'vite.config.ts'
             nuxt:
