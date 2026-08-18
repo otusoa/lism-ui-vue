@@ -14,9 +14,9 @@ Changelogenで変更履歴を生成するため、Conventional Commits形式で�
 - 1行目は72文字以内を目安にし、末尾に句点を付けない
 - 実装の詳細や推測は書かず、変更の目的と影響を優先する
 
-## type
+## 種類
 
-`feat` 機能追加、`fix` バグ修正、`refactor` リファクタリング、`docs` ドキュメント、`style` スタイル変更、`test` テスト、`build` ビルド、`ci` CI、`perf` パフォーマンス改善、`types` 型定義、`chore` その他の保守
+`feat` 機能追加、`fix` バグ修正、`refactor` リファクタリング、`type` 型定義、`docs` ドキュメント、`style` スタイル変更、`test` テスト、`build` ビルド、`ci` CI、`perf` パフォーマンス改善、`types` 型定義、`chore` その他の保守
 
 ## 例
 
@@ -24,6 +24,7 @@ Changelogenで変更履歴を生成するため、Conventional Commits形式で�
 feat(button): 無効状態のスタイルを追加
 fix(useLism): 属性名の変換ミスを修正
 refactor(core): アダプターの型定義を整理
+type(core): LismUI-Vueの型定義を追加
 docs: LismCSSの導入手順を更新
 test: Buttonコンポーネントの状態を追加検証
 chore(deps): lism-cssを更新
