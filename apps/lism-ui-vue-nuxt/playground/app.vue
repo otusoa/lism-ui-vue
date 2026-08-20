@@ -121,7 +121,7 @@
       <LismBox>aaa</LismBox>
     </LismFlow>
 
-    <LismAutoColumns auto-fill cols="240px" g="20" my="50">
+    <LismAutoColumns cols="240px" g="20" my="50">
       <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
       <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>

@@ -16,6 +16,7 @@ import type {
   ColumnsProps,
   SwitchColumnsProps,
   TileGridProps,
+  CssValue,
 } from 'lism-css/lib/types/LayoutProps'
 import type {
   TextAllowedTag,
@@ -49,9 +50,9 @@ export type {
 
 /**
  * LismFlowコンポーネント用の値の型
- * 基本的な 's' | 'l' に加え、任意の文字列や数値を許容します。
+ * LismCSS が受け付ける任意の文字列・数値を許容します。
  */
-export type FlowValue = 's' | 'l' | ((string & {}) | number)
+export type FlowValue = NonNullable<FlowLayoutProps['flow']>
 
 /**
  * LismCSS本家からインポートされた純粋なスタイリング・レイアウト用の基底プロパティ型
@@ -233,7 +234,7 @@ export type HeadingProps = LismBaseProps & {
  * 本家 LismCSS の DecoratorProps に定義されている固有プロパティ（size, clipPath, boxSizing）を含みます。
  */
 export type DecoratorProps = {
-  size?: string
+  size?: CssValue
 }
 
 /**
