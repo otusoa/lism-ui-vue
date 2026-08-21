@@ -199,7 +199,7 @@ importers:
         version: 0.8.1(typescript@5.9.3)(vue@3.5.41(typescript@5.9.3))
       eslint-plugin-storybook:
         specifier: ^10.3.1
-        version: 10.5.9(eslint@10.8.1(jiti@2.7.0))(storybook@10.5.9(@types/react@19.2.18)(react@19.2.8))(typescript@5.9.3)
+        version: 10.5.10(eslint@10.8.1(jiti@2.7.0))(typescript@5.9.3)
       playwright:
         specifier: ^1.58.2
         version: 1.62.1
@@ -3509,11 +3509,10 @@ packages:
     peerDependencies:
       eslint: '>=9.38.0'
 
-  eslint-plugin-storybook@10.5.9:
-    resolution: {integrity: sha512-4Hrqccy/zttV0S/32TSUbqtizzj4sbkgYvv7UzHveH58v96PhrO+fSpOFAqYvzNDzdOU6smKwObFtzX+RZqj4w==}
+  eslint-plugin-storybook@10.5.10:
+    resolution: {integrity: sha512-NeOu3axmhNZfRuHRciFH0a/OVgvtAJLRHAwiJjcGkPAcElNmwEPp+pqoiwxytx7kHInz7mVVoBfPwVc8kPmOLw==}
     peerDependencies:
       eslint: '>=8'
-      storybook: ^10.5.9
 
   eslint-plugin-unicorn@73.0.0:
     resolution: {integrity: sha512-V0YatLe9nkGhXEXKe2Qljb1EY0sJHwDV0HUF1NKFwtsHh/fU7qGHDgv+6fchzZcgU2/7noHo2gdjnmo0P2uDPw==}
@@ -10028,12 +10027,11 @@ snapshots:
       regexp-ast-analysis: 0.7.1
       scslre: 0.3.0
 
-  eslint-plugin-storybook@10.5.9(eslint@10.8.1(jiti@2.7.0))(storybook@10.5.9(@types/react@19.2.18)(react@19.2.8))(typescript@5.9.3):
+  eslint-plugin-storybook@10.5.10(eslint@10.8.1(jiti@2.7.0))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/types': 8.67.0
       '@typescript-eslint/utils': 8.67.0(eslint@10.8.1(jiti@2.7.0))(typescript@5.9.3)
       eslint: 10.8.1(jiti@2.7.0)
-      storybook: 10.5.9(@types/react@19.2.18)(react@19.2.8)
     transitivePeerDependencies:
       - supports-color
       - typescript
