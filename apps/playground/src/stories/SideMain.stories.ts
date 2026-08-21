@@ -1,26 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { LismSideMain, LismBox } from '@/components'
+import { LismWithSide, LismBox } from '@/components'
 
-const meta: Meta<typeof LismSideMain> = {
-  title: 'Components/Layout/SideMain',
-  component: LismSideMain,
+const meta: Meta<typeof LismWithSide> = {
+  title: 'Layout/WithSide',
+  component: LismWithSide,
   tags: ['autodocs'],
 }
 
 export default meta
-type Story = StoryObj<typeof LismSideMain>
+type Story = StoryObj<typeof LismWithSide>
 
 export const Default: Story = {
   render: (args) => ({
-    components: { LismSideMain, LismBox },
+    components: { LismWithSide, LismBox },
     setup() {
       return { args }
     },
     template: `
-      <LismSideMain v-bind="args" g="20">
+      <LismWithSide v-bind="args" g="20">
         <LismBox p="20" bgc="base-2" bd>Sidebar</LismBox>
         <LismBox p="20" bgc="base-1" bd>Main Content Area</LismBox>
-      </LismSideMain>
+      </LismWithSide>
     `,
   }),
   args: {
@@ -31,15 +31,15 @@ export const Default: Story = {
 
 export const RightSide: Story = {
   render: (args) => ({
-    components: { LismSideMain, LismBox },
+    components: { LismWithSide, LismBox },
     setup() {
       return { args }
     },
     template: `
-      <LismSideMain v-bind="args" g="20">
+      <LismWithSide v-bind="args" g="20">
         <LismBox p="20" bgc="base-1" bd>Main Content Area</LismBox>
         <LismBox p="20" bgc="base-2" bd>Right Sidebar</LismBox>
-      </LismSideMain>
+      </LismWithSide>
     `,
   }),
   args: {

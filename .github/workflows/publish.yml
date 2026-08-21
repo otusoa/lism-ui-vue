@@ -18,15 +18,16 @@ jobs:
       contents: read # ソースの読み取りに必要
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: pnpmのセットアップ
-        uses: pnpm/action-setup@v4
+        uses: pnpm/setup@v2
         with:
-          version: 10
+          version: 11
+          install: false
 
       - name: Node.jsのセットアップ
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: 'pnpm'

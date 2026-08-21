@@ -1,22 +1,19 @@
 import { describe, it, expectTypeOf } from 'vitest'
 import type { LismBaseProps } from './types'
 
+type HasLismBaseProp<Key extends PropertyKey> = Key extends keyof LismBaseProps ? true : false
+
 describe('LismBaseProps Type', () => {
-  it('should not have variant property', () => {
-    // @ts-expect-error - variant should have been removed
-    const props: LismBaseProps = { variant: 'test' }
-    expectTypeOf(props).not.toHaveProperty('variant')
+  it('should not have the removed variant property', () => {
+    expectTypeOf<HasLismBaseProp<'variant'>>().toEqualTypeOf<false>()
   })
 
-  it('should not have lismClass property', () => {
-    // @ts-expect-error - lismClass should have been removed
-    const props: LismBaseProps = { lismClass: 'test' }
-    expectTypeOf(props).not.toHaveProperty('lismClass')
+  it('should not have the removed lismClass property', () => {
+    expectTypeOf<HasLismBaseProp<'lismClass'>>().toEqualTypeOf<false>()
   })
 
   it('should still have common lism props', () => {
-    const props: LismBaseProps = { p: '20', bgc: 'brand' }
-    expectTypeOf(props).toHaveProperty('p')
-    expectTypeOf(props).toHaveProperty('bgc')
+    expectTypeOf<HasLismBaseProp<'p'>>().toEqualTypeOf<true>()
+    expectTypeOf<HasLismBaseProp<'bgc'>>().toEqualTypeOf<true>()
   })
 })

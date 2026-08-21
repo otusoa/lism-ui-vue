@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { LismSwitchCols, LismBox } from '@/components'
+import { LismSwitchColumns, LismBox } from '@/components'
 
-const meta: Meta<typeof LismSwitchCols> = {
-  title: 'Layout/SwitchCols',
-  component: LismSwitchCols,
+const meta: Meta = {
+  title: 'Layout/SwitchColumns',
+  component: LismSwitchColumns,
   tags: ['autodocs'],
   argTypes: {
     breakSize: { control: 'text' },
@@ -12,19 +12,19 @@ const meta: Meta<typeof LismSwitchCols> = {
 
 export default meta
 
-type Story = StoryObj<typeof LismSwitchCols>
+type Story = StoryObj
 
 export const Default: Story = {
   render: (args) => ({
-    components: { LismSwitchCols, LismBox },
+    components: { LismSwitchColumns, LismBox },
     setup() {
       return { args }
     },
     template: `
-      <LismSwitchCols v-bind="args" g="20">
+      <LismSwitchColumns v-bind="args" g="20">
         <LismBox p="30" bgc="base-2" bd>Card A</LismBox>
         <LismBox p="30" bgc="base-2" bd>Card B</LismBox>
-      </LismSwitchCols>
+      </LismSwitchColumns>
     `,
   }),
   args: {
@@ -34,16 +34,16 @@ export const Default: Story = {
 
 export const ThreeCards: Story = {
   render: (args) => ({
-    components: { LismSwitchCols, LismBox },
+    components: { LismSwitchColumns, LismBox },
     setup() {
       return { args }
     },
     template: `
-      <LismSwitchCols v-bind="args" g="20">
+      <LismSwitchColumns v-bind="args" g="20">
         <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
         <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
         <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
-      </LismSwitchCols>
+      </LismSwitchColumns>
     `,
   }),
   args: {

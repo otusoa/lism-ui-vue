@@ -1,33 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { LismFluidCols, LismBox } from '@/components'
+import { LismAutoColumns, LismBox } from '@/components'
 
-const meta: Meta<typeof LismFluidCols> = {
-  title: 'Layout/FluidCols',
-  component: LismFluidCols,
+const meta: Meta = {
+  title: 'Layout/AutoColumns',
+  component: LismAutoColumns,
   tags: ['autodocs'],
   argTypes: {
     cols: { control: 'text' },
-    autoFill: { control: 'boolean' },
+    autoFit: { control: 'boolean' },
   },
 }
 
 export default meta
 
-type Story = StoryObj<typeof LismFluidCols>
+type Story = StoryObj
 
 export const Default: Story = {
   render: (args) => ({
-    components: { LismFluidCols, LismBox },
+    components: { LismAutoColumns, LismBox },
     setup() {
       return { args }
     },
     template: `
-      <LismFluidCols v-bind="args" g="20">
+      <LismAutoColumns v-bind="args" g="20">
         <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
         <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
         <LismBox p="30" bgc="base-2" bd>Card 3</LismBox>
         <LismBox p="30" bgc="base-2" bd>Card 4</LismBox>
-      </LismFluidCols>
+      </LismAutoColumns>
     `,
   }),
   args: {
@@ -35,17 +35,17 @@ export const Default: Story = {
   },
 }
 
-export const AutoFill: Story = {
+export const AutoFit: Story = {
   render: (args) => ({
-    components: { LismFluidCols, LismBox },
+    components: { LismAutoColumns, LismBox },
     setup() {
       return { args }
     },
     template: `
-      <LismFluidCols v-bind="args" autoFill g="20">
+      <LismAutoColumns v-bind="args" autoFit g="20">
         <LismBox p="30" bgc="base-2" bd>Card 1</LismBox>
         <LismBox p="30" bgc="base-2" bd>Card 2</LismBox>
-      </LismFluidCols>
+      </LismAutoColumns>
     `,
   }),
   args: {

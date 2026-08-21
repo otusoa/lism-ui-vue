@@ -4,7 +4,7 @@ import type { LismBaseProps, AutoColumnsProps } from '../../core/types'
 
 // AutoColumnsProps から layout を除いたものを受け取れるように定義
 interface Props extends /* @vue-ignore */ LismBaseProps {
-  autoFill?: AutoColumnsProps['autoFill']
+  autoFit?: AutoColumnsProps['autoFit']
 }
 
 defineOptions({ inheritAttrs: false })
