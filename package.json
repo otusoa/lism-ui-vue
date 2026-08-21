@@ -31,9 +31,9 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "tsdown --watch",
+    "dev": "vite build --watch",
     "build": "run-p type-check \"build-only {@}\" --",
-    "build-only": "tsdown --minify",
+    "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
@@ -51,10 +51,10 @@
     "lism-css": "^0.26.0"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "7.58.13",
     "@nuxt/schema": "^4.5.2",
     "@phosphor-icons/vue": "^2.2.1",
     "@tsconfig/node24": "^24.0.5",
-    "@tsdown/css": "^0.22.14",
     "@types/node": "^24.13.3",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/coverage-v8": "^4.1.0",
@@ -72,16 +72,15 @@
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.44.0",
     "oxlint": "^1.79.0",
-    "rolldown-plugin-dts": "^0.28.2",
-    "tsdown": "^0.22.14",
     "typescript": "~6.0.3",
     "unplugin-auto-import": "^21.1.0",
     "unplugin-vue-components": "^31.1.0",
     "vite": "^8.2.2",
+    "vite-plugin-dts": "5.0.3",
     "vite-plugin-vue-devtools": "^8.2.1",
     "vitest": "^4.1.11",
     "vue": "^3.5.41",
-    "vue-tsc": "^3.3.10"
+    "vue-tsc": "^3.2.6"
   },
   "engines": {
     "node": ">=24.11.0"
