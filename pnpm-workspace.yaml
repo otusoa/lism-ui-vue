@@ -6,5 +6,7 @@ allowBuilds:
   lefthook: true
   unrs-resolver: true
 
+minimumReleaseAge: 1440
+
 minimumReleaseAgeExclude:
   - vite@8.2.2
