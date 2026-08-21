@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { LismLink } from '@/components'
 
-const meta: Meta<typeof LismLink> = {
+const meta: Meta = {
   title: 'Components/Semantic/Link',
   component: LismLink,
   tags: ['autodocs'],
 }
 
 export default meta
-type Story = StoryObj<typeof LismLink>
+type Story = StoryObj
 
 export const Default: Story = {
   args: {

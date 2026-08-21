@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { LismLayer, LismFrame, LismBox, LismText } from '@/components'
 
-const meta: Meta<typeof LismLayer> = {
+const meta: Meta = {
   title: 'Components/Layout/Layer',
   component: LismLayer,
   tags: ['autodocs'],
 }
 
 export default meta
-type Story = StoryObj<typeof LismLayer>
+type Story = StoryObj
 
 export const Default: Story = {
   render: (args) => ({

@@ -65,8 +65,8 @@ export const AbsolutePositioning: Story = {
           Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor Incididunt ut. Labore et dolore magna aliqua. Ut enim ad minim
           veniam, quis nostrud exercitation ullamco laboris nisi ut.
         </p>
-        <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-x-s bd-y-s bdc="current" />
-        <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-x-e bd-y-e bdc="current" />
+        <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-s bd-bs bdc="current" />
+        <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-e bd-be bdc="current" />
       </LismBox>
     `,
   }),

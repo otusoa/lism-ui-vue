@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { LismColumns, LismBox } from '@/components'
 
-const meta: Meta<typeof LismColumns> = {
+const meta: Meta = {
   title: 'Layout/Columns',
   component: LismColumns,
   tags: ['autodocs'],
@@ -12,7 +12,7 @@ const meta: Meta<typeof LismColumns> = {
 
 export default meta
 
-type Story = StoryObj<typeof LismColumns>
+type Story = StoryObj
 
 export const Default: Story = {
   render: (args) => ({
