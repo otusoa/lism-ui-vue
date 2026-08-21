@@ -1,10 +1,10 @@
 packages:
   - apps/*
 
-ignoredBuiltDependencies:
-  - unrs-resolver
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  unrs-resolver: true
 
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - esbuild
-  - lefthook
+minimumReleaseAgeExclude:
+  - vite@8.2.2
