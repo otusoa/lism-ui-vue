@@ -62,7 +62,7 @@ export default defineConfig({
       fileName: (entryName: string) => `${entryName}.js`,
       formats: ['es'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['vue'],
       output: {
         globals: {

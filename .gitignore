@@ -45,4 +45,4 @@ storybook-static
 
 # AI(LLM)
 .agents
-.github/
+.github/skills/
