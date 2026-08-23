@@ -14,7 +14,7 @@ jobs:
       core: ${{ steps.changes.outputs.core }}
       nuxt: ${{ steps.changes.outputs.nuxt }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: dorny/paths-filter@v4
         id: changes
         with:
@@ -37,7 +37,7 @@ jobs:
     if: needs.filter.outputs.core == 'true' || github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: pnpmのセットアップ
         uses: pnpm/setup@v2
@@ -72,7 +72,7 @@ jobs:
     if: needs.filter.outputs.nuxt == 'true' || needs.filter.outputs.core == 'true' || github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: pnpmのセットアップ
         uses: pnpm/setup@v2
