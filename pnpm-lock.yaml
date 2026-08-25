@@ -13,8 +13,8 @@ importers:
         version: 0.26.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.58.13
-        version: 7.58.13(@types/node@24.13.3)
+        specifier: 7.59.0
+        version: 7.59.0(@types/node@24.13.3)
       '@nuxt/schema':
         specifier: ^4.5.2
         version: 4.5.2
@@ -89,7 +89,7 @@ importers:
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)
       vite-plugin-dts:
         specifier: 5.0.3
-        version: 5.0.3(@microsoft/api-extractor@7.58.13(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))
+        version: 5.0.3(@microsoft/api-extractor@7.59.0(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))
       vite-plugin-vue-devtools:
         specifier: ^8.2.1
         version: 8.2.1(@nuxt/kit@4.5.2(magic-string@1.2.2)(magicast@0.5.4)(oxc-parser@0.127.0)(rolldown@1.2.5)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
@@ -973,8 +973,8 @@ packages:
     resolution: {integrity: sha512-iDu1AtuRC2Z8XVs2SieZieVavF1FXPBX1C9pMexJh8Dx/Dd/3ZZ4nRQp/PU2Vk2rUHWuBz1wOyL4DcuhVnBXwg==}
     engines: {node: '>=20.9.0'}
 
-  '@microsoft/api-extractor@7.58.13':
-    resolution: {integrity: sha512-htjkWdR+ovlBiQuBbMutIuiu/dzKYpFrBRRuHGlpo7J81cPzmMTBKxE8j+aWSs5HxvXHCvatVe4vQ9CKqSvZaA==}
+  '@microsoft/api-extractor@7.59.0':
+    resolution: {integrity: sha512-KDYV8kSVjmG8JJWVg1f1aKxteNG1IQ44D07Rjhlcci8wlqrSFNhUfgv7dJhwT0W2h3NDIL5Vz2f+/DfO4OpDHw==}
     engines: {node: '>=20.9.0'}
     hasBin: true
 
@@ -7163,7 +7163,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor@7.58.13(@types/node@24.13.3)':
+  '@microsoft/api-extractor@7.59.0(@types/node@24.13.3)':
     dependencies:
       '@microsoft/api-extractor-model': 7.33.11(@types/node@24.13.3)
       '@microsoft/tsdoc': 0.16.0
@@ -12769,7 +12769,7 @@ snapshots:
       - vite
       - webpack
 
-  unplugin-dts@1.0.3(@microsoft/api-extractor@7.58.13(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)):
+  unplugin-dts@1.0.3(@microsoft/api-extractor@7.59.0(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)):
     dependencies:
       '@rollup/pluginutils': 5.4.0(rollup@4.62.4)
       '@volar/typescript': 2.4.28
@@ -12781,7 +12781,7 @@ snapshots:
       typescript: 6.0.3
       unplugin: 2.3.11
     optionalDependencies:
-      '@microsoft/api-extractor': 7.58.13(@types/node@24.13.3)
+      '@microsoft/api-extractor': 7.59.0(@types/node@24.13.3)
       '@vue/language-core': 3.3.11
       esbuild: 0.28.2
       rolldown: 1.2.5
@@ -12982,11 +12982,11 @@ snapshots:
       typescript: 5.9.3
       vue-tsc: 3.3.11(typescript@5.9.3)
 
-  vite-plugin-dts@5.0.3(@microsoft/api-extractor@7.58.13(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)):
+  vite-plugin-dts@5.0.3(@microsoft/api-extractor@7.59.0(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)):
     dependencies:
-      unplugin-dts: 1.0.3(@microsoft/api-extractor@7.58.13(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))
+      unplugin-dts: 1.0.3(@microsoft/api-extractor@7.59.0(@types/node@24.13.3))(@vue/language-core@3.3.11)(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.4)(typescript@6.0.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))
     optionalDependencies:
-      '@microsoft/api-extractor': 7.58.13(@types/node@24.13.3)
+      '@microsoft/api-extractor': 7.59.0(@types/node@24.13.3)
       rollup: 4.62.4
       vite: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0)
     transitivePeerDependencies:
