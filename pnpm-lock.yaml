@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       lism-css:
-        specifier: ^0.27.0
-        version: 0.27.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^0.28.0
+        version: 0.28.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@microsoft/api-extractor':
         specifier: 7.59.0
@@ -4320,8 +4320,8 @@ packages:
     resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
     engines: {node: '>=14'}
 
-  lism-css@0.27.0:
-    resolution: {integrity: sha512-tFt8hP5+clVqoRfHbKk73AsxXY8S/+4LkUsE0qi0lvU0ATrWmkGnc5VyVd4uy0Id07xHTL1XP7lSrdU5iIYIuw==}
+  lism-css@0.28.0:
+    resolution: {integrity: sha512-MzG2QBe448yhwYICFlOBs8GazFoVZYpA4EZvqgnZvVmR+dAqEbDq4V1uzoSpkqeY/LK28QBsxzH7WkgoSYpX/g==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -10890,7 +10890,7 @@ snapshots:
 
   lilconfig@3.1.3: {}
 
-  lism-css@0.27.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  lism-css@0.28.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       csstype: 3.2.3
       react: 19.2.8
