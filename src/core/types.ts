@@ -238,20 +238,37 @@ export type DecoratorProps = {
 }
 
 /**
+ * LismIcon に渡せるSVG文字列、Vueコンポーネント、または描画先と追加props。
+ */
+export type IconSource =
+  | string
+  | (Component & { as?: never })
+  | ({ as: NonNullable<LismBaseProps['as']> } & Record<string, unknown>)
+
+/**
  * LismIcon コンポーネント用のプロパティ型。
  * icon, size, label などのアイコン固有のプロパティを含みます。
  */
 export type IconProps = LismBaseProps & {
   /**
-   * アイコンを指定します。文字列（プリセット名）またはオブジェクト（{as, ...exProps}）が指定可能です。
+   * SVG全体の文字列、Vueコンポーネント、または { as, ...exProps } を指定します。
    */
-  icon?: string | ({ as: string } & Record<string, unknown>)
+  icon?: IconSource
   /**
-   * アイコンのサイズを指定します。
+   * SVGの幅・高さの既定値。明示したwidth・heightが優先されます。
+   * フォントサイズのトークンを使う場合はfzを指定してください。
    */
   size?: string | number
   /**
    * aria-label として出力されます。指定がある場合 role="img" が、ない場合 aria-hidden="true" が付与されます。
    */
   label?: string
+  /** slotにSVGの子要素を渡す場合の座標系。 */
+  viewBox?: string
+  width?: string | number
+  height?: string | number
+  strokeWidth?: string | number
+  /** 画像をアイコンとして表示する場合のURLと代替テキスト。 */
+  src?: string
+  alt?: string
 }

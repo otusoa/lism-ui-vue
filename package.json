@@ -48,10 +48,10 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
-    "lism-css": "^0.28.0"
+    "lism-css": "^1.0.1"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "7.59.3",
+    "@microsoft/api-extractor": "^7.59.3",
     "@nuxt/schema": "^4.5.2",
     "@phosphor-icons/vue": "^2.2.1",
     "@tsconfig/node24": "^24.0.5",
