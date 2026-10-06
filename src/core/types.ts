@@ -56,15 +56,9 @@ export type FlowValue = NonNullable<FlowLayoutProps['flow']>
 
 /**
  * LismCSS本家からインポートされた純粋なスタイリング・レイアウト用の基底プロパティ型
- * HTMLレンダリングに関連する属性（'as', 'tag' など）は含まれません。
+ * HTMLレンダリングに関連する属性（'as' など）は含まれません。
  */
 export type LismCoreBaseProps = Partial<PropValueTypes & TraitProps & LayoutProps>
-
-/**
- * LismCSSで用意されている標準のプロパティをまとめた型
- * @deprecated Beta版で廃止予定。 LismCoreBaseProps を使用してください。
- */
-export type LismCoreProps = LismCoreBaseProps
 
 /**
  * プロジェクト内のほぼすべてのコンポーネント（LismBoxやLismCenterなど）のベースとなる型

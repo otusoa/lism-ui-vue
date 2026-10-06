@@ -39,7 +39,7 @@ export const Complex: Story = {
     },
     template: `
       <LismGrid v-bind="args">
-        <LismBox p="20" bgc="brand" c="white" grid-column="span 2">Header (span 2)</LismBox>
+        <LismBox p="20" bgc="brand" c="white" gc="span 2">Header (span 2)</LismBox>
         <LismBox p="20" bgc="base-2" bd>Sidebar</LismBox>
         <LismBox p="20" bgc="base-2" bd>Main Content</LismBox>
       </LismGrid>

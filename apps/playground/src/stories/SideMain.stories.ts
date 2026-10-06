@@ -18,7 +18,7 @@ export const Default: Story = {
     },
     template: `
       <LismWithSide v-bind="args" g="20">
-        <LismBox p="20" bgc="base-2" bd>Sidebar</LismBox>
+        <LismBox isSide p="20" bgc="base-2" bd>Sidebar</LismBox>
         <LismBox p="20" bgc="base-1" bd>Main Content Area</LismBox>
       </LismWithSide>
     `,
@@ -38,12 +38,11 @@ export const RightSide: Story = {
     template: `
       <LismWithSide v-bind="args" g="20">
         <LismBox p="20" bgc="base-1" bd>Main Content Area</LismBox>
-        <LismBox p="20" bgc="base-2" bd>Right Sidebar</LismBox>
+        <LismBox isSide p="20" bgc="base-2" bd>Right Sidebar</LismBox>
       </LismWithSide>
     `,
   }),
   args: {
-    isSide: true,
     sideW: '180px',
   },
 }

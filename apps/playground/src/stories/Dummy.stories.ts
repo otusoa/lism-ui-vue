@@ -56,10 +56,10 @@ export const InsideFlow: Story = {
     template: `
       <LismBox p="30" max-w="600px" bd>
         <LismFlow flow="l">
-          <LismDummy lang="ja" length="s" pre="タイトル: " as="h2" fz="xl" fw="bold" />
-          <LismDummy lang="ja" length="m" />
-          <LismDummy as="img" ar="16/9" />
-          <LismDummy lang="ja" length="l" />
+          <LismUiDummy lang="ja" length="s" pre="タイトル: " as="h2" fz="xl" fw="bold" />
+          <LismUiDummy lang="ja" length="m" />
+          <LismUiDummy as="img" ar="16/9" />
+          <LismUiDummy lang="ja" length="l" />
         </LismFlow>
       </LismBox>
     `,
