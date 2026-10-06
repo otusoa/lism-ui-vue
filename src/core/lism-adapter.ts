@@ -12,11 +12,14 @@ import getMaybeCssVar from 'lism-css/lib/getMaybeCssVar'
 import getBpData from 'lism-css/lib/getBpData'
 import splitWithComma from 'lism-css/lib/helper/splitWithComma'
 import mergeSet from 'lism-css/lib/helper/mergeSet'
+import { normalizeClass, normalizeStyle, type StyleValue } from 'vue'
 import type { LismProps } from './types'
 import type { AtomicProps } from 'lism-css/lib/types/AtomicProps'
 
 // isEmptyObj / filterEmptyObj の簡易実装
 const isEmptyObj = (obj: Record<string, unknown>) => Object.keys(obj).length === 0
+const normalizeClasses = (value: unknown): string[] =>
+  normalizeClass(value).split(/\s+/).filter(Boolean)
 
 /**
  * Lismが最終的に要素にバインドする属性の型
@@ -76,6 +79,10 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     }
   }
 
+  // layoutがstyleやprimitiveClassを展開する前に、Vueのバインディングを正規化する。
+  normalizedInput.style = normalizeStyle([normalizedInput.style as StyleValue]) ?? {}
+  normalizedInput.primitiveClass = normalizeClasses(normalizedInput.primitiveClass)
+
   const { layout, atomic, ...restInput } = normalizedInput as {
     layout?: string
     atomic?: AtomicProps['atomic']
@@ -99,14 +106,7 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
   const attrs: Record<string, unknown> = {}
 
   // baseクラスの生成
-  const baseClasses: string[] = []
-  if (props.class) baseClasses.push(...(Array.isArray(props.class) ? props.class : [props.class]))
-  if (props.className)
-    baseClasses.push(...(Array.isArray(props.className) ? props.className : [props.className]))
-  if (props.primitiveClass)
-    baseClasses.push(
-      ...(Array.isArray(props.primitiveClass) ? props.primitiveClass : [props.primitiveClass]),
-    )
+  const baseClasses = normalizeClasses([props.class, props.className, props.primitiveClass])
 
   delete props.class
   delete props.className

@@ -4,6 +4,105 @@ import getLismProps from 'lism-css/lib/getLismProps'
 import type { LismCoreBaseProps, LismProps } from './types'
 
 describe('getLismPropsVue vs getLismProps (React)', () => {
+  it('normalizes Vue class bindings while preserving generated class order', () => {
+    const result = getLismPropsVue({
+      class: ['base', { active: true, disabled: false }, ['nested', null, false]],
+      className: ['alias', [{ extra: true }]],
+      primitiveClass: ['primitive', [{ 'nested-primitive': true }]],
+      layout: 'stack',
+      set: 'hov',
+      isContainer: true,
+      util: 'trim',
+      p: '20',
+    })
+    expect(result.class).toEqual([
+      'base',
+      'active',
+      'nested',
+      'alias',
+      'extra',
+      'primitive',
+      'nested-primitive',
+      'l--stack',
+      'set--hov',
+      'is--container',
+      'u--trim',
+      '-p:20',
+    ])
+  })
+
+  it('normalizes a primitive class string before layout adds its own class', () => {
+    expect(getLismPropsVue({ primitiveClass: 'first second', layout: 'stack' }).class).toEqual([
+      'first',
+      'second',
+      'l--stack',
+    ])
+  })
+
+  it.each([undefined, null, false, '', [null, false, ['', {}]]])(
+    'ignores empty class and style bindings: %j',
+    (value) => {
+      expect(
+        getLismPropsVue({ class: value, className: value, primitiveClass: value, style: value }),
+      ).toEqual({ class: [], style: {} })
+    },
+  )
+
+  it('parses CSS strings, including custom properties and semicolons inside URLs', () => {
+    expect(
+      getLismPropsVue({
+        style: 'color: red; --custom: value; background-image: url("data:image/svg+xml;test");',
+      }).style,
+    ).toEqual({
+      color: 'red',
+      '--custom': 'value',
+      'background-image': 'url("data:image/svg+xml;test")',
+    })
+  })
+
+  it('merges nested style arrays in order and preserves numeric zero', () => {
+    const result = getLismPropsVue({
+      style: [
+        'color: red; --custom: first',
+        [false, { color: 'blue', opacity: 0 }, [null, { '--custom': 'last' }]],
+      ],
+    })
+    expect(result.style).toEqual({ color: 'blue', opacity: 0, '--custom': 'last' })
+  })
+
+  it.each([
+    { layout: 'withSide', sideW: '20rem', variable: '--sideW', expected: '20rem' },
+    { layout: 'autoColumns', autoFit: true, variable: '--autoMode', expected: 'auto-fit' },
+    { layout: 'switchColumns', breakSize: '24rem', variable: '--breakSize', expected: '24rem' },
+  ] as const)(
+    'preserves styles and layout overrides for $layout',
+    ({ variable, expected, ...props }) => {
+      const result = getLismPropsVue({
+        ...props,
+        style: ['color: red', { opacity: 0, [variable]: 'old' }],
+      })
+      expect(result.style).toEqual({ color: 'red', opacity: 0, [variable]: expected })
+    },
+  )
+
+  it('preserves Lism prop overrides and does not mutate input bindings', () => {
+    const classes = Object.freeze(['base', Object.freeze({ active: true })])
+    const styles = Object.freeze([
+      Object.freeze({ '--p': 'old', '--transitionProps': 'opacity', color: 'red' }),
+    ])
+    const input = Object.freeze({
+      class: classes,
+      style: styles,
+      p: '12px',
+      hasTransition: 'color',
+    })
+    const result = getLismPropsVue(input)
+    expect(result.style).toEqual({ '--p': '12px', '--transitionProps': 'color', color: 'red' })
+    expect(input.class).toBe(classes)
+    expect(input.style).toBe(styles)
+    expect(styles[0]).toEqual({ '--p': 'old', '--transitionProps': 'opacity', color: 'red' })
+  })
+
   it('React reference test for cols array', () => {
     const props = { cols: [1, 2, 3] as const }
     const result = getLismProps(props as LismCoreBaseProps)
