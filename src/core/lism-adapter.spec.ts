@@ -4,6 +4,105 @@ import getLismProps from 'lism-css/lib/getLismProps'
 import type { LismCoreBaseProps, LismProps } from './types'
 
 describe('getLismPropsVue vs getLismProps (React)', () => {
+  it('normalizes Vue class bindings while preserving generated class order', () => {
+    const result = getLismPropsVue({
+      class: ['base', { active: true, disabled: false }, ['nested', null, false]],
+      className: ['alias', [{ extra: true }]],
+      primitiveClass: ['primitive', [{ 'nested-primitive': true }]],
+      layout: 'stack',
+      set: 'hov',
+      isContainer: true,
+      util: 'trim',
+      p: '20',
+    })
+    expect(result.class).toEqual([
+      'base',
+      'active',
+      'nested',
+      'alias',
+      'extra',
+      'primitive',
+      'nested-primitive',
+      'l--stack',
+      'set--hov',
+      'is--container',
+      'u--trim',
+      '-p:20',
+    ])
+  })
+
+  it('normalizes a primitive class string before layout adds its own class', () => {
+    expect(getLismPropsVue({ primitiveClass: 'first second', layout: 'stack' }).class).toEqual([
+      'first',
+      'second',
+      'l--stack',
+    ])
+  })
+
+  it.each([undefined, null, false, '', [null, false, ['', {}]]])(
+    'ignores empty class and style bindings: %j',
+    (value) => {
+      expect(
+        getLismPropsVue({ class: value, className: value, primitiveClass: value, style: value }),
+      ).toEqual({ class: [], style: {} })
+    },
+  )
+
+  it('parses CSS strings, including custom properties and semicolons inside URLs', () => {
+    expect(
+      getLismPropsVue({
+        style: 'color: red; --custom: value; background-image: url("data:image/svg+xml;test");',
+      }).style,
+    ).toEqual({
+      color: 'red',
+      '--custom': 'value',
+      'background-image': 'url("data:image/svg+xml;test")',
+    })
+  })
+
+  it('merges nested style arrays in order and preserves numeric zero', () => {
+    const result = getLismPropsVue({
+      style: [
+        'color: red; --custom: first',
+        [false, { color: 'blue', opacity: 0 }, [null, { '--custom': 'last' }]],
+      ],
+    })
+    expect(result.style).toEqual({ color: 'blue', opacity: 0, '--custom': 'last' })
+  })
+
+  it.each([
+    { layout: 'withSide', sideW: '20rem', variable: '--sideW', expected: '20rem' },
+    { layout: 'autoColumns', autoFit: true, variable: '--autoMode', expected: 'auto-fit' },
+    { layout: 'switchColumns', breakSize: '24rem', variable: '--breakSize', expected: '24rem' },
+  ] as const)(
+    'preserves styles and layout overrides for $layout',
+    ({ variable, expected, ...props }) => {
+      const result = getLismPropsVue({
+        ...props,
+        style: ['color: red', { opacity: 0, [variable]: 'old' }],
+      })
+      expect(result.style).toEqual({ color: 'red', opacity: 0, [variable]: expected })
+    },
+  )
+
+  it('preserves Lism prop overrides and does not mutate input bindings', () => {
+    const classes = Object.freeze(['base', Object.freeze({ active: true })])
+    const styles = Object.freeze([
+      Object.freeze({ '--p': 'old', '--transitionProps': 'opacity', color: 'red' }),
+    ])
+    const input = Object.freeze({
+      class: classes,
+      style: styles,
+      p: '12px',
+      hasTransition: 'color',
+    })
+    const result = getLismPropsVue(input)
+    expect(result.style).toEqual({ '--p': '12px', '--transitionProps': 'color', color: 'red' })
+    expect(input.class).toBe(classes)
+    expect(input.style).toBe(styles)
+    expect(styles[0]).toEqual({ '--p': 'old', '--transitionProps': 'opacity', color: 'red' })
+  })
+
   it('React reference test for cols array', () => {
     const props = { cols: [1, 2, 3] as const }
     const result = getLismProps(props as LismCoreBaseProps)
@@ -79,7 +178,7 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
     // オブジェクト形式の場合は個別のホバーユーティリティが出力される
     expect(result.class).toContain('-hov:-c')
     expect(result.class).toContain('-hov:-bgc')
-    expect(result.class).toContain('-hov:scale')
+    expect(result.class).toContain('-hov:-scale')
 
     expect(result.style).toHaveProperty('--hov-c')
     expect(result.style).toHaveProperty('--hov-bgc')
@@ -102,15 +201,14 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
   })
 
   it('should handle set props correctly', () => {
-    const props = { set: 'transition', unset: ['hov', 'plain'] } as const
+    const props = { set: 'hov plain -plain' } as const
     const result = getLismPropsVue(props as unknown as LismProps)
 
-    expect(result.class).toContain('set--transition')
-    expect(result.class).toContain('unset--hov')
-    expect(result.class).toContain('unset--plain')
+    expect(result.class).toContain('set--hov')
+    expect(result.class).not.toContain('set--plain')
+    expect(result.class).not.toContain('set---plain')
     // 原則として attrs には残らない
     expect(result.set).toBeUndefined()
-    expect(result.unset).toBeUndefined()
   })
 
   it('should handle util props correctly', () => {
@@ -142,5 +240,65 @@ describe('getLismPropsVue vs getLismProps (React)', () => {
     const spacerResult = getLismPropsVue(spacerProps as unknown as LismProps)
 
     expect(spacerResult.class).toContain('a--spacer')
+  })
+
+  it.each([
+    { isWrapper: 'l' },
+    { isWrapper: 'l', contentSize: 's' },
+    { isWrapper: '20rem' },
+    { hasTransition: ' color, opacity ' },
+    { hasTransition: false },
+    {
+      hov: {
+        c: 'brand',
+        transform: 'scale(1.1)',
+        underline: true,
+        o: 0,
+        custom: '-',
+        ignored: false,
+      },
+    },
+    { hov: '-c,-bxsh,in:zoom' },
+    { set: 'plain hov plain -plain', util: 'trim cbox trim -trim' },
+    { set: ['plain', 'hov', '-plain'], util: ['trim', 'cbox', '-trim'] },
+    { set: '-plain', util: '-trim' },
+    { p: ':' },
+    { p: { base: ':', md: ':custom' } },
+  ])('matches the v1.0.1 distribution for %j', (props) => {
+    const reference = getLismProps(props as LismCoreBaseProps)
+    const actual = getLismPropsVue(props as LismProps)
+    expect(actual.class.join(' ')).toBe(reference.className ?? '')
+    expect(actual.style).toEqual(reference.style ?? {})
+  })
+
+  it('supports Vue template flag traits and modern border directions', () => {
+    const result = getLismPropsVue({
+      'is-wrapper': '',
+      'has-transition': '',
+      'bd-s': '',
+      'bd-bs': '',
+      'bd-e': '',
+      'bd-be': '',
+    })
+    expect(result.class).toEqual(
+      expect.arrayContaining([
+        'is--wrapper',
+        'has--transition',
+        '-bd-s',
+        '-bd-bs',
+        '-bd-e',
+        '-bd-be',
+      ]),
+    )
+    expect(result.style).toEqual({})
+  })
+
+  it('keeps inline transition variables unless an explicit hasTransition string overrides them', () => {
+    expect(
+      getLismPropsVue({ hasTransition: true, style: { '--transitionProps': 'opacity' } }).style,
+    ).toEqual({ '--transitionProps': 'opacity' })
+    expect(
+      getLismPropsVue({ hasTransition: 'color', style: { '--transitionProps': 'opacity' } }).style,
+    ).toEqual({ '--transitionProps': 'color' })
   })
 })

@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import {
+  PhList,
+  PhHouse,
+  PhWarning,
+  PhCheckCircle,
+  PhGear,
+  PhHeart,
+  PhChatCircle,
+} from '@phosphor-icons/vue'
+import { useTest } from 'lism-ui-vue/composables'
+
+const arrowSvg =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>'
+</script>
+
 <template>
   <Lism max-w="1200px" mx="auto" p="20">
     <div>Nuxt module playground!</div>
@@ -19,7 +35,7 @@
     <Lism atomic="divider"></Lism>
 
     <!-- ホバーでシャドウが変化するボックスの実装例 -->
-    <LismBox bgc="base" p="30" bdrs="20" bd bxsh="10" has-transition :hov="{ bxsh: '40' }" my="40">
+    <LismBox bgc="base" p="30" bdrs="20" bd bxsh="10" has-transition="box-shadow" :hov="{ bxsh: '40' }" my="40">
       <LismHeading lv="3" mb="15">Hover Shadow Box</LismHeading>
       <LismText c="text-2">
         マウスをホバーすると <code>bxsh</code>（box-shadow）トークンが切り替わります。
@@ -40,17 +56,17 @@
     <!-- LismIcon の使用例 -->
     <Lism p="40" my="40" bd>
       <LismHeading lv="2" mb="30">LismIcon Samples</LismHeading>
-      
+
       <LismCluster g="30">
-        <!-- プリセットアイコン -->
+        <!-- Vueコンポーネント -->
         <LismBox>
-          <LismText fz="xs" c="text-2" mb="5">Preset icons</LismText>
+          <LismText fz="xs" c="text-2" mb="5">Vue icon components</LismText>
           <LismCluster g="15" fz="3xl">
-            <LismIcon icon="menu" />
-            <LismIcon icon="home" c="blue" />
-            <LismIcon icon="warning" c="red" />
-            <LismIcon icon="check-circle" c="green" />
-            <LismIcon icon="gear" hov="zoom" />
+            <LismIcon :icon="PhList" />
+            <LismIcon :icon="PhHouse" c="blue" />
+            <LismIcon :icon="PhWarning" c="red" />
+            <LismIcon :icon="PhCheckCircle" c="green" />
+            <LismIcon :icon="{ as: PhGear, weight: 'bold' }" />
           </LismCluster>
         </LismBox>
 
@@ -58,17 +74,22 @@
         <LismBox>
           <LismText fz="xs" c="text-2" mb="5">Sizes & Colors</LismText>
           <LismCluster g="20" ai="center">
-            <LismIcon icon="heart" size="1em" c="red-3" />
-            <LismIcon icon="heart" size="1.5em" c="red-5" />
-            <LismIcon icon="heart" size="2em" c="red-7" />
-            <LismIcon icon="heart" size="3em" c="red" />
+            <LismIcon :as="PhHeart" size="1em" c="red-3" />
+            <LismIcon :as="PhHeart" size="1.5em" c="red-5" />
+            <LismIcon :as="PhHeart" size="2em" c="red-7" />
+            <LismIcon :as="PhHeart" size="3em" c="red" />
           </LismCluster>
         </LismBox>
 
         <!-- ラベル付き（アクセシブル） -->
         <LismBox>
           <LismText fz="xs" c="text-2" mb="5">With Label (aria-label)</LismText>
-          <LismIcon icon="chat" label="チャットを開く" fz="3xl" hov="o" cursor="pointer" />
+          <LismIcon :icon="PhChatCircle" label="チャットを開く" fz="3xl" />
+        </LismBox>
+
+        <LismBox>
+          <LismText fz="xs" c="text-2" mb="5">SVG string</LismText>
+          <LismIcon :icon="arrowSvg" label="右矢印" fz="3xl" :stroke-width="2" />
         </LismBox>
 
         <!-- スロットによるSVG直接記述 -->
@@ -78,7 +99,14 @@
             <circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="16" />
             <circle cx="92" cy="108" r="12" />
             <circle cx="164" cy="108" r="12" />
-            <path d="M169.6,176a48,48,0,0,1-83.2,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+            <path
+              d="M169.6,176a48,48,0,0,1-83.2,0"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"
+            />
           </LismIcon>
         </LismBox>
 
@@ -215,21 +243,18 @@ src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
         ut. Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
         ullamco laboris nisi ut.
       </LismText>
-      <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-x-s bd-y-s bdc="current" />
-      <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-x-e bd-y-e bdc="current" />
+      <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-s bd-bs bdc="current" />
+      <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-e bd-be bdc="current" />
     </LismBox>
 
     <LismStack g="20">
       <LismBox
 p="30" bgc="base-2"
-        :hov="{ bgc: 'accent', c: 'white', duration: '1s', easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }"
-        set-transition>
+        :hov="{ bgc: 'accent', c: 'white' }"
+        has-transition="background-color, color"
+        :style="{ '--duration': '1s', '--ease': 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }">
         Slow & Bouncy (1s duration)
       </LismBox>
     </LismStack>
   </Lism>
 </template>
-
-<script setup lang="ts">
-import { useTest } from 'lism-ui-vue/composables'
-</script>

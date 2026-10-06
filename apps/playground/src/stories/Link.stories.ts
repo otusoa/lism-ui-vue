@@ -23,7 +23,8 @@ export const CustomLink: Story = {
     c: 'brand',
     td: 'u',
     fw: 'bold',
-    hov: { scale: '1.1' },
+    hov: { transform: 'scale(1.1)' },
+    hasTransition: 'transform',
     default: 'カスタムホバースタイル',
   },
 }
@@ -37,7 +38,8 @@ export const ButtonLike: Story = {
     bdrs: '2',
     d: 'if',
     td: 'n',
-    hov: { opacity: '0.8' },
+    hov: { o: '0.8' },
+    hasTransition: 'opacity',
     default: 'ボタン風リンク',
   },
 }

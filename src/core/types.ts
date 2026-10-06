@@ -56,15 +56,9 @@ export type FlowValue = NonNullable<FlowLayoutProps['flow']>
 
 /**
  * LismCSS本家からインポートされた純粋なスタイリング・レイアウト用の基底プロパティ型
- * HTMLレンダリングに関連する属性（'as', 'tag' など）は含まれません。
+ * HTMLレンダリングに関連する属性（'as' など）は含まれません。
  */
 export type LismCoreBaseProps = Partial<PropValueTypes & TraitProps & LayoutProps>
-
-/**
- * LismCSSで用意されている標準のプロパティをまとめた型
- * @deprecated Beta版で廃止予定。 LismCoreBaseProps を使用してください。
- */
-export type LismCoreProps = LismCoreBaseProps
 
 /**
  * プロジェクト内のほぼすべてのコンポーネント（LismBoxやLismCenterなど）のベースとなる型
@@ -80,39 +74,29 @@ export type LismBaseProps = LismCoreBaseProps & {
    * 文字列でカンマ区切りのクラス指定、またはオブジェクト形式での指定が可能です。
    *
    * @example
-   * hov="o"
-   * hov="c,bxsh"
-   * hov="to:zoom"
+   * hov="-o"
+   * hov="-c,-bxsh"
+   * hov="in:zoom"
    * hov={{ bgc: 'brand', c: 'white' }}
    */
   hov?:
     | (string & {})
-    | 'o'
-    | 'c'
-    | 'bgc'
-    | 'bdc'
-    | 'bxsh'
-    | 'fade'
-    | 'zoom'
-    | 'shadowUp'
-    | 'to:show'
-    | 'to:hide'
-    | 'to:zoom'
-    | (Partial<PropValueTypes> & {
-        duration?: string | number
-        delay?: string | number
-        easing?: string
-        class?: string
-        [key: string]: unknown
-      })
+    | boolean
+    | '-o'
+    | '-c'
+    | '-bgc'
+    | '-bdc'
+    | '-bxsh'
+    | '-transform'
+    | 'underline'
+    | 'in:show'
+    | 'in:hide'
+    | 'in:zoom'
+    | Record<string, string | number | boolean | null | undefined>
   /**
-   * LismCSSの 'set--' クラスを適用するためのプロパティです。
+   * LismCSSの 'set--' クラスを適用します。先頭に - を付けると対象を除外します。
    */
   set?: SetPropValue
-  /**
-   * LismCSSの 'set--' クラスを解除、または負の値をセットするためのプロパティです。
-   */
-  unset?: SetPropValue
   /**
    * Lism CSSのユーティリティプロパティ（破線、シェイプなど）Utility Class - スタイル・装飾をまとめてセットするようなクラスを分類しています。
    */
@@ -238,20 +222,38 @@ export type DecoratorProps = {
 }
 
 /**
+ * LismIcon に渡せるSVG文字列、Vueコンポーネント、または描画先と追加props。
+ */
+export type IconSource =
+  | string
+  | (Component & { as?: never })
+  | ({ as: NonNullable<LismBaseProps['as']> } & Record<string, unknown>)
+
+/**
  * LismIcon コンポーネント用のプロパティ型。
  * icon, size, label などのアイコン固有のプロパティを含みます。
  */
 export type IconProps = LismBaseProps & {
   /**
-   * アイコンを指定します。文字列（プリセット名）またはオブジェクト（{as, ...exProps}）が指定可能です。
+   * SVG全体の文字列、Vueコンポーネント、または { as, ...exProps } を指定します。
+   * SVG文字列はDOMPurifyでサニタイズします。危険なタグ・属性は除去されます。
    */
-  icon?: string | ({ as: string } & Record<string, unknown>)
+  icon?: IconSource
   /**
-   * アイコンのサイズを指定します。
+   * SVGの幅・高さの既定値。明示したwidth・heightが優先されます。
+   * フォントサイズのトークンを使う場合はfzを指定してください。
    */
   size?: string | number
   /**
    * aria-label として出力されます。指定がある場合 role="img" が、ない場合 aria-hidden="true" が付与されます。
    */
   label?: string
+  /** slotにSVGの子要素を渡す場合の座標系。 */
+  viewBox?: string
+  width?: string | number
+  height?: string | number
+  strokeWidth?: string | number
+  /** 画像をアイコンとして表示する場合のURLと代替テキスト。 */
+  src?: string
+  alt?: string
 }

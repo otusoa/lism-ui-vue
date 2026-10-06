@@ -2,8 +2,10 @@ import { fileURLToPath, URL } from 'node:url'
 import { cpSync, statSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import dts from 'vite-plugin-dts'
+import dts from 'unplugin-dts/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+
+const isWatch = process.argv.includes('--watch')
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,8 +16,9 @@ export default defineConfig({
       dts: 'dist/auto-imports.d.ts',
     }),
     dts({
+      processor: 'vue',
       tsconfigPath: './tsconfig.app.json',
-      bundleTypes: true,
+      bundleTypes: !isWatch,
       entryRoot: 'src',
       outDirs: ['dist'],
       insertTypesEntry: true,
@@ -53,6 +56,16 @@ export default defineConfig({
     },
   },
   build: {
+    watch: isWatch
+      ? {
+          // ルートディレクトリ全体を監視せず、ソースと型設定に限定する。
+          include: [
+            /[/\\]src(?:[/\\]|$)/,
+            /[/\\](?:env\.d\.ts|tsconfig(?:\.[^/\\]+)?\.json)$/,
+          ],
+          exclude: /[/\\]dist(?:[/\\]|$)/,
+        }
+      : null,
     lib: {
       entry: {
         index: fileURLToPath(new URL('./src/components/index.ts', import.meta.url)),
@@ -63,7 +76,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rolldownOptions: {
-      external: ['vue'],
+      external: ['vue', /^lism-css(?:\/|$)/, 'isomorphic-dompurify'],
       output: {
         globals: {
           vue: 'Vue',

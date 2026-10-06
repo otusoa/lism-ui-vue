@@ -44,9 +44,9 @@ import { Lism } from '../../../../src/components/Lism'
       </Lism>
     </section>
     <section>
-      <h2>Tag and exProps</h2>
-      <Lism tag="section" p="20" ajax="asdf" bgc="base-2" bd>
-        This is a section with <code>tag="section"</code>.
+      <h2>as and exProps</h2>
+      <Lism as="section" p="20" bgc="base-2" bd>
+        This is a section with <code>as="section"</code>.
       </Lism>
       <Lism
         as="p"
@@ -59,7 +59,7 @@ import { Lism } from '../../../../src/components/Lism'
         This paragraph has <code>exProps</code> applied (id and data-custom).
       </Lism>
     </section>
-    <Lism lismClass="c--myComponent" variant="secondary"> LismClass + variant </Lism>
+    <Lism class="c--myComponent c--myComponent--secondary">Custom class + modifier</Lism>
     <Lism h="fit"> aa </Lism>
   </div>
 </template>

@@ -1,8 +1,37 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { createSSRApp, h } from 'vue'
+import { renderToString } from 'vue/server-renderer'
 import { Lism } from './index'
 
 describe('Lism component', () => {
+  const bindings = {
+    class: ['base', [{ active: true, disabled: false }]],
+    className: ['alias', ['nested']],
+    style: ['color: red; --custom: first', [{ color: 'blue', opacity: 0 }, { '--custom': 'last' }]],
+    layout: 'withSide',
+    sideW: '20rem',
+  } as const
+
+  it('renders normalized class and style bindings in the DOM', () => {
+    const wrapper = mount(Lism, { attrs: bindings })
+    expect(wrapper.classes()).toEqual(['base', 'active', 'alias', 'nested', 'l--withSide'])
+    const style = (wrapper.element as HTMLElement).style
+    expect(style.color).toBe('blue')
+    expect(style.opacity).toBe('0')
+    expect(style.getPropertyValue('--custom')).toBe('last')
+    expect(style.getPropertyValue('--sideW')).toBe('20rem')
+  })
+
+  it('renders normalized class and style bindings on the server', async () => {
+    const html = await renderToString(createSSRApp({ render: () => h(Lism, bindings) }))
+    expect(html).toContain('class="base active alias nested l--withSide"')
+    expect(html).toContain('color:blue')
+    expect(html).toContain('opacity:0')
+    expect(html).toContain('--custom:last')
+    expect(html).toContain('--sideW:20rem')
+  })
+
   it('should render correct "as"', () => {
     const wrapper = mount(Lism, {
       props: { as: 'section' },
