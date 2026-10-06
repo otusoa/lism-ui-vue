@@ -145,7 +145,7 @@ describe('LismIcon component', () => {
     )
     expect(html).toContain('viewBox="0 0 24 24"')
     expect(html).toContain('stroke-width="2"')
-    expect(html).toContain('<path d="M4 12h16" />')
+    expect(html).toContain('<path d="M4 12h16"></path>')
     expect(html).toContain('aria-label="Arrow"')
   })
 
@@ -156,6 +156,59 @@ describe('LismIcon component', () => {
     })
     expect(wrapper.attributes('viewBox')).toBe('0 0 100 100')
     expect(wrapper.find('circle').exists()).toBe(true)
+  })
+
+  it('removes executable content and attributes from the entire SVG string', () => {
+    const wrapper = mount(LismIcon, {
+      props: {
+        icon: `<svg viewBox="0 0 24 24" onload="alert(1)" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <script>alert(1)</script>
+          <style>body { display:none }</style>
+          <foreignObject><div xmlns="http://www.w3.org/1999/xhtml" onclick="alert(1)">unsafe</div></foreignObject>
+          <image href="missing.png" onerror="alert(1)" />
+          <a href="jav&#x61;script:alert(1)"><path d="M4 12h16" onclick="alert(1)" /></a>
+          <use xlink:href="javascript:alert(1)" />
+          <use href="https://example.com/icon.svg#shape" />
+        </svg>`,
+      },
+    })
+    expect(wrapper.attributes('onload')).toBeUndefined()
+    expect(wrapper.find('script, style, foreignObject, div').exists()).toBe(false)
+    expect(wrapper.find('image').attributes('onerror')).toBeUndefined()
+    expect(wrapper.find('a').attributes('href')).toBeUndefined()
+    for (const use of wrapper.findAll('use')) {
+      expect(use.attributes('xlink:href')).toBeUndefined()
+      expect(use.attributes('href')).toBeUndefined()
+    }
+    expect(wrapper.find('path').attributes('onclick')).toBeUndefined()
+    expect(wrapper.find('path').attributes('d')).toBe('M4 12h16')
+  })
+
+  it('preserves gradients, masks, filters, internal references and decoded attributes', () => {
+    const wrapper = mount(LismIcon, {
+      props: {
+        icon: `<svg viewBox="0 0 24 24" aria-label="A &amp; B">
+          <defs>
+            <linearGradient id="gradient"><stop offset="0" stop-color="red" /><stop offset="1" stop-color="blue" /></linearGradient>
+            <mask id="mask"><rect width="24" height="24" fill="white" /></mask>
+            <filter id="blur"><feGaussianBlur stdDeviation="1" /></filter>
+            <path id="shape" d="M4 12h16" />
+          </defs>
+          <use href="#shape" fill="url(#gradient)" mask="url(#mask)" filter="url(#blur)" />
+        </svg>`,
+      },
+    })
+    expect(wrapper.find('linearGradient').attributes('id')).toBe('gradient')
+    expect(wrapper.findAll('stop')).toHaveLength(2)
+    expect(wrapper.find('mask rect').attributes('fill')).toBe('white')
+    expect(wrapper.find('feGaussianBlur').attributes('stdDeviation')).toBe('1')
+    expect(wrapper.find('use').attributes()).toMatchObject({
+      href: '#shape',
+      fill: 'url(#gradient)',
+      mask: 'url(#mask)',
+      filter: 'url(#blur)',
+    })
+    expect(wrapper.attributes('aria-label')).toBe('A & B')
   })
 
   it('uses size for SVG dimensions and fz for font size tokens', () => {

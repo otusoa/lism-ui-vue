@@ -236,6 +236,7 @@ export type IconSource =
 export type IconProps = LismBaseProps & {
   /**
    * SVG全体の文字列、Vueコンポーネント、または { as, ...exProps } を指定します。
+   * SVG文字列はDOMPurifyでサニタイズします。危険なタグ・属性は除去されます。
    */
   icon?: IconSource
   /**

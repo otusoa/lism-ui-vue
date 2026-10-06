@@ -76,7 +76,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rolldownOptions: {
-      external: ['vue', /^lism-css(?:\/|$)/],
+      external: ['vue', /^lism-css(?:\/|$)/, 'isomorphic-dompurify'],
       output: {
         globals: {
           vue: 'Vue',

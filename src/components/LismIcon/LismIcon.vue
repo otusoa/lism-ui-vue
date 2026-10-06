@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, normalizeClass, normalizeStyle, toRaw, useAttrs, type StyleValue } from 'vue'
+import DOMPurify from 'isomorphic-dompurify'
 import Lism from '../Lism/Lism.vue'
 import { getLismPropsVue } from '../../core/lism-adapter'
 import type { IconProps } from '../../core/types'
 
 /**
  * LismCSSのa--iconを使い、Vueコンポーネント・SVG文字列・slot・画像を表示します。
+ * SVG文字列はブラウザー・SSRともDOMPurifyでサニタイズして描画します。
  *
  * @example
  * <LismIcon :icon="MyIcon" label="メニュー" />
@@ -31,17 +33,34 @@ defineSlots<{ default?: () => unknown }>()
 const props = defineProps<Props>()
 const attrs = useAttrs()
 
-// DOMParserを使わず、SSRでもSVGの外側の属性と内容を取り出す。
+// ルート属性も含めてサニタイズし、SVGと同じ名前空間で内容を取り出す。
 const parseSvg = (markup: string) => {
-  const match = markup.trim().match(/^<svg\b([^>]*?)(?:\/>|>([\s\S]*)<\/svg>)$/i)
-  if (!match) return undefined
+  const fragment = DOMPurify.sanitize(markup, {
+    USE_PROFILES: { svg: true, svgFilters: true },
+    ADD_TAGS: ['use'],
+    FORBID_TAGS: ['style', 'foreignObject'],
+    RETURN_DOM_FRAGMENT: true,
+  })
+  const svg = fragment.firstElementChild
+  if (
+    fragment.children.length !== 1 ||
+    svg?.localName !== 'svg' ||
+    svg.namespaceURI !== 'http://www.w3.org/2000/svg'
+  )
+    return undefined
 
-  const attributes: Record<string, unknown> = {}
-  const attributePattern = /([^\s"'<>/=]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g
-  for (const attribute of (match[1] ?? '').matchAll(attributePattern)) {
-    attributes[attribute[1]!] = attribute[2] ?? attribute[3] ?? ''
+  // useは同じSVG内の参照だけ許可し、外部SVGの読み込みを防ぐ。
+  for (const use of svg.querySelectorAll('use')) {
+    for (const name of ['href', 'xlink:href']) {
+      const value = use.getAttribute(name)
+      if (value !== null && !value.startsWith('#')) use.removeAttribute(name)
+    }
   }
-  return { attributes, content: match[2] ?? '' }
+
+  return {
+    attributes: Object.fromEntries(Array.from(svg.attributes, ({ name, value }) => [name, value])),
+    content: svg.innerHTML,
+  }
 }
 
 // VueコンポーネントにはcamelCase、ネイティブSVGにはSVGの属性名で渡す。
@@ -149,6 +168,7 @@ const iconData = computed(() => {
       as: typeof component === 'object' ? toRaw(component) : component,
       exProps: additionalProps,
     },
+    // 動的SVG要素に渡し、SSRでもSVG属性の大文字・小文字とinnerHTMLを維持する。
     svgProps:
       content === undefined
         ? undefined
@@ -162,7 +182,12 @@ const iconData = computed(() => {
 </script>
 
 <template>
-  <svg v-if="iconData.content !== undefined" v-bind="iconData.svgProps" v-html="iconData.content" />
+  <component
+    :is="'svg'"
+    v-if="iconData.content !== undefined"
+    v-bind="iconData.svgProps"
+    :innerHTML="iconData.content"
+  />
   <Lism v-else v-bind="iconData.lismProps" atomic="icon">
     <slot />
   </Lism>

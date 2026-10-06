@@ -48,6 +48,7 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
+    "isomorphic-dompurify": "~3.19.0",
     "lism-css": "^1.0.1"
   },
   "devDependencies": {
