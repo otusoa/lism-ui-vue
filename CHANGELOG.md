@@ -1,6 +1,56 @@
 # Changelog
 
 
+## lism-ui-vue@v1.0.0
+
+[compare changes](https://github.com/otusoa/lism-ui-vue/compare/cli-v0.1.1-alpha.14...lism-ui-vue@v1.0.0)
+
+### 🚀 Enhancements
+
+- **LismAutoColumns:** AutoFitプロパティを追加し、テストを実装 LismAutoColumnsコンポーネントにautoFitプロパティを追加し、スタイルを変更する機能を実装した。 また、コンポーネントのレンダリングとautoFitの動作を確認するテストを追加した。 ([b6e8b11](https://github.com/otusoa/lism-ui-vue/commit/b6e8b11))
+- **LismIcon:** Iconコンポーネントの改修 ([9c0070f](https://github.com/otusoa/lism-ui-vue/commit/9c0070f))
+
+### 🩹 Fixes
+
+- **nodeバージョン:** 対応バージョンを修正 ([fc08dea](https://github.com/otusoa/lism-ui-vue/commit/fc08dea))
+- **AIプロンプト:** 型関連の種類を追加 ([67b67f1](https://github.com/otusoa/lism-ui-vue/commit/67b67f1))
+- **deps:** Update dependency lism-css to ^0.27.0 ([#72](https://github.com/otusoa/lism-ui-vue/pull/72))
+- **deps:** Update dependency lism-css to ^0.28.0 ([#75](https://github.com/otusoa/lism-ui-vue/pull/75))
+- LismCSS v1.0.1に合わせてアダプターとデモを修正 ([e3cd5be](https://github.com/otusoa/lism-ui-vue/commit/e3cd5be))
+- LismCSSを外部化しclass・styleの入力を正規化 ([b89bbac](https://github.com/otusoa/lism-ui-vue/commit/b89bbac))
+- **LismIcon:** SVG文字列周りのサニタイズ機能を追加 ([1f36698](https://github.com/otusoa/lism-ui-vue/commit/1f36698))
+
+### 💅 Refactors
+
+- **CLI:** 今はいらないと思ったのでごっそり関連するファイルを編集・削除 ([74c8d36](https://github.com/otusoa/lism-ui-vue/commit/74c8d36))
+
+### 📦 Build
+
+- **tsdown:** Tsdownの設定ファイルを追加 tsdownを使用してビルド設定を整理し、出力先や依存関係の管理を明確化 vite.config.tsからビルド関連の設定を移行し、プラグインの構成を簡素化 ([7ac9e23](https://github.com/otusoa/lism-ui-vue/commit/7ac9e23))
+- **vite:** Tsdown.config.tsを削除し、やはりViteのほうに移行 ([b97bce0](https://github.com/otusoa/lism-ui-vue/commit/b97bce0))
+
+### 🏡 Chore
+
+- **dev:** 開発環境をアップデートするついでに、型生成周りもアップデート ([406586e](https://github.com/otusoa/lism-ui-vue/commit/406586e))
+- **del:** いらないファイルを削除 ([8e63420](https://github.com/otusoa/lism-ui-vue/commit/8e63420))
+- **dev:** コミットメッセージ自動生成のプロンプトを作成 ([b5c3a7a](https://github.com/otusoa/lism-ui-vue/commit/b5c3a7a))
+- **.gitignore:** .githubディレクトリのskillsを無視リストに追加 ([8f22583](https://github.com/otusoa/lism-ui-vue/commit/8f22583))
+- **renovate:** Renovate.jsonにextends設定を追加 ([dc19c28](https://github.com/otusoa/lism-ui-vue/commit/dc19c28))
+- **pnpm:** MinimumReleaseAgeの設定を追加 ([ee70ba6](https://github.com/otusoa/lism-ui-vue/commit/ee70ba6))
+- **renovate:** PackageRulesにgithub-actionsの設定を追加 ([d7abf91](https://github.com/otusoa/lism-ui-vue/commit/d7abf91))
+- **Builder:** Unplugin-dts に変更 devコマンドの改善 ([06ddb10](https://github.com/otusoa/lism-ui-vue/commit/06ddb10))
+- **demo:** デモの更新 古い型など削除 ([c3b9f63](https://github.com/otusoa/lism-ui-vue/commit/c3b9f63))
+
+### 🤖 CI
+
+- **ci.yml:** Pnpm-lock.yamlとtsconfig.app.jsonのフィルタを追加 ([98087ea](https://github.com/otusoa/lism-ui-vue/commit/98087ea))
+- **version:** Ciのワークフローのバージョンを更新 pnpm v10からv11にマイグレーション workspaceの設定を11に最適化 ([db69384](https://github.com/otusoa/lism-ui-vue/commit/db69384))
+- Pnpmのセットアップをv2に更新 ([1cb7195](https://github.com/otusoa/lism-ui-vue/commit/1cb7195))
+
+### ❤️ Contributors
+
+- Eita <kusaiyuka@gmail.com>
+
 ## lism-ui-vue@v0.1.2-alpha.10
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.5...lism-ui-vue@v0.1.2-alpha.10)
