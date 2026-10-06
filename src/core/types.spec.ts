@@ -12,6 +12,10 @@ describe('LismBaseProps Type', () => {
     expectTypeOf<HasLismBaseProp<'lismClass'>>().toEqualTypeOf<false>()
   })
 
+  it('should not have the removed unset property', () => {
+    expectTypeOf<HasLismBaseProp<'unset'>>().toEqualTypeOf<false>()
+  })
+
   it('should still have common lism props', () => {
     expectTypeOf<HasLismBaseProp<'p'>>().toEqualTypeOf<true>()
     expectTypeOf<HasLismBaseProp<'bgc'>>().toEqualTypeOf<true>()

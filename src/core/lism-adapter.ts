@@ -11,6 +11,7 @@ import getUtilKey from 'lism-css/lib/getUtilKey'
 import getMaybeCssVar from 'lism-css/lib/getMaybeCssVar'
 import getBpData from 'lism-css/lib/getBpData'
 import splitWithComma from 'lism-css/lib/helper/splitWithComma'
+import mergeSet from 'lism-css/lib/helper/mergeSet'
 import type { LismProps } from './types'
 import type { AtomicProps } from 'lism-css/lib/types/AtomicProps'
 
@@ -82,10 +83,10 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
 
   const atomicParsed = getAtomicProps(atomic, restInput)
 
-  const props = getLayoutProps(layout as Parameters<typeof getLayoutProps>[0], atomicParsed) as Record<
-    string,
-    unknown
-  > & {
+  const props = getLayoutProps(
+    layout as Parameters<typeof getLayoutProps>[0],
+    atomicParsed,
+  ) as Record<string, unknown> & {
     class?: string
     className?: string
     style?: string | Record<string, unknown> | unknown[]
@@ -119,6 +120,22 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
 
   Object.assign(styles, inlineStyle)
 
+  // v1.0.1では値付きTraitを通常のProp・CSS変数へ移してから処理する。
+  const wrapper = props.isWrapper
+  if (wrapper != null && wrapper !== false && wrapper !== '' && wrapper !== true) {
+    if (props.contentSize === undefined) props.contentSize = wrapper
+    props.isWrapper = true
+  }
+  if (typeof props.hasTransition === 'string' && props.hasTransition.trim()) {
+    styles['--transitionProps'] = props.hasTransition.trim()
+    props.hasTransition = true
+  }
+
+  const setClasses = mergeSet(undefined, props.set).map((value) => `set--${value}`)
+  const utilClasses = mergeSet(undefined, props.util).map((value) => `u--${value}`)
+  delete props.set
+  delete props.util
+
   // ヘルパー関数群
   const addUtil = (u: string) => uClasses.push(u)
   const addStyle = (k: string, v: string | number) => {
@@ -141,7 +158,8 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
     }
 
     if (typeof val === 'string' && val.startsWith(':')) {
-      addUtil(`${utilName}:${val.replace(':', '')}`)
+      const value = val.slice(1)
+      addUtil(value ? `${utilName}:${value}` : utilName)
       return
     }
 
@@ -166,7 +184,7 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       }
     }
 
-    if (val === true || val === '-' || val === '') {
+    if (val === true || val === '') {
       addUtil(utilName)
       return
     }
@@ -219,7 +237,7 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
    */
   const setHovProps = (hovVal: any) => {
     if (!hovVal) return
-    if (hovVal === '-' || hovVal === true) {
+    if (hovVal === true) {
       addUtil('-hov')
     } else if (typeof hovVal === 'string') {
       splitWithComma(hovVal).forEach((v: string) => addUtil(`-hov:${v}`))
@@ -227,15 +245,11 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
       Object.keys(hovVal).forEach((k) => {
         const v = hovVal[k]
         if (v == null || v === '' || v === false) return
-        if (v === '-' || v === true) {
+        if (v === true) {
           addUtil(`-hov:${k}`)
-        } else if (k === 'class') {
-          splitWithComma(v).forEach((c: string) => addUtil(`-hov:${c}`))
         } else if (typeof v === 'string' || typeof v === 'number') {
           const finalV = getMaybeCssVar(v, getTokenKey(k))
-          // PROPS に含まれるキー（bxsh, c, bgc 等）の場合は -hov:-bxsh のようにダッシュを付与する
-          const isProp = Object.prototype.hasOwnProperty.call(PROPS, k)
-          addUtil(`-hov:${isProp ? '-' : ''}${k}`)
+          addUtil(`-hov:-${k}`)
           addStyle(`--hov-${k}`, finalV)
         }
       })
@@ -288,20 +302,6 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
           setAttrs(key, bpData[bp], config, bp)
         })
       }
-    } else if (key === 'set' || key === 'unset' || key === 'util') {
-      const prefix = key === 'util' ? 'u--' : `${key}--`
-      if (Array.isArray(val)) {
-        val.forEach((v) => {
-          if (v) (key === 'util' ? uClasses : lismState).push(`${prefix}${v}`)
-        })
-      } else if (typeof val === 'string') {
-        val
-          .split(' ')
-          .filter(Boolean)
-          .forEach((v) => {
-            ; (key === 'util' ? uClasses : lismState).push(`${prefix}${v}`)
-          })
-      }
     } else if (FILTERS.includes(key)) {
       if (val) {
         const kebabName = key.replace(/([A-Z])/g, '-$1').toLowerCase()
@@ -319,7 +319,13 @@ export function getLismPropsVue(inputProps: LismProps): LismOutput {
 
   // 最終的なクラス配列の構築
   // Vueのクラスバインディングを活かし、配列で返す
-  const finalClass = [...baseClasses, ...lismState, ...uClasses].filter(Boolean)
+  const finalClass = [
+    ...baseClasses,
+    ...setClasses,
+    ...lismState,
+    ...utilClasses,
+    ...uClasses,
+  ].filter(Boolean)
 
   // フィルターがある場合は backdrop-filter として追加 (Layer用)
   if (filterValues.length > 0) {

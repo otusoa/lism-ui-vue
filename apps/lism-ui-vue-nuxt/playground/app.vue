@@ -35,7 +35,7 @@ const arrowSvg =
     <Lism atomic="divider"></Lism>
 
     <!-- ホバーでシャドウが変化するボックスの実装例 -->
-    <LismBox bgc="base" p="30" bdrs="20" bd bxsh="10" has-transition :hov="{ bxsh: '40' }" my="40">
+    <LismBox bgc="base" p="30" bdrs="20" bd bxsh="10" has-transition="box-shadow" :hov="{ bxsh: '40' }" my="40">
       <LismHeading lv="3" mb="15">Hover Shadow Box</LismHeading>
       <LismText c="text-2">
         マウスをホバーすると <code>bxsh</code>（box-shadow）トークンが切り替わります。
@@ -243,15 +243,16 @@ src="https://cdn.lism-css.com/img/a-1.jpg" width="960" height="640"
         ut. Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
         ullamco laboris nisi ut.
       </LismText>
-      <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-x-s bd-y-s bdc="current" />
-      <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-x-e bd-y-e bdc="current" />
+      <LismDecorator size="1.25em" pos="absolute" t="0" l="0" bd-s bd-bs bdc="current" />
+      <LismDecorator size="1.25em" pos="absolute" r="0" b="0" bd-e bd-be bdc="current" />
     </LismBox>
 
     <LismStack g="20">
       <LismBox
 p="30" bgc="base-2"
-        :hov="{ bgc: 'accent', c: 'white', duration: '1s', easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }"
-        set-transition>
+        :hov="{ bgc: 'accent', c: 'white' }"
+        has-transition="background-color, color"
+        :style="{ '--duration': '1s', '--ease': 'cubic-bezier(0.68, -0.55, 0.27, 1.55)' }">
         Slow & Bouncy (1s duration)
       </LismBox>
     </LismStack>

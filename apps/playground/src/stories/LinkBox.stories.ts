@@ -27,7 +27,8 @@ export const Default: Story = {
     p: '20',
     bgc: 'base',
     bd: true,
-    hov: 'o',
+    hov: '-o',
+    hasTransition: 'opacity',
   },
 }
 
@@ -68,7 +69,7 @@ export const Complex: Story = {
           veniam, quis nostrud exercitation ullamco laboris nisi ut.
         </LismText>
         <LismGroup id="inner-link02" my="10">
-          <a href="#inner-link02" class="-hov:o">
+          <a href="#inner-link02" class="-hov:-o">
             Inner Link
           </a>
         </LismGroup>
@@ -80,7 +81,7 @@ export const Complex: Story = {
     bgc: 'base',
     bd: true,
     bdrs: '30',
-    set: 'transition',
-    hov: 'bxsh',
+    hasTransition: 'box-shadow',
+    hov: '-bxsh',
   },
 }

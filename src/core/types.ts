@@ -80,39 +80,29 @@ export type LismBaseProps = LismCoreBaseProps & {
    * 文字列でカンマ区切りのクラス指定、またはオブジェクト形式での指定が可能です。
    *
    * @example
-   * hov="o"
-   * hov="c,bxsh"
-   * hov="to:zoom"
+   * hov="-o"
+   * hov="-c,-bxsh"
+   * hov="in:zoom"
    * hov={{ bgc: 'brand', c: 'white' }}
    */
   hov?:
     | (string & {})
-    | 'o'
-    | 'c'
-    | 'bgc'
-    | 'bdc'
-    | 'bxsh'
-    | 'fade'
-    | 'zoom'
-    | 'shadowUp'
-    | 'to:show'
-    | 'to:hide'
-    | 'to:zoom'
-    | (Partial<PropValueTypes> & {
-        duration?: string | number
-        delay?: string | number
-        easing?: string
-        class?: string
-        [key: string]: unknown
-      })
+    | boolean
+    | '-o'
+    | '-c'
+    | '-bgc'
+    | '-bdc'
+    | '-bxsh'
+    | '-transform'
+    | 'underline'
+    | 'in:show'
+    | 'in:hide'
+    | 'in:zoom'
+    | Record<string, string | number | boolean | null | undefined>
   /**
-   * LismCSSの 'set--' クラスを適用するためのプロパティです。
+   * LismCSSの 'set--' クラスを適用します。先頭に - を付けると対象を除外します。
    */
   set?: SetPropValue
-  /**
-   * LismCSSの 'set--' クラスを解除、または負の値をセットするためのプロパティです。
-   */
-  unset?: SetPropValue
   /**
    * Lism CSSのユーティリティプロパティ（破線、シェイプなど）Utility Class - スタイル・装飾をまとめてセットするようなクラスを分類しています。
    */
