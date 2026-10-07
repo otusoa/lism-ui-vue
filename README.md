@@ -112,6 +112,12 @@ pnpm dev
 pnpm build
 ```
 
+### リリース
+
+Release Please が `main` の変更からバージョンと CHANGELOG を更新するリリース用PRを作成します。そのPRをマージすると、CIの成功後に GitHub Release と npm 公開が実行されます。本体と Nuxt モジュールの変更は一つのリリース用PRにまとめ、同時リリース時は本体を先に公開します。
+
+初期設定、プレリリースの扱い、公開失敗時の再試行は [リリース手順](docs/releasing.md) を参照してください。
+
 ---
 
 ## License

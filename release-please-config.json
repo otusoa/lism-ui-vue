@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/v17.3.0/schemas/config.json",
+  "bootstrap-sha": "76176756791291a91feffab98da1f6ff10b3737c",
+  "release-type": "node",
+  "include-component-in-tag": true,
+  "include-v-in-tag": true,
+  "tag-separator": "@",
+  "plugins": ["node-workspace"],
+  "packages": {
+    ".": {
+      "component": "lism-ui-vue",
+      "package-name": "lism-ui-vue",
+      "exclude-paths": ["apps"]
+    },
+    "apps/lism-ui-vue-nuxt": {
+      "component": "@lism-ui-vue/nuxt",
+      "package-name": "@lism-ui-vue/nuxt",
+      "versioning": "prerelease",
+      "prerelease": true,
+      "prerelease-type": "alpha",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true
+    }
+  }
+}

@@ -1,24 +1,72 @@
-name: Publish to npm
+name: Release Please and npm publish
 
 on:
   push:
-    tags:
-      - '**@v*'
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   ci:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+      pull-requests: read
+    with:
+      full: true
+
+  release:
+    needs: ci
+    runs-on: ubuntu-latest
+    concurrency:
+      group: release-please-main
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      core_released: ${{ steps.release.outputs.release_created }}
+      nuxt_released: ${{ steps.release.outputs['apps/lism-ui-vue-nuxt--release_created'] }}
+      release_sha: ${{ steps.release.outputs.sha || steps.release.outputs['apps/lism-ui-vue-nuxt--sha'] }}
+      releases_created: ${{ steps.release.outputs.releases_created }}
+    steps:
+      - name: リリース用トークンの確認
+        env:
+          RELEASE_PLEASE_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+        run: |
+          if [ -z "$RELEASE_PLEASE_TOKEN" ]; then
+            echo '::error::RELEASE_PLEASE_TOKEN を設定してください。リリースPRのCI実行に必要です。'
+            exit 1
+          fi
+
+      - name: リリースPRとGitHub Releaseの作成
+        id: release
+        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4.4.1
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          target-branch: main
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
   publish:
-    needs: ci
-    name: パブリッシュの実行
+    needs: release
+    if: needs.release.outputs.releases_created == 'true'
     runs-on: ubuntu-latest
+    concurrency:
+      group: npm-publish-${{ needs.release.outputs.release_sha }}
+      cancel-in-progress: false
     permissions:
-      id-token: write # OIDCによるnpm認証（Provenance）に必要
-      contents: read # ソースの読み取りに必要
-
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.release.outputs.release_sha }}
+          persist-credentials: false
 
       - name: pnpmのセットアップ
         uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3
@@ -30,42 +78,26 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: 24
-          cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
 
       - name: 依存関係のインストール
         run: pnpm install --frozen-lockfile
 
-      - name: Prepare Nuxt
-        run: pnpm exec nuxi prepare
-        working-directory: apps/lism-ui-vue-nuxt # 該当のディレクトリを指定
-
       - name: ビルドの実行
         run: pnpm build
 
-      - name: npmへパブリッシュ
-        shell: bash
+      - name: Nuxtモジュールの準備
+        run: pnpm --filter @lism-ui-vue/nuxt run dev:prepare
+
+      - name: 本体の公開
+        if: needs.release.outputs.core_released == 'true'
         run: |
-          REF="${{ github.ref_name }}"
-          # タグ名からパッケージ名を抽出 (例: @scope/pkg@v1.0.0 -> @scope/pkg)
-          PKG=$(echo "$REF" | sed 's/@v[0-9].*//')
-          # タグ名からバージョンを抽出 (例: @scope/pkg@v1.0.0 -> 1.0.0)
-          VER=$(echo "$REF" | sed 's/.*@v//')
+          DIST_TAG=$(node -p "require('./package.json').version.split('-')[1]?.split('.')[0] || 'latest'")
+          pnpm publish -r --filter lism-ui-vue --access public --no-git-checks --provenance --tag "$DIST_TAG" --registry=https://registry.npmjs.org
 
-          # タグ名からリリース識別子 (alpha, beta, rc, next) を抽出して dist-tag を決定
-          TAG=$(echo "$REF" | sed -n 's/.*-\(alpha\|beta\|rc\|next\).*/\1/p')
-          TAG=${TAG:-latest}
-
-          # OIDC認証（--provenance）を使いつつ、最新の pre-release 版を latest として扱うための調整
-          # 注意: OIDC では 1 回のパブリッシュで 1 つのタグしか付与できないため、
-          # 現在の latest がプレリリース版の場合は、今回のパブリッシュを latest タグで行います。
-          if [ "$TAG" != "latest" ]; then
-            CURRENT_LATEST=$(npm view "$PKG" version 2>/dev/null || echo "")
-            if [[ -z "$CURRENT_LATEST" || "$CURRENT_LATEST" =~ -(alpha|beta|rc|next) ]]; then
-              echo "Promoting $TAG to 'latest' to satisfy OIDC publishing requirements."
-              TAG="latest"
-            fi
-          fi
-
-          echo "Publishing $PKG@$VER with tag: $TAG"
-          pnpm publish -r --filter "$PKG" --access public --no-git-checks --provenance --tag "$TAG"
+      - name: Nuxtモジュールの公開
+        if: needs.release.outputs.nuxt_released == 'true'
+        run: |
+          DIST_TAG=$(node -p "require('./apps/lism-ui-vue-nuxt/package.json').version.split('-')[1]?.split('.')[0] || 'latest'")
+          pnpm publish -r --filter @lism-ui-vue/nuxt --access public --no-git-checks --provenance --tag "$DIST_TAG" --registry=https://registry.npmjs.org
