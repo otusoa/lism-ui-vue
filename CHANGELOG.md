@@ -205,6 +205,13 @@
 
 - Eita <kusaiyuka@gmail.com>
 
+## [1.1.0](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v1.0.0...lism-ui-vue@v1.1.0) (2026-10-09)
+
+
+### Features
+
+* **ci:** リリース周りの改修 ([104d8e9](https://github.com/otusoa/lism-ui-vue/commit/104d8e9cc1281ee4556ba2f50844fda5bf2b2f3e))
+
 ## v0.1.2-alpha.3
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.1-alpha.1...v0.1.2-alpha.3)
@@ -375,4 +382,3 @@
 ### ❤️ Contributors
 
 - Eita <kusaiyuka@gmail.com>
-
