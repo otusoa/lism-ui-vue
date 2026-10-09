@@ -81,6 +81,35 @@
 
 - Eita <kusaiyuka@gmail.com>
 
+## [0.1.1-alpha.6](https://github.com/otusoa/lism-ui-vue/compare/@lism-ui-vue/nuxt@v0.1.1-alpha.5...@lism-ui-vue/nuxt@v0.1.1-alpha.6) (2026-10-09)
+
+
+### Features
+
+* **ci:** リリース周りの改修 ([104d8e9](https://github.com/otusoa/lism-ui-vue/commit/104d8e9cc1281ee4556ba2f50844fda5bf2b2f3e))
+* **Divider:** Dividerを追加し、軽微な修正 ([fad5d9d](https://github.com/otusoa/lism-ui-vue/commit/fad5d9dea2394e16d0bda670e5cda149a8153f0e))
+* **Iconコンポーネント:** Iconを追加 ([7807349](https://github.com/otusoa/lism-ui-vue/commit/7807349a8761bac6cea26f95e5d2e11a9e2c0cda))
+* **lefthook:** lefthookを追加 ([22e5963](https://github.com/otusoa/lism-ui-vue/commit/22e5963e37cb6a53866e4930a28453d50692f5da))
+* **lefthook:** lefthookを追加 ([0b6002e](https://github.com/otusoa/lism-ui-vue/commit/0b6002e05d0e7e86caa0b40ffd1f7658afc784d1))
+* **LismAutoColumns:** autoFitプロパティを追加し、テストを実装 ([b6e8b11](https://github.com/otusoa/lism-ui-vue/commit/b6e8b11cda4005b244395b0e717e93908701fb26))
+* **LismCSS v0.26.0:** 0.26.0に追従、開発環境の変更 ([404eac2](https://github.com/otusoa/lism-ui-vue/commit/404eac2d350c2a4a3375b83f089bdd9b295498b5))
+* LismCSS v1.0.1対応と開発ビルドの改善 ([c9d45e6](https://github.com/otusoa/lism-ui-vue/commit/c9d45e6006c4ef103929eab084753321cb586c1a))
+* **LismIcon:** Iconコンポーネントの改修 ([9c0070f](https://github.com/otusoa/lism-ui-vue/commit/9c0070fbefdf18e32eecc4495c17d3982d3b7520))
+* **Props:** Atomicとutilを追加し、型を変更、そしてAdapterでatomicとutilを解析対象に入れる ([c02aba7](https://github.com/otusoa/lism-ui-vue/commit/c02aba74a1e580a86a3070ebe1d06a3bd72ab7b5))
+
+
+### Bug Fixes
+
+* lintに合わせて修正 ([30926a7](https://github.com/otusoa/lism-ui-vue/commit/30926a700cf51f1394fa1a46e3525268202f9dee))
+* LismCSS v1.0.1に合わせてアダプターとデモを修正 ([e3cd5be](https://github.com/otusoa/lism-ui-vue/commit/e3cd5be277ae5e4720bbda7ac8fd3eea9779f542))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * lism-ui-vue bumped to 1.1.0
+
 ## v0.1.1-alpha.1
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.2-alpha.2...v0.1.1-alpha.1)
@@ -88,4 +117,3 @@
 ## v0.1.1-alpha.0
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.2-alpha.1...v0.1.1-alpha.0)
-
