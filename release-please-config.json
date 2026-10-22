@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/v17.3.0/schemas/config.json",
   "bootstrap-sha": "76176756791291a91feffab98da1f6ff10b3737c",
+  "commit-batch-size": 5,
   "release-type": "node",
   "include-component-in-tag": true,
   "include-v-in-tag": true,
