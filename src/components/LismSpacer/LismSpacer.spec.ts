@@ -3,6 +3,14 @@ import { describe, it, expect } from 'vitest'
 import { LismSpacer } from '.'
 
 describe('LismSpacer', () => {
+  it.each([false, 'false'] as const)('allows aria-hidden=%j to override the default', (value) => {
+    const wrapper = mount(LismSpacer, {
+      attrs: { 'aria-hidden': value },
+    })
+
+    expect(wrapper.attributes('aria-hidden')).toBe('false')
+  })
+
   it('renders div by default with atomic="spacer" and aria-hidden="true"', () => {
     const wrapper = mount(LismSpacer)
     expect(wrapper.element.tagName).toBe('DIV')

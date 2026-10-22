@@ -5,19 +5,23 @@
   "include-component-in-tag": true,
   "include-v-in-tag": true,
   "tag-separator": "@",
-  "plugins": ["node-workspace"],
+  "plugins": [
+    "node-workspace"
+  ],
   "packages": {
     ".": {
       "component": "lism-ui-vue",
       "package-name": "lism-ui-vue",
-      "exclude-paths": ["apps"]
+      "exclude-paths": [
+        "apps"
+      ]
     },
     "apps/lism-ui-vue-nuxt": {
       "component": "@lism-ui-vue/nuxt",
       "package-name": "@lism-ui-vue/nuxt",
       "versioning": "prerelease",
       "prerelease": true,
-      "prerelease-type": "alpha",
+      "prerelease-type": "rc",
       "bump-minor-pre-major": true,
       "bump-patch-for-minor-pre-major": true
     }
