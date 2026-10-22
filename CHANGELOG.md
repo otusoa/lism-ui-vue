@@ -205,6 +205,20 @@
 
 - Eita <kusaiyuka@gmail.com>
 
+## [1.1.0](https://github.com/otusoa/lism-ui-vue/compare/lism-ui-vue@v1.0.0...lism-ui-vue@v1.1.0) (2026-10-22)
+
+
+### Features
+
+* **ci:** リリース周りの改修 ([104d8e9](https://github.com/otusoa/lism-ui-vue/commit/104d8e9cc1281ee4556ba2f50844fda5bf2b2f3e))
+
+
+### Bug Fixes
+
+* **LismDecorator:** cssプロパティの型をオブジェクト専用に変更 ([279e1af](https://github.com/otusoa/lism-ui-vue/commit/279e1af7d645203254616e5e2a0c278496a80260))
+* **LismDivider:** Lismコンポーネントのバインディングを整理 ([279e1af](https://github.com/otusoa/lism-ui-vue/commit/279e1af7d645203254616e5e2a0c278496a80260))
+* **LismSpacer:** Lismコンポーネントのバインディングを整理 ([279e1af](https://github.com/otusoa/lism-ui-vue/commit/279e1af7d645203254616e5e2a0c278496a80260))
+
 ## v0.1.2-alpha.3
 
 [compare changes](https://github.com/otusoa/lism-ui-vue/compare/v0.1.1-alpha.1...v0.1.2-alpha.3)
@@ -375,4 +389,3 @@
 ### ❤️ Contributors
 
 - Eita <kusaiyuka@gmail.com>
-
