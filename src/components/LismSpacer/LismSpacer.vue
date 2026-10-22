@@ -11,7 +11,7 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <Lism v-bind="{ ...props, ...$attrs }" atomic="spacer" aria-hidden="true">
+  <Lism aria-hidden="true" v-bind="{ ...props, ...$attrs }" atomic="spacer">
     <slot />
   </Lism>
 </template>

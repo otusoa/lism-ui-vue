@@ -3,6 +3,41 @@ import { mount } from '@vue/test-utils'
 import LismDecorator from './LismDecorator.vue'
 
 describe('LismDecorator', () => {
+  it.each([false, 'false'] as const)('allows aria-hidden=%j to override the default', (value) => {
+    const wrapper = mount(LismDecorator, {
+      attrs: { 'aria-hidden': value },
+    })
+
+    expect(wrapper.attributes('aria-hidden')).toBe('false')
+  })
+
+  it('applies object css, including custom properties and numeric zero', () => {
+    const wrapper = mount(LismDecorator, {
+      props: {
+        css: { color: 'red', opacity: 0, '--custom': 'value' },
+      },
+    })
+    const style = (wrapper.element as HTMLElement).style
+
+    expect(style.color).toBe('red')
+    expect(style.opacity).toBe('0')
+    expect(style.getPropertyValue('--custom')).toBe('value')
+    expect(wrapper.attributes('css')).toBeUndefined()
+  })
+
+  it('prioritizes size over w and ar, matching the atomic decorator behavior', () => {
+    const wrapper = mount(LismDecorator, {
+      props: { size: '100px' },
+      attrs: { w: '200px', ar: '2/1' },
+    })
+
+    expect((wrapper.element as HTMLElement).style.getPropertyValue('--w')).toBe('100px')
+    expect(wrapper.classes()).toContain('-ar:1/1')
+    expect(wrapper.classes()).not.toContain('-ar:2/1')
+    expect(wrapper.classes().filter((name) => name === 'a--decorator')).toHaveLength(1)
+    expect(wrapper.attributes('size')).toBeUndefined()
+  })
+
   it('should render correctly with default props', () => {
     const wrapper = mount(LismDecorator)
 
