@@ -26,7 +26,7 @@ importers:
         version: 2.2.1(vue@3.5.45(typescript@6.0.3))
       '@tsconfig/node24':
         specifier: ^24.0.5
-        version: 24.0.5
+        version: 24.0.6
       '@types/node':
         specifier: ^24.13.3
         version: 24.19.2
@@ -181,7 +181,7 @@ importers:
         version: 10.6.7(storybook@10.6.7(@types/react@19.2.18)(react@19.3.1))(typescript@5.9.3)(vite@8.3.8(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.0))(vue@3.5.45(typescript@5.9.3))
       '@tsconfig/node24':
         specifier: ^24.0.4
-        version: 24.0.5
+        version: 24.0.6
       '@types/node':
         specifier: ^24.11.0
         version: 24.19.2
@@ -2273,8 +2273,8 @@ packages:
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
 
-  '@tsconfig/node24@24.0.5':
-    resolution: {integrity: sha512-DWC54fGPuhZgg3Ighg4Y/A/bA3ZdB5hnzAuv/MkQ/X85sVsBsMQxu8t7khutdYeiNksBbFdDyeqv1HSW2Zl8aA==}
+  '@tsconfig/node24@24.0.6':
+    resolution: {integrity: sha512-/SK4JuydRQLGSCq7+hbiQ8fdAVR4Suv5EcBvkIAG3zo3GbXQvGoSclz4olL12Ar4OpH8gwGYJ67P4wwQqBRxKw==}
 
   '@tybys/wasm-util@0.10.4':
     resolution: {integrity: sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A==}
@@ -8627,7 +8627,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.2
 
-  '@tsconfig/node24@24.0.5': {}
+  '@tsconfig/node24@24.0.6': {}
 
   '@tybys/wasm-util@0.10.4':
     dependencies:
