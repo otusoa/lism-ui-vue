@@ -23,7 +23,7 @@
     "@storybook/addon-vitest": "^10.3.1",
     "@storybook/vue3-vite": "^10.3.1",
     "@tsconfig/node24": "^24.0.4",
-    "@types/node": "^24.11.0",
+    "@types/node": "^26.0.0",
     "@vitejs/plugin-vue": "^6.0.4",
     "@vitest/browser-playwright": "^4.1.0",
     "@vitest/coverage-v8": "^4.1.0",
