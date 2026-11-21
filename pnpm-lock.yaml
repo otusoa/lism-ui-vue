@@ -13,7 +13,7 @@ importers:
         version: 3.19.0
       lism-css:
         specifier: ^1.0.1
-        version: 1.0.1(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        version: 1.1.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
     devDependencies:
       '@microsoft/api-extractor':
         specifier: ^7.59.3
@@ -3383,9 +3383,6 @@ packages:
     resolution: {integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
 
-  csstype@3.2.3:
-    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
-
   csstype@3.2.4:
     resolution: {integrity: sha512-PoKaoPzQapnEoqUSnHx1u6W6ku8CVEgKsnpmmzU3m1nwkidpPBQ8V/Zq2+bWNrsOKoKLwTGdbx6xF7BXP1zLVQ==}
 
@@ -4475,8 +4472,8 @@ packages:
     resolution: {integrity: sha512-aRAOI9Ia43ygL4o1EOmC/sc/0OFxrm7qcQngiIyWaqVnSnz932ybJ07zyCcgMNGSDP8Yxaf88Xj1zHEXmvQ4SA==}
     engines: {node: '>=14'}
 
-  lism-css@1.0.1:
-    resolution: {integrity: sha512-goLmDj4P+EYJqoefMPfVzdq6mNbjKK7lEGxYl0dZZzguk0C1kg9bumgCAKwrJOnG1vwVQhgvVa/+xhK03P/k7Q==}
+  lism-css@1.1.0:
+    resolution: {integrity: sha512-nYf3kFQ0fEyPT2I5AQMUcRm8k8LReybAnNgSe8V7jwqjcKrWlWTmvKp+fFesYOcN8Efcr5g/CImVavRonZp5mw==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -10046,8 +10043,6 @@ snapshots:
     dependencies:
       css-tree: 2.2.1
 
-  csstype@3.2.3: {}
-
   csstype@3.2.4: {}
 
   data-urls@7.0.0:
@@ -11156,9 +11151,9 @@ snapshots:
 
   lilconfig@3.1.5: {}
 
-  lism-css@1.0.1(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  lism-css@1.1.0(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
-      csstype: 3.2.3
+      csstype: 3.2.4
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
     optionalDependencies:
