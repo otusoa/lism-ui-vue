@@ -52,7 +52,7 @@ jobs:
       - name: pnpmのセットアップ
         uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3
         with:
-          version: 11
+          version: 12
           install: false
 
       - name: Node.jsのセットアップ
@@ -87,7 +87,7 @@ jobs:
       - name: pnpmのセットアップ
         uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3
         with:
-          version: 11
+          version: 12
           install: false
 
       - name: Node.jsのセットアップ
